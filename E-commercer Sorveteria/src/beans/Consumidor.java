@@ -10,5 +10,14 @@ public class Consumidor extends Pessoa {
 		super(nome, email, dataNascimento, senha, cpf);
 		this.endereco = endereco;
 	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
 	
 }

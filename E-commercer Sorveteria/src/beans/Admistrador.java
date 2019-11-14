@@ -1,22 +1,12 @@
 package beans;
 
-public class Admistrador {
-	
-	
-	
-	
-	public void cadratrarFuncionario()
-	{
-		//a implementar;
+import java.time.LocalDate;
+
+public class Admistrador extends Funcionario {
+
+	public Admistrador(String nome, String email, LocalDate dataNascimento, String senha, String cpf,LocalDate dataAdmissao, String tipoFuncionario) {
+		super(nome, email, dataNascimento, senha, cpf, dataAdmissao, tipoFuncionario);
 	}
 	
-	public void removerFuncionario()
-	{
-		//a implementar;
-	}
 	
-	public void atualizarFuncionario()
-	{
-		//a implementar;
-	}
 }

@@ -14,4 +14,20 @@ public class Funcionario extends Pessoa{
 	}
 	
 	
+	public LocalDate getDataAdmissao() {
+		return dataAdmissao;
+	}
+	public void setDataAdmissao(LocalDate dataAdmissao) {
+		this.dataAdmissao = dataAdmissao;
+	}
+	public String getTipoFuncionario() {
+		return tipoFuncionario;
+	}
+	public void setTipoFuncionario(String tipoFuncionario) {
+		this.tipoFuncionario = tipoFuncionario;
+	}
+	
+	
+	
+	
 }
