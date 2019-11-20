@@ -6,6 +6,10 @@ public class Funcionario extends Pessoa{
 	
 	private LocalDate dataAdmissao;
 	private String tipoFuncionario;
+	
+	private static final String ENTREGADOR = "ENTREGADOR";
+	private static final String SORVETEIRO= "SORVETEIRO";
+	
 	public Funcionario(String nome, String email, LocalDate dataNascimento, String senha, String cpf,
 			LocalDate dataAdmissao, String tipoFuncionario) {
 		super(nome, email, dataNascimento, senha, cpf);
@@ -24,7 +28,10 @@ public class Funcionario extends Pessoa{
 		return tipoFuncionario;
 	}
 	public void setTipoFuncionario(String tipoFuncionario) {
-		this.tipoFuncionario = tipoFuncionario;
+		if (tipoFuncionario.equalsIgnoreCase(ENTREGADOR) || 
+				tipoFuncionario.equalsIgnoreCase(SORVETEIRO)) {
+			this.tipoFuncionario = tipoFuncionario;
+		}
 	}
 	
 	

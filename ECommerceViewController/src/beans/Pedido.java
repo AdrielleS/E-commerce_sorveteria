@@ -1,30 +1,30 @@
 package beans;
 
+import java.util.List;
+
 public class Pedido {
-	/*
-	 * List<Item> itens; List<Incrementos> incrementos;
-	 */
-	private Sorvete sorvete;
+	
+	private List<Sorvete> sorvetes;
 	private String status;
 	private Consumidor consumidor;
 	private double preco;
 	
 	
-	public Pedido(Sorvete sorvete, String status, Consumidor consumidor) {
+	public Pedido(List<Sorvete> sorvete, String status, Consumidor consumidor) {
 		super();
-		this.sorvete = sorvete;
+		this.sorvetes = sorvete;
 		this.status = status;
 		this.consumidor = consumidor;
 	}
 
-	public Sorvete getSorvete() {
-		return sorvete;
+
+	public List<Sorvete> getSorvetes() {
+		return sorvetes;
 	}
 
-	public void setSorvete(Sorvete sorvete) {
-		this.sorvete = sorvete;
+	public void setSorvetes(List<Sorvete> sorvetes) {
+		this.sorvetes = sorvetes;
 	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -39,6 +39,22 @@ public class Pedido {
 
 	public void setConsumidor(Consumidor consumidor) {
 		this.consumidor = consumidor;
+	}
+
+	
+
+	public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco() {
+		this.preco =0;
+		for (Sorvete s: sorvetes) {
+			for(int i = 0; s.getSabor().length < s.getNumeroBolas(); i++) {
+				this.preco += s.getSabor()[i].getValor();
+			}
+			this.preco += s.getAdicionais().getValor()+ s.getCalda().getValor();
+		}
 	}
 
 	

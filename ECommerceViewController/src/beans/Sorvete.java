@@ -1,46 +1,59 @@
 package beans;
 
 public class Sorvete {
-	private String sabor;
-	private String nome;
-	private double preco;
+	private SaborSorvete[] sabor;
+	private Incremento adicionais;
+	private  Calda calda;
+	private int numeroBolas;
 	
-	
-	public Sorvete(String sabor, String nome, double preco) {
+	public Sorvete(SaborSorvete[] sabor, Incremento adicionais, Calda calda, int numeroBolas) {
 		this.sabor = sabor;
-		this.nome = nome;
-		this.preco = preco;
+		this.adicionais = adicionais;
+		this.calda = calda;
+		this.numeroBolas = numeroBolas;
 	}
 
-
-	public String getSabor() {
+	public SaborSorvete[] getSabor() {
 		return sabor;
 	}
 
-
-	public void setSabor(String sabor) {
+	public void setSabor(SaborSorvete[] sabor) {
 		this.sabor = sabor;
 	}
 
-
-	public String getNome() {
-		return nome;
+	public Incremento getAdicionais() {
+		return adicionais;
 	}
 
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setAdicionais(Incremento adicionais) {
+		this.adicionais = adicionais;
 	}
 
-
-	public double getPreco() {
-		return preco;
+	public Calda getCalda() {
+		return calda;
 	}
 
-
-	public void setPreco(double preco) {
-		this.preco = preco;
+	public void setCalda(Calda calda) {
+		this.calda = calda;
 	}
+
+	public int getNumeroBolas() {
+		return numeroBolas;
+	}
+
+	public void setNumeroBolas(int numeroBolas) {
+		this.numeroBolas = numeroBolas;
+	}
+	
+	
+	
+	
+
+
+	
+
+
+	
 	
 	
 	

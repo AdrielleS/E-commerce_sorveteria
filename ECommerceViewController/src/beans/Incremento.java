@@ -1,18 +1,17 @@
 package beans;
 
-public enum Calda {
-	CHOCOLATE(1),
-	DOCE_DE_lEITE(2.5),
-	MORANGO(1),
-	LIMAO(2),
-	LEITE_CONDENSADO(2.5);
+public enum Incremento {
+	PAÇOCA(1.5),
+	GRANULADO(1),
+	AMEDOIM(2),
+	MeM(2.5);
 	
 	public double valorCalda;
-	Calda(double valor) {
+	Incremento(double valor) {
 		this.valorCalda = valor;
 	}
+	
 	public double getValor() {
 		return this.valorCalda;
 	}
-
 }
