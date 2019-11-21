@@ -1,5 +1,6 @@
 package dados;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -44,15 +45,17 @@ public class RepositorioFuncionarios{
 				}
 			}
 			
-			scan.close();
+			
 			if (!resul)
 			{
-				FileWriter w =  new FileWriter(file);
-				w.append(funcionario.toString()+"\n");
-				w.close();
+				FileWriter w =  new FileWriter(file,true);
+				BufferedWriter conexao = new BufferedWriter(w);
+				conexao.write(funcionario.toString()+"\n");
+				conexao.close();
 				cadastrado = true;
 				
 			}
+			scan.close();
 			
 		}	
 		return cadastrado;
