@@ -28,6 +28,10 @@ public class Venda {
 		this.pedido = pedido;
 	}
 	
+	public String toString() {
+		String s = this.pedido.toString()+","+this.frete+","+this.valorTotalPedido;
+		return s;
+	}
 	
 	
 }

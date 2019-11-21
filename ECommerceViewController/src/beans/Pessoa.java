@@ -68,6 +68,11 @@ public abstract class Pessoa {
 		this.cpf = cpf;
 	}
 	
+	public String toString() {
+		String s = this.cpf+","+this.nome+","+this.dataNascimento.toString()+
+				","+this.email+","+this.senha;
+		return s;
+	}
 	
 	
 	

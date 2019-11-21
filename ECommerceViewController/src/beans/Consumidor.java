@@ -29,6 +29,11 @@ public class Consumidor extends Pessoa {
 		this.zona = zona;
 	}
 	
+	public String toString() {
+		String s = super.toString()+","+ this.endereco+","+this.zona;
+		return s;
+	}
+	
 	
 
 	

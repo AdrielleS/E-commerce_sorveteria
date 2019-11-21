@@ -7,7 +7,7 @@ public class Sorvete {
 	private int numeroBolas;
 	
 	public Sorvete(SaborSorvete[] sabor, Incremento adicionais, Calda calda, int numeroBolas) {
-		this.sabor = sabor;
+		this.setSabor(sabor); 
 		this.adicionais = adicionais;
 		this.calda = calda;
 		this.numeroBolas = numeroBolas;
@@ -18,7 +18,9 @@ public class Sorvete {
 	}
 
 	public void setSabor(SaborSorvete[] sabor) {
-		this.sabor = sabor;
+		if (sabor.length == this.numeroBolas) {
+			this.sabor = sabor;
+		}
 	}
 
 	public Incremento getAdicionais() {
@@ -43,6 +45,15 @@ public class Sorvete {
 
 	public void setNumeroBolas(int numeroBolas) {
 		this.numeroBolas = numeroBolas;
+	}
+	
+	public String toString() {
+		String s = "";
+		for(int i =0; i < this.numeroBolas; i++) {
+			s+= this.getSabor()[i].toString()+",";
+		}
+		s += this.adicionais.toString()+","+this.calda.toString();
+		return s;
 	}
 	
 	

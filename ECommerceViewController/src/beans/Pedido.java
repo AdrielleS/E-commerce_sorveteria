@@ -50,13 +50,21 @@ public class Pedido {
 	public void setPreco() {
 		this.preco =0;
 		for (Sorvete s: sorvetes) {
-			for(int i = 0; s.getSabor().length < s.getNumeroBolas(); i++) {
+			for(int i = 0; i < s.getNumeroBolas(); i++) {
 				this.preco += s.getSabor()[i].getValor();
 			}
 			this.preco += s.getAdicionais().getValor()+ s.getCalda().getValor();
 		}
 	}
 
-	
+	public String toString() {
+		String s = "";
+		s+=this.consumidor.getCpf()+",";
+		for(Sorvete so: sorvetes) {
+			s+=so.toString()+",";
+		}
+		s+= this.status+"," +this.getPreco();
+		return s;
+	}
 
 }
