@@ -12,27 +12,29 @@ import exceptions.FuncionarioException;
 import java.time.LocalDate;
 
 public class RepositorioFuncionarios{
-
 	ArrayList<Funcionario> funcionarios;
 	File file;
 	
 	public RepositorioFuncionarios() {
 		funcionarios = new ArrayList<Funcionario>();
-		file =  new File("Arquivofuncionario.txt");
+		file =  new File("resource" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionario.txt");
+		
 	}
 	
 
 
-	public void cadastrar(String nome, String email, LocalDate dataNascimento, String senha, String cpf,
+	public boolean cadastrar(String nome, String email, LocalDate dataNascimento, String senha, String cpf,
 			LocalDate dataAdmissao, String tipoFuncionario) throws FuncionarioException, IOException {
-		
-                Funcionario funcionario = new Funcionario(nome, email, dataNascimento, senha, cpf, dataAdmissao, tipoFuncionario);
+		boolean cadastrado =false;
+        Funcionario funcionario = new Funcionario(nome, email, dataNascimento, senha, cpf, dataAdmissao, tipoFuncionario);
 		boolean resul = false;
+		if(!file.exists()) {
+			file.createNewFile();
+		}
+		
 		if(funcionario != null)
 		{
 			Scanner scan =  new Scanner(file);
-			
-			
 			while(scan.hasNext())
 			{
 				String linha =  scan.nextLine();
@@ -40,21 +42,20 @@ public class RepositorioFuncionarios{
 				{
 					resul = true;
 				}
-				
 			}
 			
-			
-			if (resul == false)
+			scan.close();
+			if (!resul)
 			{
-				FileWriter w =  new FileWriter(file, true);
+				FileWriter w =  new FileWriter(file);
 				w.append(funcionario.toString()+"\n");
 				w.close();
+				cadastrado = true;
 				
 			}
 			
-			
-			
-                }		
+		}	
+		return cadastrado;
 	}
 	
 	
@@ -112,7 +113,6 @@ public class RepositorioFuncionarios{
 			
 			if(resul ==  true)
 			{
-			
 				while (scan.hasNext()) 
 				{
 					String linha =  scan.nextLine();
@@ -140,10 +140,6 @@ public class RepositorioFuncionarios{
 				FuncionarioException funcionarionexiste =  new FuncionarioException("O funcionario n existe");
 				throw funcionarionexiste;
 			}
-				
-			scan.close();
-
-			
 		
 	}
 		
@@ -168,7 +164,7 @@ public class RepositorioFuncionarios{
 			}
 			
 		}
-		
+		scan.close();
 		return resul;
 	}
 	

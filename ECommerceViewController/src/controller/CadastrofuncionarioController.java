@@ -7,6 +7,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import beans.Funcionario;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -67,13 +69,16 @@ public class CadastrofuncionarioController extends Sair implements Initializable
                 }else{
                      cargo = "entregador";
                  }
-                repositorio.cadastrar(txtNome.getText(),txtEmail.getText(),dateData.getValue(), txtSenha.getText(), txtCpf.getText(), dateDataAdmissao.getValue(),cargo);
+                 
                 
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setHeaderText("Sucesso");
-                alert.setTitle("Cadastro realizado");
-                alert.setContentText("Cadastro realizado com sucesso");
-                alert.show();
+                boolean ok =repositorio.cadastrar(txtNome.getText(),txtEmail.getText(),dateData.getValue(), txtSenha.getText(), txtCpf.getText(), dateDataAdmissao.getValue(),cargo);
+                if(ok) {
+	                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+	                alert.setHeaderText("Sucesso");
+	                alert.setTitle("Cadastro realizado");
+	                alert.setContentText("Cadastro realizado com sucesso");
+	                alert.show();
+                }
                 
             } catch (FuncionarioException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

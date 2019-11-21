@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #FF69B4;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.EntregadorController">
+   <children>
+      <Label layoutX="239.0" layoutY="28.0" text="Pedidos a serem entregues">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
+         </font>
+      </Label>
+      <ListView layoutX="84.0" layoutY="62.0" prefHeight="200.0" prefWidth="535.0" />
+      <Button fx:id="btnEntrega" layoutX="295.0" layoutY="287.0" mnemonicParsing="false" style="-fx-background-color: #FFC0CB;" text="Entregar pedido" textFill="#683939">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnSair" layoutX="651.0" layoutY="3.0" mnemonicParsing="false" style="-fx-background-color: #FFC0CB;" text="Sair" textFill="#683939">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

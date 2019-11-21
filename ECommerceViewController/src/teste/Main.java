@@ -24,6 +24,19 @@ public class Main {
 		
 		
 		RepositorioFuncionarios rep =  new RepositorioFuncionarios();
+		 boolean ok = rep.cadastrar("Sonael", "Sonael@gmail.com", LocalDate.of(2000, 6, 1), "1234", "123131231",
+					LocalDate.of(2019, 8, 5), "ENTREGADOR");
+		 boolean ok2 = rep.cadastrar("Maria", "Maria@gmail.com", LocalDate.of(2000, 6, 1), "1234", "16231631632",
+					LocalDate.of(2019, 8, 5), "ENTREGADOR");
+		 boolean ok3 = rep.cadastrar("Sonael", "Sonael@gmail.com", LocalDate.of(2000, 6, 1), "1234", "123131231",
+					LocalDate.of(2019, 8, 5), "ENTREGADOR");
+		 System.out.println(ok3);
+		 
+		if (ok ) {
+			System.out.println(rep.buscar(funcionario));
+			System.out.println(rep.buscar(funcionario2));
+		}
+		System.out.println("fora");
 		
 		
 

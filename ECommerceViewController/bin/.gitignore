@@ -1,6 +1,5 @@
-/beans/
-/controller/
+/arquivos/
+/arquivosPessoas/
 /dados/
-/exceptions/
-/telas/
-/view/
+/controller/
+/teste/
