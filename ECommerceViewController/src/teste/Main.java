@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import beans.Funcionario;
+import beans.Zona;
+import dados.RepositorioConsumidores;
 import dados.RepositorioFuncionarios;
 import exceptions.FuncionarioException;
 
@@ -37,6 +39,11 @@ public class Main {
 			System.out.println(rep.buscar(funcionario2));
 		}
 		System.out.println("fora");
+		
+		RepositorioConsumidores rpc = new RepositorioConsumidores();
+		rpc.cadastrar("Sonael", "Sonaelneto@gmail.com", LocalDate.of(2000, 6, 1), "1234", "123131231", "rua bla", Zona.SUL);
+		rpc.cadastrar("gU", "GUo@gmail.com", LocalDate.of(2000, 6, 1), "1234", "1231334455", "rua bla", Zona.NORTE);
+		rpc.cadastrar("Sonael", "Sonaelneto@gmail.com", LocalDate.of(2000, 6, 1), "1234", "123131231", "rua bla", Zona.SUL);
 		
 		
 
