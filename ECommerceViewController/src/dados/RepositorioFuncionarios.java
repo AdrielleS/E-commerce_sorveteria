@@ -1,9 +1,11 @@
 package dados;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import beans.Funcionario;
 import exceptions.FuncionarioException;
@@ -15,68 +17,163 @@ public class RepositorioFuncionarios{
 	
 	public RepositorioFuncionarios() throws IOException {
 		funcionarios = new ArrayList<Funcionario>();
-		file =  new File("Arquivo-funcinario.txt");
-		if(!file.exists()) 
-		{
-			file.createNewFile();
-		}
-		else
-		{
-			IOException arquivo  =  new IOException("O arquivo não pode ser criado");
-			throw arquivo;
-		}
+		file =  new File("Arquivofuncionario.txt");
 	}
 	
 
 
 	public void cadastrar(Funcionario funcionario) throws FuncionarioException, IOException {
+		
+		boolean resul = false;
 		if(funcionario != null)
 		{
-			for (Funcionario f : funcionarios) {
-				if(f.getCpf().equals(funcionario.getCpf()))
+			Scanner scan =  new Scanner(file);
+			
+			
+			while(scan.hasNext())
+			{
+				String linha =  scan.nextLine();
+				if(linha.contains(funcionario.getCpf()))
 				{
-					FuncionarioException funcionariocadastrado =  new FuncionarioException("O fucionario já esta cadastrado");
-					throw funcionariocadastrado;
+					resul = true;
 				}
-				else
-				{
-					FileWriter w = new FileWriter(file);
-					w.append(funcionario.toString());
-				}
+				
 			}
+			
+			
+			if (resul == false)
+			{
+				FileWriter w =  new FileWriter(file, true);
+				w.append(funcionario.toString()+"\n");
+				w.close();
+				
+			}
+			
+			
+			
 		}
+		
+		
+		
 	}
+	
+	
 
 
-	public void remover(Funcionario funcionario) throws FuncionarioException {
+	public void remover(Funcionario funcionario) throws FuncionarioException, IOException {
 		if(funcionario != null)
 		{
-			for (Funcionario f : funcionarios) {
-				if(f.getCpf().equals(funcionario.getCpf()))
+			ArrayList<String> salvar =  new ArrayList<String>();
+			Scanner scan =  new Scanner(file);
+				
+			while (scan.hasNext()) 
+			{
+				String linha =  scan.nextLine();
+				if(!linha.contains(funcionario.getCpf()))
 				{
-					funcionarios.remove(funcionario);
+					salvar.add(linha);
 				}
-				else
-				{
-					FuncionarioException funcionarioremovido =  new FuncionarioException("O funcionario já foi removido");
-					throw funcionarioremovido;
-				}
+					
 			}
-		}
+				
+			scan.close();
+				
+			FileWriter w =  new FileWriter(file);
+			for (int i = 0; i < salvar.size(); i++) 
+			{
+				w.write(salvar.get(i)+"\n");	
+			}
+				
+			w.close();
+			
+		
 	}
+}
 
 
-	public void atualizar() {
-		// TODO Auto-generated method stub
+	public void atualizar(Funcionario funcionario) throws IOException, FuncionarioException {
+		
+		boolean resul =  false;
+		if(funcionario != null)
+		{
+			ArrayList<String> salvar =  new ArrayList<String>();
+			Scanner scan =  new Scanner(file);
+				
+			while (scan.hasNext()) 
+			{
+				String linha =  scan.nextLine();
+				if(linha.contains(funcionario.getCpf()))
+				{
+					resul = true;
+				}
+					
+			}
+			
+			
+			if(resul ==  true)
+			{
+			
+				while (scan.hasNext()) 
+				{
+					String linha =  scan.nextLine();
+					if(!linha.contains(funcionario.getCpf()))
+					{
+						salvar.add(linha);
+					}
+						
+				}
+					
+				scan.close();
+				FileWriter w =  new FileWriter(file,true);
+				for (int i = 0; i < salvar.size(); i++) 
+				{
+					w.write(salvar.get(i)+"\n");	
+				}
+				
+				w.append(funcionario.toString());
+					
+				w.close();
+			}
+			
+			else
+			{
+				FuncionarioException funcionarionexiste =  new FuncionarioException("O funcionario n existe");
+				throw funcionarionexiste;
+			}
+				
+			scan.close();
+
+			
+		
+	}
 		
 	}
 
-	public Object buscar() {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean buscar(Funcionario funcionario) throws FileNotFoundException {
+		
+		Scanner scan =  new Scanner(file);
+		boolean resul =  false;
+		
+		
+		if(funcionario != null) 
+		{
+	
+			while(scan.hasNext())
+			{
+				String linha = scan.nextLine();
+				if(linha.contains(funcionario.getCpf()))
+				{
+					resul =  true;
+				}
+			}
+			
+		}
+		
+		return resul;
 	}
 	
 	
+
 	
 	
 }
