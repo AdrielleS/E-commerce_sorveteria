@@ -34,6 +34,12 @@ public class Funcionario extends Pessoa{
 		}
 	}
 	
+	public String toString()
+	{
+		return this.getNome()+","+this.getEmail()+","+this.getDataNascimento()+","+this.getSenha()+","+this.getCpf()+","
+	+this.getDataAdmissao()+","+this.tipoFuncionario;
+	}
+	
 	
 	
 	
