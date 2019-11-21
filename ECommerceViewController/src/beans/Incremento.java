@@ -1,7 +1,7 @@
 package beans;
 
 public enum Incremento {
-	PAÇOCA(1.5),
+	PACOCA(1.5),
 	GRANULADO(1),
 	AMEDOIM(2),
 	MeM(2.5);

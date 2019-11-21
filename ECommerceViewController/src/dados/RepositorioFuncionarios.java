@@ -9,21 +9,24 @@ import java.util.Scanner;
 
 import beans.Funcionario;
 import exceptions.FuncionarioException;
+import java.time.LocalDate;
 
 public class RepositorioFuncionarios{
 
 	ArrayList<Funcionario> funcionarios;
 	File file;
 	
-	public RepositorioFuncionarios() throws IOException {
+	public RepositorioFuncionarios() {
 		funcionarios = new ArrayList<Funcionario>();
 		file =  new File("Arquivofuncionario.txt");
 	}
 	
 
 
-	public void cadastrar(Funcionario funcionario) throws FuncionarioException, IOException {
+	public void cadastrar(String nome, String email, LocalDate dataNascimento, String senha, String cpf,
+			LocalDate dataAdmissao, String tipoFuncionario) throws FuncionarioException, IOException {
 		
+                Funcionario funcionario = new Funcionario(nome, email, dataNascimento, senha, cpf, dataAdmissao, tipoFuncionario);
 		boolean resul = false;
 		if(funcionario != null)
 		{
@@ -51,10 +54,7 @@ public class RepositorioFuncionarios{
 			
 			
 			
-		}
-		
-		
-		
+                }		
 	}
 	
 	
