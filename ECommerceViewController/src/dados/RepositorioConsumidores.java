@@ -15,7 +15,7 @@ public class RepositorioConsumidores {
 	File file;
 	
 	public RepositorioConsumidores() {
-		file = new File("resource" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqConsumidores.txt");
+		file = new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqConsumidores.txt");
 	}
 	
 	public boolean cadastrar(String nome, String email, LocalDate dataNascimento, String senha, String cpf,

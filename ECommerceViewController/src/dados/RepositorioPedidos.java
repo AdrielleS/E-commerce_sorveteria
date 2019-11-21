@@ -15,7 +15,7 @@ public class RepositorioPedidos {
 File file;
 	
 	public RepositorioPedidos() {
-		file = new File("resource" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqConsumidores.txt");
+		file = new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqConsumidores.txt");
 	}
 	
 	public boolean cadastrar(List<Sorvete> sorvete, String status, Consumidor consumidor) throws IOException {
