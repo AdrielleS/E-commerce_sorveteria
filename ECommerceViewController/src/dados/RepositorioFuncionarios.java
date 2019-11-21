@@ -18,7 +18,7 @@ public class RepositorioFuncionarios{
 	
 	public RepositorioFuncionarios() {
 		funcionarios = new ArrayList<Funcionario>();
-		file =  new File("resource" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionario.txt");
+		file =  new File("resource" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.txt");
 		
 	}
 	
