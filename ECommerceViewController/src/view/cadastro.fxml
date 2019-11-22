@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -68,13 +67,6 @@
             <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <RadioButton layoutX="273.0" layoutY="258.0" mnemonicParsing="false" selected="true" text="Norte">
-         <toggleGroup>
-            <ToggleGroup fx:id="regiao" />
-         </toggleGroup>
-      </RadioButton>
-      <RadioButton layoutX="464.0" layoutY="257.0" mnemonicParsing="false" text="Oeste" toggleGroup="$regiao" />
-      <RadioButton layoutX="399.0" layoutY="258.0" mnemonicParsing="false" text="Leste" toggleGroup="$regiao" />
-      <RadioButton layoutX="337.0" layoutY="258.0" mnemonicParsing="false" text="Sul" toggleGroup="$regiao" />
+      <ComboBox fx:id="cbZona" layoutX="268.0" layoutY="254.0" prefHeight="25.0" prefWidth="205.0" />
    </children>
 </AnchorPane>
