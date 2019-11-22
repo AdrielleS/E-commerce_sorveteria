@@ -1,2 +1,5 @@
 123131231,Sonael,2000-06-01,Sonael@gmail.com,1234,ENTREGADOR,2019-08-05
 16231631632,Maria,2000-06-01,Maria@gmail.com,1234,ENTREGADOR,2019-08-05
+dsds,cc,2019-11-07,cc,ddd,sorveteiro,2019-11-02
+dsdsc,cc,2019-11-07,cc,ddd,entregador,2019-11-02
+1212,c,2019-11-07,c,cc,sorveteiro,2019-11-09

@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #FF69B4;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastrofuncionarioController">
    <children>
+      <TextField fx:id="txtNome" layoutX="285.0" layoutY="60.0" />
+      <TextField fx:id="txtEmail" layoutX="285.0" layoutY="88.0" />
+      <TextField fx:id="txtCpf" layoutX="285.0" layoutY="117.0" />
+      <DatePicker fx:id="dateData" layoutX="285.0" layoutY="146.0" />
+      <DatePicker fx:id="dateDataAdmissao" layoutX="285.0" layoutY="178.0" />
+      <TextField fx:id="txtSenha" layoutX="285.0" layoutY="215.0" />
+      <RadioButton fx:id="rdSorveteiro" layoutX="276.0" layoutY="282.0" mnemonicParsing="false" text="Sorveteiro">
+         <toggleGroup>
+            <ToggleGroup fx:id="cargos" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rdEntregador" layoutX="379.0" layoutY="282.0" mnemonicParsing="false" text="Entregador" toggleGroup="$cargos" />
+      <Button fx:id="btnCadastrar" layoutX="314.0" layoutY="332.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="91.0" style="-fx-background-color: #FFC0CB;" text="Cadastrar" textFill="#683939">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Button>
       <Button fx:id="btnVoltar" layoutX="6.0" layoutY="7.0" mnemonicParsing="false" style="-fx-background-color: #FFC0CB;" text="Voltar" textFill="#683939">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </Button>
       <Button fx:id="btnSair" layoutX="651.0" layoutY="7.0" mnemonicParsing="false" style="-fx-background-color: #FFC0CB;" text="Sair" textFill="#683939">
-         <font>
-            <Font name="Arial" size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnCadastrar" layoutX="314.0" layoutY="332.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="91.0" style="-fx-background-color: #FFC0CB;" text="Cadastrar" textFill="#683939">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
@@ -50,28 +63,20 @@
             <Font name="Arial" size="17.0" />
          </font>
       </Label>
-      <CheckBox fx:id="ckSorveteiro" layoutX="250.0" layoutY="286.0" mnemonicParsing="false" text="Sorveteiro" />
-      <CheckBox fx:id="ckEntregador" layoutX="373.0" layoutY="286.0" mnemonicParsing="false" text="Entregador" />
-      <TextField fx:id="txtNome" layoutX="285.0" layoutY="60.0" />
-      <TextField fx:id="txtSenha" layoutX="285.0" layoutY="215.0" />
-      <DatePicker fx:id="dateData" layoutX="285.0" layoutY="146.0" />
       <Label layoutX="233.0" layoutY="91.0" text="Email:">
          <font>
             <Font name="Arial" size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="txtEmail" layoutX="285.0" layoutY="88.0" />
       <Label layoutX="241.0" layoutY="119.0" text="CPF:">
          <font>
             <Font name="Arial" size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="txtCpf" layoutX="285.0" layoutY="117.0" />
       <Label layoutX="139.0" layoutY="181.0" text="Data de admissão:">
          <font>
             <Font name="Arial" size="17.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dateDataAdmissao" layoutX="285.0" layoutY="178.0" />
    </children>
 </AnchorPane>

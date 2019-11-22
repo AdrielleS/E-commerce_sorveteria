@@ -15,7 +15,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import telas.TelaCadastroFuncionario;
@@ -38,7 +40,10 @@ public class CadastrofuncionarioController extends Sair implements Initializable
     @FXML private TextField txtEmail;
     @FXML private TextField txtCpf;
     @FXML private DatePicker dateDataAdmissao;
-    private String cargo;
+    @FXML private RadioButton rdSorveteiro;
+    @FXML private ToggleGroup cargos;
+    @FXML private RadioButton rdEntregador;
+    String cargo;
 
     
     RepositorioFuncionarios repositorio = new RepositorioFuncionarios();
@@ -63,14 +68,15 @@ public class CadastrofuncionarioController extends Sair implements Initializable
         btnCadastrar.setOnMouseClicked((MouseEvent e)->{
 
             try {    
-                 if (ckSorveteiro.isSelected() && ckEntregador.isDisable()) {
-                     ckEntregador.disarm();
+                if (cargos.getSelectedToggle().equals(rdSorveteiro)) {
                     cargo = "sorveteiro";
-                }else{
-                     cargo = "entregador";
-                 }
-                 
+                }
                 
+                if(cargos.getSelectedToggle().equals(rdEntregador)){
+                    cargo = "entregador";
+                }
+
+                        
                 boolean ok =repositorio.cadastrar(txtNome.getText(),txtEmail.getText(),dateData.getValue(), txtSenha.getText(), txtCpf.getText(), dateDataAdmissao.getValue(),cargo);
                 if(ok) {
 	                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
