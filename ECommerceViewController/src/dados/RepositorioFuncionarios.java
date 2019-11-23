@@ -2,172 +2,195 @@ package dados;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
+
 import beans.Funcionario;
 import exceptions.FuncionarioException;
+import sun.security.jca.GetInstance.Instance;
+
 import java.time.LocalDate;
 
 public class RepositorioFuncionarios{
 	ArrayList<Funcionario> funcionarios;
 	File file;
+	private static RepositorioFuncionarios instance;
 	
 	public RepositorioFuncionarios() {
 		funcionarios = new ArrayList<Funcionario>();
-		file =  new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.txt");
+		
+	}
+	
+	
+	public void listar()
+	{
+		for (Funcionario funcionario : funcionarios) {
+			System.out.println(funcionario.getNome());
+		}
+	}
+	
+	
+	  public static RepositorioFuncionarios getInstance() throws ClassNotFoundException, IOException {
+		    if (instance == null) {
+		      instance = lerArquivo();
+		    }
+		    return instance;
+		  }
+	
+	
+	public static RepositorioFuncionarios lerArquivo() throws IOException, ClassNotFoundException
+	{
+		RepositorioFuncionarios instancialocal =  null;
+		File f = new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
+		FileInputStream fis =  new FileInputStream(f);
+		ObjectInputStream ois =  new ObjectInputStream(fis);
+		Object o = ois.readObject();
+
+		instancialocal = (RepositorioFuncionarios) o; 
+		
+		ois.close();
+		
+		return instancialocal;
+	}
+	
+	public void salvarArquivo() throws IOException
+	{
+			File f =  new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
+			FileOutputStream fos =  new FileOutputStream(f);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			oos.writeObject(instance);
+			
+			oos.close();
+		
 		
 	}
 	
 
 
 	public boolean cadastrar(String nome, String email, LocalDate dataNascimento, String senha, String cpf,
-			LocalDate dataAdmissao, String tipoFuncionario) throws FuncionarioException, IOException {
-		boolean cadastrado =false;
-        Funcionario funcionario = new Funcionario(nome, email, dataNascimento, senha, cpf, dataAdmissao, tipoFuncionario);
-		boolean resul = false;
-		if(!file.exists()) {
-			file.createNewFile();
-		}
 		
-		if(funcionario != null)
-		{
-			Scanner scan =  new Scanner(file);
-			while(scan.hasNext())
-			{
-				String linha =  scan.nextLine();
-				if(linha.contains(funcionario.getCpf()))
+		LocalDate dataAdmissao, String tipoFuncionario) throws FuncionarioException {
+		boolean cadastrado =false;
+		boolean resul = false;
+        Funcionario funcionario = new Funcionario(nome, email, dataNascimento, senha, cpf, dataAdmissao, tipoFuncionario);
+		
+        if(funcionarios.isEmpty())
+        {
+        	funcionarios.add(funcionario);
+        	cadastrado = true;
+        }
+        else
+        {
+        	for (Funcionario f : funcionarios) {
+				if(f.getCpf().equals(funcionario.getCpf()))
 				{
 					resul = true;
 				}
 			}
-			
-			
-			if (!resul)
-			{
-				FileWriter w =  new FileWriter(file,true);
-				BufferedWriter conexao = new BufferedWriter(w);
-				conexao.write(funcionario.toString()+"\n");
-				conexao.close();
-				cadastrado = true;
-				
-			}
-			scan.close();
-			
-		}	
+            
+            if(resul == false)
+            {
+            	funcionarios.add(funcionario);
+            	cadastrado = true;
+            }
+            else
+            {
+            	FuncionarioException cadastrofuncionario =  new FuncionarioException("Funcionario não pode ser cadastrado");
+            	throw cadastrofuncionario;
+            }
+        }
+
+        
 		return cadastrado;
 	}
 	
 	
 
 
-	public void remover(Funcionario funcionario) throws FuncionarioException, IOException {
+	public boolean remover(Funcionario funcionario) throws FuncionarioException {
+		boolean removido = false;
 		if(funcionario != null)
 		{
-			ArrayList<String> salvar =  new ArrayList<String>();
-			Scanner scan =  new Scanner(file);
-				
-			while (scan.hasNext()) 
+			if(funcionarios.contains(funcionario))
 			{
-				String linha =  scan.nextLine();
-				if(!linha.contains(funcionario.getCpf()))
-				{
-					salvar.add(linha);
-				}
-					
+				funcionarios.remove(funcionario);
+				removido = true;
 			}
-				
-			scan.close();
-				
-			FileWriter w =  new FileWriter(file);
-			for (int i = 0; i < salvar.size(); i++) 
+			else
 			{
-				w.write(salvar.get(i)+"\n");	
+				FuncionarioException removerfuncionario =  new FuncionarioException("Funcionario não existe no repositorio");
+				throw removerfuncionario;
 			}
-				
-			w.close();
-			
+		}
 		
-	}
+		return removido;
 }
 
 
-	public void atualizar(Funcionario funcionario) throws IOException, FuncionarioException {
-		
+	public boolean atualizar(Funcionario funcionario) throws FuncionarioException {
+		boolean atualizado = false;
 		boolean resul =  false;
 		if(funcionario != null)
 		{
-			ArrayList<String> salvar =  new ArrayList<String>();
-			Scanner scan =  new Scanner(file);
-				
-			while (scan.hasNext()) 
+			for (Funcionario f : funcionarios) 
 			{
-				String linha =  scan.nextLine();
-				if(linha.contains(funcionario.getCpf()))
+				if(f.getCpf().equals(funcionario.getCpf()))
 				{
+					funcionarios.remove(f);
 					resul = true;
 				}
-					
 			}
 			
-			
-			if(resul ==  true)
+			if(resul == true)
 			{
-				while (scan.hasNext()) 
-				{
-					String linha =  scan.nextLine();
-					if(!linha.contains(funcionario.getCpf()))
-					{
-						salvar.add(linha);
-					}
-						
-				}
-					
-				scan.close();
-				FileWriter w =  new FileWriter(file,true);
-				for (int i = 0; i < salvar.size(); i++) 
-				{
-					w.write(salvar.get(i)+"\n");	
-				}
-				
-				w.append(funcionario.toString());
-					
-				w.close();
+				funcionarios.add(funcionario);
+				atualizado = true;
 			}
-			
 			else
 			{
-				FuncionarioException funcionarionexiste =  new FuncionarioException("O funcionario n existe");
-				throw funcionarionexiste;
+				FuncionarioException atualizarfuncionario = new FuncionarioException("Funcionario não existe no repositorio");
+				throw atualizarfuncionario;
 			}
 		
-	}
+		}
+		
+		
+		return atualizado;
 		
 	}
 
-	public boolean buscar(Funcionario funcionario) throws FileNotFoundException {
+	public Funcionario buscar(Funcionario funcionario) throws FuncionarioException {
 		
-		Scanner scan =  new Scanner(file);
-		boolean resul =  false;
+		Funcionario resul = null;
 		
-		
-		if(funcionario != null) 
+		if(funcionario != null)
 		{
-	
-			while(scan.hasNext())
+			for (Funcionario f : funcionarios)
 			{
-				String linha = scan.nextLine();
-				if(linha.contains(funcionario.getCpf()))
+				if(f.getCpf().equals(funcionario.getCpf()))
 				{
-					resul =  true;
+					resul = f;
 				}
 			}
 			
+			
+			if(resul == null)
+			{
+				FuncionarioException buscarfuncionario = new FuncionarioException("Funcionario n existe no repositorio");
+				throw buscarfuncionario;
+			}
 		}
-		scan.close();
+		
 		return resul;
 	}
 	

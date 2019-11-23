@@ -93,9 +93,10 @@ public class CadastrofuncionarioController extends Sair implements Initializable
                 alert.show();
             
                 Logger.getLogger(CadastrofuncionarioController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(CadastrofuncionarioController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } 
+//            catch (IOException ex) {
+//                Logger.getLogger(CadastrofuncionarioController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
             
         });
     }    
