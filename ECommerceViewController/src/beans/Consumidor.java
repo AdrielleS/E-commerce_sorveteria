@@ -1,9 +1,14 @@
 package beans;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Consumidor extends Pessoa {
+public class Consumidor extends Pessoa implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7874769581605575568L;
 	private String endereco;
 	private Zona zona;
 

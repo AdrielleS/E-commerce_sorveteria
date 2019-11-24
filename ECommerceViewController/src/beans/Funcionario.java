@@ -1,9 +1,11 @@
 package beans;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Funcionario extends Pessoa{
-	
+public class Funcionario extends Pessoa implements Serializable{
+
+	private static final long serialVersionUID = -2048168189871662381L;
 	private LocalDate dataAdmissao;
 	private String tipoFuncionario;
 	

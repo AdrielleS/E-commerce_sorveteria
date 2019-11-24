@@ -1,29 +1,26 @@
 package dados;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
-
+import beans.Consumidor;
 import beans.Funcionario;
+import exceptions.ConsumidorException;
 import exceptions.FuncionarioException;
-import sun.security.jca.GetInstance.Instance;
-
 import java.time.LocalDate;
 
-public class RepositorioFuncionarios{
+public class RepositorioFuncionarios implements Serializable{
+
+	private static final long serialVersionUID = 1025911660485970999L;
 	ArrayList<Funcionario> funcionarios;
 	File file;
-	private static RepositorioFuncionarios instance;
+	public static RepositorioFuncionarios instance;
 	
 	public RepositorioFuncionarios() {
 		funcionarios = new ArrayList<Funcionario>();
@@ -47,30 +44,33 @@ public class RepositorioFuncionarios{
 		  }
 	
 	
-	public static RepositorioFuncionarios lerArquivo() throws IOException, ClassNotFoundException
+	public static RepositorioFuncionarios lerArquivo() throws ClassNotFoundException, IOException
 	{
 		RepositorioFuncionarios instancialocal =  null;
 		File f = new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
-		FileInputStream fis =  new FileInputStream(f);
-		ObjectInputStream ois =  new ObjectInputStream(fis);
-		Object o = ois.readObject();
+	    FileInputStream fis = null;
+	    ObjectInputStream ois = null;
+	    fis = new FileInputStream(f);
+	    ois = new ObjectInputStream(fis);
+	    Object o = ois.readObject();
+	    instancialocal = (RepositorioFuncionarios) o;
+	    ois.close();
 
-		instancialocal = (RepositorioFuncionarios) o; 
-		
-		ois.close();
-		
-		return instancialocal;
+
+	    return instancialocal;
 	}
 	
 	public void salvarArquivo() throws IOException
 	{
+
 			File f =  new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
-			FileOutputStream fos =  new FileOutputStream(f);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			
-			oos.writeObject(instance);
-			
-			oos.close();
+			FileOutputStream fos = null;
+		    ObjectOutputStream oos = null;
+
+		    fos = new FileOutputStream(f);
+		    oos = new ObjectOutputStream(fos);
+		    oos.writeObject(instance);
+		    oos.close(); 
 		
 		
 	}
@@ -78,7 +78,6 @@ public class RepositorioFuncionarios{
 
 
 	public boolean cadastrar(String nome, String email, LocalDate dataNascimento, String senha, String cpf,
-		
 		LocalDate dataAdmissao, String tipoFuncionario) throws FuncionarioException {
 		boolean cadastrado =false;
 		boolean resul = false;
@@ -118,12 +117,23 @@ public class RepositorioFuncionarios{
 
 
 	public boolean remover(Funcionario funcionario) throws FuncionarioException {
+		Funcionario fun = null;
 		boolean removido = false;
+		boolean resul = false;
 		if(funcionario != null)
 		{
-			if(funcionarios.contains(funcionario))
+			for (Funcionario f : funcionarios)
 			{
-				funcionarios.remove(funcionario);
+				if(f.getCpf().equals(funcionario.getCpf()))
+				{
+					resul = true;
+					fun = f;
+				}
+			}
+			
+			if(resul == true)
+			{
+				funcionarios.remove(fun);
 				removido = true;
 			}
 			else
@@ -131,13 +141,18 @@ public class RepositorioFuncionarios{
 				FuncionarioException removerfuncionario =  new FuncionarioException("Funcionario não existe no repositorio");
 				throw removerfuncionario;
 			}
+
 		}
-		
+
+
 		return removido;
 }
 
 
-	public boolean atualizar(Funcionario funcionario) throws FuncionarioException {
+	public boolean atualizar(String nome, String email, LocalDate dataNascimento, String senha, String cpf,
+			LocalDate dataAdmissao, String tipoFuncionario) throws FuncionarioException {
+		
+		Funcionario funcionario =  new Funcionario(nome, email, dataNascimento, senha, cpf, dataAdmissao, tipoFuncionario);
 		boolean atualizado = false;
 		boolean resul =  false;
 		if(funcionario != null)
@@ -186,7 +201,7 @@ public class RepositorioFuncionarios{
 			
 			if(resul == null)
 			{
-				FuncionarioException buscarfuncionario = new FuncionarioException("Funcionario n existe no repositorio");
+				FuncionarioException buscarfuncionario = new FuncionarioException("Funcionario não existe no repositorio");
 				throw buscarfuncionario;
 			}
 		}
