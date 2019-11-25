@@ -1,6 +1,10 @@
 package beans;
 
-public class Venda {
+import java.io.Serializable;
+
+public class Venda implements Serializable{
+
+	private static final long serialVersionUID = -8634188873103876178L;
 	private double frete;
 	private double valorTotalPedido;
 	private Pedido pedido;

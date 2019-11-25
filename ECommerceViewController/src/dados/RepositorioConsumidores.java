@@ -16,9 +16,7 @@ import exceptions.ConsumidorException;
 
 
 public class RepositorioConsumidores implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -1217645168917213127L;
 	File file;
 	ArrayList<Consumidor> consumidores;

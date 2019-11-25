@@ -1,20 +1,24 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Pedido {
+public class Pedido implements Serializable {
 	
+	private static final long serialVersionUID = 545384808876977854L;
 	private List<Sorvete> sorvetes;
 	private String status;
 	private Consumidor consumidor;
 	private double preco;
+	private int id;
 	
 	
-	public Pedido(List<Sorvete> sorvete, String status, Consumidor consumidor) {
+	public Pedido(List<Sorvete> sorvete, String status, Consumidor consumidor, int id) {
 		super();
 		this.sorvetes = sorvete;
 		this.status = status;
 		this.consumidor = consumidor;
+		this.id = id;
 	}
 
 
@@ -40,7 +44,16 @@ public class Pedido {
 	public void setConsumidor(Consumidor consumidor) {
 		this.consumidor = consumidor;
 	}
-
+	
+	public int getId()
+	{
+		return this.id;
+	}
+	
+	public void setId(int id)
+	{
+		this.id = id;
+	}
 	
 
 	public double getPreco() {

@@ -1,6 +1,10 @@
 package beans;
 
-public class Sorvete {
+import java.io.Serializable;
+
+public class Sorvete implements Serializable{
+
+	private static final long serialVersionUID = 1966429498693322976L;
 	private SaborSorvete[] sabor;
 	private Incremento adicionais;
 	private  Calda calda;
