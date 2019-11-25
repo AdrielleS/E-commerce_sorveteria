@@ -32,5 +32,4 @@ public class TelaLogin extends Application{
     public static void setStage(Stage stage) {
         TelaLogin.stage = stage;
     }
- 
 }

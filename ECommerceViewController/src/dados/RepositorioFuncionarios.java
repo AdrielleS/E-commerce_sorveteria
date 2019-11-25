@@ -28,6 +28,7 @@ public class RepositorioFuncionarios implements Serializable{
 	
 	public ArrayList<Funcionario> listar()
 	{
+                
                 return funcionarios;
                /* ArrayList<String> funcionarioString = new ArrayList<>();
 		for (Funcionario funcionario : funcionarios) {
@@ -65,8 +66,8 @@ public class RepositorioFuncionarios implements Serializable{
 	public void salvarArquivo() throws IOException
 	{
 
-			File f =  new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
-			FileOutputStream fos = null;
+                    File f =  new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
+                    FileOutputStream fos = null;
 		    ObjectOutputStream oos = null;
 
 		    fos = new FileOutputStream(f);

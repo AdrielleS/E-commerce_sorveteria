@@ -35,11 +35,11 @@ public class FuncionariosController extends Sair implements Initializable {
     @FXML private ListView<Funcionario> lvFuncionarios;
     private List<Funcionario> funcionarios = new ArrayList<>();
     private ObservableList<Funcionario> obsFuncionario;
-    private RepositorioFuncionarios repFuncionario = new RepositorioFuncionarios();
+    private RepositorioFuncionarios repFuncionario;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //listarFuncionarios();
+        listarFuncionarios();
         
         btnSair.setOnMouseClicked((MouseEvent e)->{
             sair();
@@ -73,6 +73,7 @@ public class FuncionariosController extends Sair implements Initializable {
     }   
     
     private void listarFuncionarios(){
+        repFuncionario = new RepositorioFuncionarios();
         obsFuncionario = FXCollections.observableArrayList(repFuncionario.listar());
         lvFuncionarios.setItems(obsFuncionario);
     }

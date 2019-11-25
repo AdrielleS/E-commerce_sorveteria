@@ -43,12 +43,12 @@ public class LoginController implements Initializable {
         
         btnCadastrar.setOnMouseClicked((MouseEvent e)->{
             TelaCadastro c = new TelaCadastro();
-            fecha();
             try {
                 c.start(new Stage());
             } catch (Exception ex) {
                 Logger.getLogger(CadastroController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            fecha();
         });
         
     }    
@@ -59,12 +59,12 @@ public class LoginController implements Initializable {
     private void logar(){
         if (txtUsuario.getText().equals("admin") && txtSenha.getText().equals("admin")) {
                 TelaAdmin a = new TelaAdmin();
-                fecha();
                 try {
                     a.start(new Stage());
                 } catch (Exception ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                fecha();
                 
             }else{
                 Alert alert = new Alert(AlertType.ERROR);
