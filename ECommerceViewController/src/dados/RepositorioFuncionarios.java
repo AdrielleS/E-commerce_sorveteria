@@ -154,25 +154,19 @@ public class RepositorioFuncionarios implements Serializable{
 		
 		Funcionario funcionario =  new Funcionario(nome, email, dataNascimento, senha, cpf, dataAdmissao, tipoFuncionario);
 		boolean atualizado = false;
-		boolean resul =  false;
 		if(funcionario != null)
 		{
-			for (Funcionario f : funcionarios) 
-			{
-				if(f.getCpf().equals(funcionario.getCpf()))
+			for (int i =0; i< funcionarios.size(); i++) {
+				int u = this.retornarIndice(funcionario.getCpf());
+				if(u!= -1)
 				{
-					funcionarios.remove(f);
-					resul = true;
+					
+					funcionarios.set(u, funcionario);
+					atualizado = true;
+				
 				}
-			}
-			
-			if(resul == true)
-			{
-				funcionarios.add(funcionario);
-				atualizado = true;
-			}
-			else
-			{
+			}if(atualizado == false){
+				
 				FuncionarioException atualizarfuncionario = new FuncionarioException("Funcionario não existe no repositorio");
 				throw atualizarfuncionario;
 			}
@@ -192,7 +186,8 @@ public class RepositorioFuncionarios implements Serializable{
 		{
 			for (Funcionario f : funcionarios)
 			{
-				if(f.getCpf().equals(funcionario.getCpf()))
+				int i = this.retornarIndice(funcionario.getCpf());
+				if(i!=-1)
 				{
 					resul = f;
 				}
@@ -209,7 +204,16 @@ public class RepositorioFuncionarios implements Serializable{
 		return resul;
 	}
 	
-	
+	private int retornarIndice(String cpf) {
+		int indice =-1;
+		for(int i =0; i< funcionarios.size(); i++) {
+			if(funcionarios.get(i).getCpf().equals(cpf)) {
+				indice = i;
+			}
+		}
+		return indice;
+		
+	}
 
 	
 	

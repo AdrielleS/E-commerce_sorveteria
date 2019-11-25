@@ -15,7 +15,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException, FuncionarioException, ClassNotFoundException, ConsumidorException {
 		
-		//classe de testes		
+		/*classe de testes		
 		
 		RepositorioConsumidores repc =  new RepositorioConsumidores();
 		
@@ -73,7 +73,13 @@ public class Main {
 		//listando nomes da isntacia do arquivo
 		System.out.println();
 		System.out.println("instância do arquivo/nomes");
-		repc2.listar();
+		repc2.listar();*/
+		
+		Funcionario f1 = new Funcionario("Sonael", "Sonael@gmail.com", LocalDate.of(2000, 6, 1), "1234", "13123123123", LocalDate.of(2000, 6, 1), "entregador");
+		RepositorioFuncionarios rpf = new RepositorioFuncionarios();
+		System.out.println(rpf.cadastrar("Sonael", "Sonael@gmail.com", LocalDate.of(2000, 6, 1), "1234", "13123123123", LocalDate.of(2000, 6, 1), "entregador"));
+		System.out.println(rpf.atualizar("Sonael", "Sonael@gmail.com", LocalDate.of(2000, 6, 1), "1234", "13123123123", LocalDate.of(2000, 6, 1), "sorveteiro"));
+		System.out.println(rpf.buscar(f1));
 		
 		
 	}

@@ -1,7 +1,9 @@
+/arquivosPessoas/
+/beans/
 /controller/
 /dados/
 /exceptions/
+/pedido/
 /telas/
 /teste/
-/arquivosPessoas/
-/beans/
+/view/
