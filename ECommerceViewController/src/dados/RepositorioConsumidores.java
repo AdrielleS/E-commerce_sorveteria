@@ -1,23 +1,18 @@
 package dados;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import beans.Consumidor;
-import beans.Funcionario;
 import beans.Zona;
 import exceptions.ConsumidorException;
-import exceptions.FuncionarioException;
 
 
 public class RepositorioConsumidores implements Serializable {
@@ -93,30 +88,18 @@ public class RepositorioConsumidores implements Serializable {
 	public boolean cadastrar(String nome, String email, LocalDate dataNascimento, String senha, String cpf,
 			String endereco, Zona zona) throws ConsumidorException {
 		boolean cadastrado =false;
-		boolean resul = false;
         Consumidor consumidor = new Consumidor(nome, email, dataNascimento, senha, cpf, endereco, zona);
 		
-        if(consumidores.isEmpty())
-        {
+        if(consumidores.isEmpty()){
         	consumidores.add(consumidor);
         	cadastrado = true;
-        }
-        else
-        {
-        	for (Consumidor c : consumidores) {
-				if(c.getCpf().equals(consumidor.getCpf()))
-				{
-					resul = true;
-				}
-			}
+        }else {
+        	Consumidor tem = this.buscar(consumidor);
             
-            if(resul == false)
-            {
+            if(tem == null){
             	consumidores.add(consumidor);
             	cadastrado = true;
-            }
-            else
-            {
+            }else{
             	ConsumidorException cadastroconsumidor =  new ConsumidorException("Consumidor não pode ser cadastrado");
             	throw cadastroconsumidor;
             }
@@ -129,65 +112,40 @@ public class RepositorioConsumidores implements Serializable {
 	
 	
 	public boolean remover(Consumidor consumidor) throws ConsumidorException {
-		Consumidor consu = null;
+		Consumidor consu = this.buscar(consumidor);
 		boolean removido = false;
-		boolean resul = false;
-		if(consumidor != null)
-		{
-			for (Consumidor c : consumidores)
-			{
-				if(c.getCpf().equals(consumidor.getCpf()))
-				{
-					resul = true;
-					consu = c;
-				}
-			}
-			
-			if(resul == true)
-			{
-				consumidores.remove(consu);
-				removido = true;
-			}
-			else
-			{
-				ConsumidorException removerconsumidor =  new ConsumidorException("Consumidor não existe no repositorio");
-				throw removerconsumidor;
-			}
-
+		if(consu != null){
+			consumidores.remove(consu);
+			removido = true;
+		}else {
+			ConsumidorException removerconsumidor =  new ConsumidorException("Consumidor não existe no repositorio");
+			throw removerconsumidor;
 		}
 
 
 		return removido;
-}
-	
-	
-	public boolean atualizar(String nome, String email, LocalDate dataNascimento, String senha, String cpf,String endereco, Zona zona) throws ConsumidorException {
+	}
 		
+	
+	
+	public boolean atualizar(String nome, String email, LocalDate dataNascimento, 
+			String senha, String cpf,String endereco, Zona zona) throws ConsumidorException {
 		Consumidor consumidor = new Consumidor(nome, email, dataNascimento, senha, cpf, endereco, zona);
 		boolean atualizado = false;
-		boolean resul =  false;
-		if(consumidor != null)
-		{
-			for (Consumidor c : consumidores) 
-			{
-				if(c.getCpf().equals(consumidor.getCpf()))
+		if(consumidor != null){
+			for (int i =0; i< consumidores.size(); i++) {
+				int u = this.retornarIndice(consumidores.get(i).getCpf());
+				if(u!= -1)
 				{
-					consumidores.remove(c);
-					resul = true;
+					
+					consumidores.set(u, consumidor);
+					atualizado = true;
+				
 				}
-			}
-			
-			if(resul == true)
-			{
-				consumidores.add(consumidor);
-				atualizado = true;
-			}
-			else
-			{
+			}if(atualizado == false){
 				ConsumidorException atualizarconsumidor = new ConsumidorException("Funcionario não existe no repositorio");
 				throw atualizarconsumidor;
 			}
-		
 		}
 		
 		
@@ -197,28 +155,33 @@ public class RepositorioConsumidores implements Serializable {
 	
 	
 	public Consumidor buscar(Consumidor consumidor) throws ConsumidorException {
-		
 		Consumidor resul = null;
-		
-		if(consumidor != null)
-		{
+		if(consumidor != null){
 			for (Consumidor c : consumidores)
 			{
-				if(c.getCpf().equals(consumidor.getCpf()))
-				{
+				int i = this.retornarIndice(c.getCpf());
+				if(i!=-1){
 					resul = c;
 				}
 			}
 			
-			
-			if(resul == null)
-			{
+			if(resul == null){
 				ConsumidorException buscarconsumidor= new ConsumidorException("Consumidor não existe no repositorio");
 				throw buscarconsumidor;
 			}
 		}
 		
 		return resul;
+	}
+	private int retornarIndice(String cpf) {
+		int indice =-1;
+		for(int i =0; i< consumidores.size(); i++) {
+			if(consumidores.get(i).getCpf().equals(cpf)) {
+				indice = i;
+			}
+		}
+		return indice;
+		
 	}
 	
 

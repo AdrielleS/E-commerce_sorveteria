@@ -9,9 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import beans.Consumidor;
 import beans.Funcionario;
-import exceptions.ConsumidorException;
 import exceptions.FuncionarioException;
 import java.time.LocalDate;
 
@@ -80,30 +78,17 @@ public class RepositorioFuncionarios implements Serializable{
 	public boolean cadastrar(String nome, String email, LocalDate dataNascimento, String senha, String cpf,
 		LocalDate dataAdmissao, String tipoFuncionario) throws FuncionarioException {
 		boolean cadastrado =false;
-		boolean resul = false;
         Funcionario funcionario = new Funcionario(nome, email, dataNascimento, senha, cpf, dataAdmissao, tipoFuncionario);
 		
-        if(funcionarios.isEmpty())
-        {
+        if(funcionarios.isEmpty()){
         	funcionarios.add(funcionario);
         	cadastrado = true;
-        }
-        else
-        {
-        	for (Funcionario f : funcionarios) {
-				if(f.getCpf().equals(funcionario.getCpf()))
-				{
-					resul = true;
-				}
-			}
-            
-            if(resul == false)
-            {
+        }else{
+        	Funcionario tem = this.buscar(funcionario);
+            if(tem == null){
             	funcionarios.add(funcionario);
             	cadastrado = true;
-            }
-            else
-            {
+            }else{
             	FuncionarioException cadastrofuncionario =  new FuncionarioException("Funcionario não pode ser cadastrado");
             	throw cadastrofuncionario;
             }
@@ -117,36 +102,20 @@ public class RepositorioFuncionarios implements Serializable{
 
 
 	public boolean remover(Funcionario funcionario) throws FuncionarioException {
-		Funcionario fun = null;
+		Funcionario fun = this.buscar(funcionario);
 		boolean removido = false;
-		boolean resul = false;
 		if(funcionario != null)
 		{
-			for (Funcionario f : funcionarios)
-			{
-				if(f.getCpf().equals(funcionario.getCpf()))
-				{
-					resul = true;
-					fun = f;
-				}
-			}
-			
-			if(resul == true)
-			{
-				funcionarios.remove(fun);
-				removido = true;
-			}
-			else
-			{
-				FuncionarioException removerfuncionario =  new FuncionarioException("Funcionario não existe no repositorio");
-				throw removerfuncionario;
-			}
-
+			funcionarios.remove(fun);
+			removido = true;
+		}else{
+			FuncionarioException removerfuncionario =  new FuncionarioException("Funcionario não existe no repositorio");
+			throw removerfuncionario;
 		}
 
 
 		return removido;
-}
+	}
 
 
 	public boolean atualizar(String nome, String email, LocalDate dataNascimento, String senha, String cpf,
@@ -170,7 +139,6 @@ public class RepositorioFuncionarios implements Serializable{
 				FuncionarioException atualizarfuncionario = new FuncionarioException("Funcionario não existe no repositorio");
 				throw atualizarfuncionario;
 			}
-		
 		}
 		
 		
@@ -186,16 +154,12 @@ public class RepositorioFuncionarios implements Serializable{
 		{
 			for (Funcionario f : funcionarios)
 			{
-				int i = this.retornarIndice(funcionario.getCpf());
+				int i = this.retornarIndice(f.getCpf());
 				if(i!=-1)
 				{
 					resul = f;
 				}
-			}
-			
-			
-			if(resul == null)
-			{
+			}if(resul == null){
 				FuncionarioException buscarfuncionario = new FuncionarioException("Funcionario não existe no repositorio");
 				throw buscarfuncionario;
 			}
