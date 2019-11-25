@@ -111,7 +111,7 @@ public class RepositorioPedidos implements Serializable {
 				
 			if(buscarpedidos.isEmpty())
 			{
-				ConsumidorException buscarconsumidor= new ConsumidorException("Consumidor n„o existe no repositorio");
+				ConsumidorException buscarconsumidor= new ConsumidorException("Consumidor n√£o existe no repositorio");
 				throw buscarconsumidor;
 			}
 
@@ -165,7 +165,7 @@ public class RepositorioPedidos implements Serializable {
 			removido = true;
 		}
 		else {
-			ConsumidorException removerconsumidor =  new ConsumidorException("Consumidor n„o existe no repositorio");
+			ConsumidorException removerconsumidor =  new ConsumidorException("Consumidor n√£o existe no repositorio");
 			throw removerconsumidor;
 		}
 
@@ -189,7 +189,7 @@ public class RepositorioPedidos implements Serializable {
 			
 			}
 			if(atualizado == false){
-				ConsumidorException atualizarconsumidor = new ConsumidorException("Funcionario n„o existe no repositorio");
+				ConsumidorException atualizarconsumidor = new ConsumidorException("Funcionario n√£o existe no repositorio");
 				throw atualizarconsumidor;
 			}
 		}

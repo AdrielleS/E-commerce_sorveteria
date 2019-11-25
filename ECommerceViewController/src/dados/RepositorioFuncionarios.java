@@ -26,11 +26,15 @@ public class RepositorioFuncionarios implements Serializable{
 	}
 	
 	
-	public void listar()
+	public ArrayList<Funcionario> listar()
 	{
+                return funcionarios;
+               /* ArrayList<String> funcionarioString = new ArrayList<>();
 		for (Funcionario funcionario : funcionarios) {
+                        funcionarioString.add(funcionario.toString());
 			System.out.println(funcionario.getNome());
 		}
+                return funcionarioString */
 	}
 	
 	
@@ -89,7 +93,7 @@ public class RepositorioFuncionarios implements Serializable{
             	funcionarios.add(funcionario);
             	cadastrado = true;
             }else{
-            	FuncionarioException cadastrofuncionario =  new FuncionarioException("Funcionario n„o pode ser cadastrado");
+            	FuncionarioException cadastrofuncionario =  new FuncionarioException("Funcionario n√£o pode ser cadastrado");
             	throw cadastrofuncionario;
             }
         }
@@ -109,7 +113,7 @@ public class RepositorioFuncionarios implements Serializable{
 			funcionarios.remove(fun);
 			removido = true;
 		}else{
-			FuncionarioException removerfuncionario =  new FuncionarioException("Funcionario n„o existe no repositorio");
+			FuncionarioException removerfuncionario =  new FuncionarioException("Funcionario n√£o existe no repositorio");
 			throw removerfuncionario;
 		}
 
@@ -136,7 +140,7 @@ public class RepositorioFuncionarios implements Serializable{
 				}
 			}if(atualizado == false){
 				
-				FuncionarioException atualizarfuncionario = new FuncionarioException("Funcionario n„o existe no repositorio");
+				FuncionarioException atualizarfuncionario = new FuncionarioException("Funcionario n√£o existe no repositorio");
 				throw atualizarfuncionario;
 			}
 		}
@@ -160,7 +164,7 @@ public class RepositorioFuncionarios implements Serializable{
 					resul = f;
 				}
 			}if(resul == null){
-				FuncionarioException buscarfuncionario = new FuncionarioException("Funcionario n„o existe no repositorio");
+				FuncionarioException buscarfuncionario = new FuncionarioException("Funcionario n√£o existe no repositorio");
 				throw buscarfuncionario;
 			}
 		}

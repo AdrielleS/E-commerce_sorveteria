@@ -79,10 +79,7 @@ public class RepositorioConsumidores implements Serializable {
 		
 		
 	}
-	
-	
-	
-	
+        
 	public boolean cadastrar(String nome, String email, LocalDate dataNascimento, String senha, String cpf,
 			String endereco, Zona zona) throws ConsumidorException {
 		boolean cadastrado =false;
@@ -98,7 +95,7 @@ public class RepositorioConsumidores implements Serializable {
             	consumidores.add(consumidor);
             	cadastrado = true;
             }else{
-            	ConsumidorException cadastroconsumidor =  new ConsumidorException("Consumidor n„o pode ser cadastrado");
+            	ConsumidorException cadastroconsumidor =  new ConsumidorException("Consumidor n√£o pode ser cadastrado");
             	throw cadastroconsumidor;
             }
         }
@@ -116,7 +113,7 @@ public class RepositorioConsumidores implements Serializable {
 			consumidores.remove(consu);
 			removido = true;
 		}else {
-			ConsumidorException removerconsumidor =  new ConsumidorException("Consumidor n„o existe no repositorio");
+			ConsumidorException removerconsumidor =  new ConsumidorException("Consumidor n√£o existe no repositorio");
 			throw removerconsumidor;
 		}
 
@@ -141,7 +138,7 @@ public class RepositorioConsumidores implements Serializable {
 				
 				}
 			}if(atualizado == false){
-				ConsumidorException atualizarconsumidor = new ConsumidorException("Funcionario n„o existe no repositorio");
+				ConsumidorException atualizarconsumidor = new ConsumidorException("Funcionario n√£o existe no repositorio");
 				throw atualizarconsumidor;
 			}
 		}
@@ -164,7 +161,7 @@ public class RepositorioConsumidores implements Serializable {
 			}
 			
 			if(resul == null){
-				ConsumidorException buscarconsumidor= new ConsumidorException("Consumidor n„o existe no repositorio");
+				ConsumidorException buscarconsumidor= new ConsumidorException("Consumidor n√£o existe no repositorio");
 				throw buscarconsumidor;
 			}
 		}

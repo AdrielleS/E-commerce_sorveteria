@@ -7,8 +7,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import beans.Funcionario;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -88,7 +86,7 @@ public class CadastrofuncionarioController extends Sair implements Initializable
                 
             } catch (FuncionarioException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Erro");
+                alert.setHeaderText("Funcionario já cadastrado");
                 alert.setContentText(ex.getMessage());
                 alert.show();
             

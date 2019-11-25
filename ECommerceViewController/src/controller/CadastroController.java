@@ -24,15 +24,13 @@ public class CadastroController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        ObservableList<String> zonas = FXCollections.observableArrayList("Norte","Sul","Leste","Oeste");
+        cbZona.setValue("Zonas");
+        cbZona.setItems(zonas);
+        cbZona.getSelectionModel().getSelectedItem();// select item escolhido no comboBox;
        
-        
-        
         btnCadastro.setOnMouseClicked((MouseEvent e)->{
-            ObservableList<String> zonas = FXCollections.observableArrayList("Norte","Sul","Leste","Oeste");
-            cbZona.setValue("Zonas");
-            cbZona.setItems(zonas);
-            cbZona.getSelectionModel().getSelectedItem();// select item escolhido no comboBox;
+            
     }); 
         
         btnVoltar.setOnMouseClicked((MouseEvent e)->{
