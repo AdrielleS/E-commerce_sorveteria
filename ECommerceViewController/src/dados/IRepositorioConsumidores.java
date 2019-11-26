@@ -10,11 +10,11 @@ public interface IRepositorioConsumidores {
 	
 	void salvarArquivo();
 	
-	boolean cadastrar( Consumidor consumidor) throws ConsumidorException;
+	void cadastrar( Consumidor consumidor) throws ConsumidorException;
 	
-	boolean remover(Consumidor consumidor) throws ConsumidorException;
+	void remover(Consumidor consumidor) throws ConsumidorException;
 	
-	boolean atualizar( Consumidor consumidor) throws ConsumidorException;
+	void atualizar( Consumidor consumidor) throws ConsumidorException;
 	
 	 Consumidor buscar(Consumidor consumidor) throws ConsumidorException;
 	

@@ -12,11 +12,11 @@ public interface IRepositorioFuncionarios {
 	
 	void salvarArquivo();
 	
-	boolean cadastrar(Funcionario funcionarioo) throws FuncionarioException;
+	void cadastrar(Funcionario funcionarioo) throws FuncionarioException;
 	
-	boolean remover(Funcionario funcionario) throws FuncionarioException;
+	void remover(Funcionario funcionario) throws FuncionarioException;
 	
-	boolean atualizar(Funcionario funcionario) throws FuncionarioException;
+	void atualizar(Funcionario funcionario) throws FuncionarioException;
 	
 	Funcionario buscar(Funcionario funcionario) throws FuncionarioException ;
 	

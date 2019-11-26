@@ -40,19 +40,15 @@ public class RepositorioPedidos implements IRepositorioPedidos,Serializable {
 	}
 
 
-	public boolean cadastrar(Pedido pedido) {
-		boolean cadastrado = false;
+	public void cadastrar(Pedido pedido) {
 		cont  = this.proximoId();
 		if (cont >0) {
 			pedido.setId(cont);
 			pedidos.add(pedido);
-			cadastrado = true;
 		}
-		return cadastrado;
 	}
 	
-	public boolean remover(Pedido pedido) {
-		boolean removido = false;
+	public void remover(Pedido pedido) {
 		boolean tem = false;
 		for(Pedido p: pedidos) {
 			if(p.getId() == pedido.getId()) {
@@ -61,10 +57,8 @@ public class RepositorioPedidos implements IRepositorioPedidos,Serializable {
 		}
 		if(tem) {
 			pedidos.remove(pedido);
-			removido = true;
 		}
 
-		return removido;
 	}
 	
 	

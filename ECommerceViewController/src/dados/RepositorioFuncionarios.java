@@ -111,14 +111,11 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
 	
 
 	@Override
-	public boolean cadastrar(Funcionario funcionario) throws FuncionarioException {
-		boolean cadastrado =false;
-
+	public void cadastrar(Funcionario funcionario) throws FuncionarioException {
 		boolean temEmail = false;
 		
         if(funcionarios.isEmpty()){
         	funcionarios.add(funcionario);
-        	cadastrado = true;
         }else{
         	for(Funcionario f: funcionarios) {
         		if(f.getEmail().equals(funcionario.getEmail())) {
@@ -129,27 +126,20 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
             
             if(!temEmail){
             	funcionarios.add(funcionario);
-            	cadastrado = true;
             }else{
             	FuncionarioException cadastrofuncionario =  new FuncionarioException("CPF ou e-mail j· cadastrado!");
             	throw cadastrofuncionario;
             }
         }
-        
-		return cadastrado;
 	}
 	
 	
 
 	@Override
-	public boolean remover(Funcionario funcionario) throws FuncionarioException {
+	public void remover(Funcionario funcionario) throws FuncionarioException {
 		int i = this.retornarIndice(funcionario.getCpf());
-		boolean removido = false;
-
 		if(i != -1) {
 			funcionarios.remove(funcionario);
-
-			removido = true;
 		}else{
 			FuncionarioException removerfuncionario =  new FuncionarioException("Funcionario n√£o encontrado");
 			throw removerfuncionario;
@@ -157,11 +147,10 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
 
 
 
-		return removido;
 	}
 
 	@Override
-	public boolean atualizar(Funcionario funcionario) throws FuncionarioException {
+	public void atualizar(Funcionario funcionario) throws FuncionarioException {
 		boolean atualizado = false;
 		if(funcionario != null)
 		{
@@ -181,8 +170,6 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
 			}
 		}
 		
-		
-		return atualizado;
 		
 	}
 	

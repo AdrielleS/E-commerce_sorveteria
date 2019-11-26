@@ -26,6 +26,10 @@ public class CadastroVendas {
 		}
 		
 	}
+	
+	public void cancelarVenda(Venda v) {
+		repV.cancelarVenda(v);
+	}
 
 	public boolean remover(Venda v) {
 		return repV.remover(v);

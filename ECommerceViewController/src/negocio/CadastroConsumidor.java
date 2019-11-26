@@ -1,33 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package negocio;
 
 import beans.Consumidor;
-import controller.CadastroController;
 import dados.RepositorioConsumidores;
 import exceptions.ConsumidorException;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.scene.control.Alert;
+import java.util.List;
 
-/**
- *
- * @author Jamelly
- */
 public class CadastroConsumidor {
     private  RepositorioConsumidores RepConsumidor;
 
         
-    public CadastroConsumidor(RepositorioConsumidores instancia){
-        this.RepConsumidor = instancia;
+    public CadastroConsumidor(){
+        this.RepConsumidor = RepositorioConsumidores.getInstance();
     }
     
     public void cadastrar(Consumidor consumidor) throws ConsumidorException, IOException{
         this.RepConsumidor.cadastrar(consumidor);
         this.RepConsumidor.salvarArquivo();
     }
+
+	public List<Consumidor> listar() {
+		return RepConsumidor.listar();
+	}
+
+	public void atualizar(Consumidor consumidor) throws ConsumidorException {
+		RepConsumidor.atualizar(consumidor);
+		this.RepConsumidor.salvarArquivo();
+	}
+
+	public Consumidor buscar(Consumidor consumidor) throws ConsumidorException {
+		return RepConsumidor.buscar(consumidor);
+	}
+    
 }

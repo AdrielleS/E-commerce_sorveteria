@@ -111,12 +111,10 @@ public class RepositorioConsumidores implements IRepositorioConsumidores,Seriali
 
 	@Override    
 
-	public boolean cadastrar(Consumidor consumidor) throws ConsumidorException {
-		boolean cadastrado =false;
+	public void cadastrar(Consumidor consumidor) throws ConsumidorException {
 		boolean temEmail = false;
         if(consumidores.isEmpty()){
         	consumidores.add(consumidor);
-        	cadastrado = true;
         }else {
         	Consumidor tem = this.buscar(consumidor);
         	for(Consumidor c: consumidores) {
@@ -128,33 +126,29 @@ public class RepositorioConsumidores implements IRepositorioConsumidores,Seriali
             
             if(tem == null && !temEmail){
             	consumidores.add(consumidor);
-            	cadastrado = true;
             }else{
             	ConsumidorException cadastroconsumidor =  new ConsumidorException("CPF ou e-mail j· cadastrado!");
             	throw cadastroconsumidor;
             }
         }       
-        
-		return cadastrado;
+ 
 	}
 	
 	
 	@Override
-	public boolean remover(Consumidor consumidor) throws ConsumidorException {
-		boolean removido = false;
-		if(consumidor != null){
+	public void remover(Consumidor consumidor) throws ConsumidorException {
+		int i = this.retornarIndice(consumidor.getCpf());
+		if(consumidor != null && i !=-1 ){
 			consumidores.remove(consumidor);
-			removido = true;
 		}else {
 			ConsumidorException removerconsumidor =  new ConsumidorException("Consumidor n√£o encontrado!");
 			throw removerconsumidor;
 		}
-		return removido;
 	}
 		
 	
 	@Override
-	public boolean atualizar(Consumidor consumidor) throws ConsumidorException {
+	public void atualizar(Consumidor consumidor) throws ConsumidorException {
 		boolean atualizado = false;
 		if(consumidor != null){
 			for (int i =0; i< consumidores.size(); i++) {
@@ -172,9 +166,6 @@ public class RepositorioConsumidores implements IRepositorioConsumidores,Seriali
 				throw atualizarconsumidor;
 			}
 		}
-		
-		
-		return atualizado;
 		
 	}
 	

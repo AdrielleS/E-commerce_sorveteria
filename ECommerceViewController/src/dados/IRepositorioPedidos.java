@@ -9,9 +9,9 @@ public interface IRepositorioPedidos {
 	
 	List<Pedido> listarTodosPedidos();
 	
-	boolean cadastrar(Pedido pedido);
+	void cadastrar(Pedido pedido);
 	
-	boolean remover(Pedido pedido);
+	void remover(Pedido pedido);
 	
 	public void salvarArquivo();
 	

@@ -14,6 +14,7 @@ import java.util.List;
 import beans.Consumidor;
 import beans.Venda;
 import dados.IRepositorioVendas;
+import exceptions.VendaException;
 
 public class RepositorioVendas implements IRepositorioVendas ,Serializable{
 
@@ -35,7 +36,7 @@ public class RepositorioVendas implements IRepositorioVendas ,Serializable{
 	@Override
 	public void cadastrar(Venda v) {
 		vendas.add(v);
-	
+		
 	}
 
 	@Override

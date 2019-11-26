@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.sun.javafx.scene.control.ControlAcceleratorSupport;
+
 import javafx.scene.control.Alert;
 
 /**
@@ -24,11 +27,16 @@ import javafx.scene.control.Alert;
 public class FachadaSorveteria implements ISorveteria{
     private final CadastroFuncionario funcionario;
     private final CadastroConsumidor consumidor;
+    private final CadastroPedido pedido;
+    private final CadastroVendas venda;
+    
     private static ISorveteria instance;
     
     public FachadaSorveteria() throws ClassNotFoundException, IOException {
-        this.funcionario = new CadastroFuncionario(RepositorioFuncionarios.getInstance());
-        this.consumidor = new CadastroConsumidor(RepositorioConsumidores.getInstance());
+        this.funcionario = new CadastroFuncionario();
+        this.consumidor = new CadastroConsumidor();
+        this.pedido = new CadastroPedido();
+        this.venda = new CadastroVendas();
         
     }
     
