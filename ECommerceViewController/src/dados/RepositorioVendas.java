@@ -12,14 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Consumidor;
-import beans.Funcionario;
-import beans.Pedido;
-import beans.Sorvete;
-import beans.Venda;
-import exceptions.PedidoException;
-import exceptions.VendaException;
-
-
 import beans.Venda;
 import dados.IRepositorioVendas;
 import exceptions.VendaException;

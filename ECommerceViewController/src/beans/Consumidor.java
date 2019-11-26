@@ -9,9 +9,6 @@ public class Consumidor extends Pessoa implements Serializable{
 	private static final long serialVersionUID = 7874769581605575568L;
 	private String endereco;
 	private Zona zona;
-        private Consumidor(){
-            super();
-        }
         
 	public Consumidor(String nome, String email, LocalDate dataNascimento, String senha, String cpf, String endereco, Zona zona) {
 		super(nome, email, dataNascimento, senha, cpf);
