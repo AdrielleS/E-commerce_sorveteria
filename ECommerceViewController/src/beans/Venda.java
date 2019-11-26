@@ -11,6 +11,10 @@ public class Venda implements Serializable{
 	private Pedido pedido;
 	private String modoPagamento;
 	private LocalDate dataVenda;
+	
+	private static final String DEBITO ="debito";
+	private static final String CREDITO ="credito";
+	private static final String DINHEIRO ="dinheiro";
 		
 	public Venda(Pedido pedido, String modoPag) {
 		this.pedido = pedido;
@@ -47,7 +51,10 @@ public class Venda implements Serializable{
 
 	public void setModoPagamento(String modoPagamento) {
 		if (modoPagamento != null) {
-			this.modoPagamento = modoPagamento;
+			if (modoPagamento.equals(DEBITO) || modoPagamento.equals(CREDITO)
+					|| modoPagamento.equals(DINHEIRO)) {
+				this.modoPagamento = modoPagamento;
+			}
 		}
 	}
 	

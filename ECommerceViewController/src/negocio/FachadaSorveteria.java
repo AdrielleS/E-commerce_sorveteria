@@ -29,6 +29,7 @@ public class FachadaSorveteria implements ISorveteria{
     private final CadastroConsumidor consumidor;
     private final CadastroPedido pedido;
     private final CadastroVendas venda;
+    private final CadastroEntregas entrega;
     
     private static ISorveteria instance;
     
@@ -37,6 +38,7 @@ public class FachadaSorveteria implements ISorveteria{
         this.consumidor = new CadastroConsumidor();
         this.pedido = new CadastroPedido();
         this.venda = new CadastroVendas();
+        this.entrega = new CadastroEntregas();
         
     }
     

@@ -27,6 +27,18 @@ public class CadastroVendas {
 		
 	}
 	
+	public void cadastrar(Venda v) throws VendaException  {
+		
+		if (v  != null) {
+			
+			this.repV.cadastrar(v);
+			this.repV.salvar();
+		}
+		
+	}
+	
+	
+	
 	public void cancelarVenda(Venda v) {
 		repV.cancelarVenda(v);
 	}

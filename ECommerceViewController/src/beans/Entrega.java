@@ -6,11 +6,13 @@ import java.util.List;
 public class Entrega {
 	private List<Venda> vendas;
 	private LocalDate dataEntrega;
+	private Funcionario entregador;
 	
 	
-	public Entrega(List<Venda> vendas, LocalDate dataEntrega) {
+	public Entrega(List<Venda> vendas, LocalDate dataEntrega, Funcionario entregador) {
 		this.vendas = vendas;
 		this.dataEntrega = dataEntrega;
+		this.setEntregador(entregador);
 
 	}
 
@@ -38,16 +40,23 @@ public class Entrega {
 	public void setDataEntrega(LocalDate dataEntrega) {
 		this.dataEntrega = dataEntrega;
 	}
+	
+	public Funcionario getEntregador() {
+		return entregador;
+	}
 
-
-
+	public void setEntregador(Funcionario entregador) {
+		if (entregador.getTipoFuncionario().equalsIgnoreCase("entregador")) {
+			this.entregador = entregador;
+		}
+	}
 
 	public String toString() {
 		String s = "";
 		for(Venda v: vendas) {
 			s+=v.toString()+",";
 		}
-		s+=this.dataEntrega.toString();
+		s+=this.dataEntrega.toString()+","+entregador.getCpf()+","+entregador.getNome();
 		return s;
 	}
 	

@@ -8,41 +8,41 @@ import java.util.List;
 
 public class CadastroFuncionario {
     
-    private RepositorioFuncionarios RepFuncionario;
+    private RepositorioFuncionarios repFuncionario;
 
         
     public CadastroFuncionario() throws IOException{
-        this.RepFuncionario = RepositorioFuncionarios.getInstance();
+        this.repFuncionario = RepositorioFuncionarios.getInstance();
     }
     
     public void cadastrar(Funcionario funcionario) throws FuncionarioException{
         if (funcionario != null) {
-			this.RepFuncionario.cadastrar(funcionario);
-			this.RepFuncionario.salvarArquivo();
+			this.repFuncionario.cadastrar(funcionario);
+			this.repFuncionario.salvarArquivo();
 		}
     
     }
 
 	public List<Funcionario> listar() {
-		return RepFuncionario.listar();
+		return repFuncionario.listar();
 	}
 
 	public void remover(Funcionario funcionario) throws FuncionarioException {
 		if (funcionario != null) {
-			RepFuncionario.remover(funcionario);
-			this.RepFuncionario.salvarArquivo();
+			repFuncionario.remover(funcionario);
+			this.repFuncionario.salvarArquivo();
 		}
 	}
 
 	public void atualizar(Funcionario funcionario) throws FuncionarioException {
 		if (funcionario != null) {
-			RepFuncionario.atualizar(funcionario);
-			this.RepFuncionario.salvarArquivo();
+			repFuncionario.atualizar(funcionario);
+			this.repFuncionario.salvarArquivo();
 		}
 	}
 
 	public Funcionario buscar(Funcionario funcionario) throws FuncionarioException {
-		return RepFuncionario.buscar(funcionario);
+		return repFuncionario.buscar(funcionario);
 	}
     
     
