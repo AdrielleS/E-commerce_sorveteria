@@ -49,8 +49,8 @@ public class RepositorioFuncionarios implements Serializable{
 	
 	public static RepositorioFuncionarios lerArquivo() throws ClassNotFoundException, IOException
 	{
-		RepositorioFuncionarios instancialocal =  null;
-		File f = new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
+            RepositorioFuncionarios instancialocal =  null;
+            File f = new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
 	    FileInputStream fis = null;
 	    ObjectInputStream ois = null;
 	    fis = new FileInputStream(f);
@@ -80,11 +80,8 @@ public class RepositorioFuncionarios implements Serializable{
 	
 
 
-	public boolean cadastrar(String nome, String email, LocalDate dataNascimento, String senha, String cpf,
-		LocalDate dataAdmissao, String tipoFuncionario) throws FuncionarioException {
-		boolean cadastrado =false;
-        Funcionario funcionario = new Funcionario(nome, email, dataNascimento, senha, cpf, dataAdmissao, tipoFuncionario);
-		
+	public boolean cadastrar(Funcionario funcionario) throws FuncionarioException{
+	boolean cadastrado =false;	
         if(funcionarios.isEmpty()){
         	funcionarios.add(funcionario);
         	cadastrado = true;

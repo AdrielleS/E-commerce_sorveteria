@@ -1,5 +1,6 @@
 package controller;
 
+import beans.Funcionario;
 import dados.RepositorioFuncionarios;
 import exceptions.FuncionarioException;
 import java.io.IOException;
@@ -18,6 +19,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import negocio.CadastrarFuncionario;
+import negocio.FachadaSorveteria;
+import negocio.ISorveteria;
 import telas.TelaCadastroFuncionario;
 import telas.TelaFuncionariosAdmin;
 
@@ -42,12 +46,11 @@ public class CadastrofuncionarioController extends Sair implements Initializable
     @FXML private ToggleGroup cargos;
     @FXML private RadioButton rdEntregador;
     String cargo;
-
-    
-    RepositorioFuncionarios repositorio = new RepositorioFuncionarios();
+    ISorveteria fachada;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+     
         btnSair.setOnMouseClicked((MouseEvent e)->{
             sair();
             fechar();
@@ -64,8 +67,12 @@ public class CadastrofuncionarioController extends Sair implements Initializable
         });
         
         btnCadastrar.setOnMouseClicked((MouseEvent e)->{
-
-            try {    
+                try {
+                    fachada = FachadaSorveteria.getInstance();
+                } catch (ClassNotFoundException | IOException ex) {
+                    Logger.getLogger(CadastrofuncionarioController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 if (cargos.getSelectedToggle().equals(rdSorveteiro)) {
                     cargo = "sorveteiro";
                 }
@@ -73,29 +80,8 @@ public class CadastrofuncionarioController extends Sair implements Initializable
                 if(cargos.getSelectedToggle().equals(rdEntregador)){
                     cargo = "entregador";
                 }
-
-                        
-                boolean ok =repositorio.cadastrar(txtNome.getText(),txtEmail.getText(),dateData.getValue(), txtSenha.getText(), txtCpf.getText(), dateDataAdmissao.getValue(),cargo);
-                if(ok) {
-	                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-	                alert.setHeaderText("Sucesso");
-	                alert.setTitle("Cadastro realizado");
-	                alert.setContentText("Cadastro realizado com sucesso");
-	                alert.show();
-                }
-                
-            } catch (FuncionarioException ex) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Funcionario já cadastrado");
-                alert.setContentText(ex.getMessage());
-                alert.show();
-            
-                Logger.getLogger(CadastrofuncionarioController.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-//            catch (IOException ex) {
-//                Logger.getLogger(CadastrofuncionarioController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-            
+       
+            fachada.cadastrar(new Funcionario(txtNome.getText(),txtEmail.getText(),dateData.getValue(), txtSenha.getText(), txtCpf.getText(), dateDataAdmissao.getValue(),cargo));
         });
     }    
     

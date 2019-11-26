@@ -80,11 +80,8 @@ public class RepositorioConsumidores implements Serializable {
 		
 	}
         
-	public boolean cadastrar(String nome, String email, LocalDate dataNascimento, String senha, String cpf,
-			String endereco, Zona zona) throws ConsumidorException {
-		boolean cadastrado =false;
-        Consumidor consumidor = new Consumidor(nome, email, dataNascimento, senha, cpf, endereco, zona);
-		
+	public boolean cadastrar(Consumidor consumidor) throws ConsumidorException {
+		boolean cadastrado =false;		
         if(consumidores.isEmpty()){
         	consumidores.add(consumidor);
         	cadastrado = true;

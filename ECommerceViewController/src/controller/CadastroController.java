@@ -1,9 +1,11 @@
 
 package controller;
 
+import beans.Consumidor;
 import beans.Zona;
 import dados.RepositorioConsumidores;
 import exceptions.ConsumidorException;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -13,7 +15,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -21,6 +22,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import negocio.FachadaSorveteria;
+import negocio.ISorveteria;
 import telas.TelaCadastro;
 import telas.TelaLogin;
 
@@ -35,30 +38,12 @@ public class CadastroController implements Initializable {
     @FXML private Button btnCadastro;
     @FXML private Button btnVoltar;
     @FXML private ComboBox<String> cbZona;
-    RepositorioConsumidores repConsumidor;
+    ISorveteria fachada;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        zonas();
-        btnCadastro.setOnMouseClicked((MouseEvent e)->{
-            repConsumidor = new RepositorioConsumidores();
-           try {
-               repConsumidor.cadastrar(txtNome.getText(), txtEmail.getText(), dateDataNascimento.getValue(), txtSenha.getText(), txtCpf.getText(), txtEndereco.getText(), Zona.valueOf(cbZona.getSelectionModel().getSelectedItem()));
-               Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-	       alert.setHeaderText("Sucesso");
-	       alert.setTitle("Cadastro realizado");
-	       alert.setContentText("Cadastro realizado com sucesso");
-	       alert.show();
-           } catch (ConsumidorException ex) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(ex.getMessage());
-                alert.setContentText(ex.getMessage());
-                alert.show();
-               Logger.getLogger(CadastroController.class.getName()).log(Level.SEVERE, null, ex);
-           }
-            
-    }); 
-        
+           
         btnVoltar.setOnMouseClicked((MouseEvent e)->{
             TelaLogin l = new TelaLogin();
             try {
@@ -67,6 +52,19 @@ public class CadastroController implements Initializable {
                 Logger.getLogger(CadastroController.class.getName()).log(Level.SEVERE, null, ex);
             }
             fecha();
+        });
+        
+        btnCadastro.setOnMouseClicked((MouseEvent e)->{
+           try {
+               fachada = FachadaSorveteria.getInstance();
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(CadastroController.class.getName()).log(Level.SEVERE, null, ex);
+           } catch (IOException ex) {
+               Logger.getLogger(CadastroController.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           
+           fachada.cadastrarConsumi(new Consumidor(txtNome.getText(), txtEmail.getText(), dateDataNascimento.getValue(), txtSenha.getText(), txtCpf.getText(), txtEndereco.getText(), Zona.valueOf(cbZona.getSelectionModel().getSelectedItem())));
+           
         });
     }  
     
