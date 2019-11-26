@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Venda implements Serializable{
 
@@ -8,31 +9,20 @@ public class Venda implements Serializable{
 	private double frete;
 	private double valorTotalPedido;
 	private Pedido pedido;
-	private int id;
-	private static int cont;
-	
-	public Venda(Pedido pedido) {
-		cont+=1;
+	private String modoPagamento;
+	private LocalDate dataVenda;
+		
+	public Venda(Pedido pedido, String modoPag) {
 		this.pedido = pedido;
-		this.id = cont;
+		this.setModoPagamento(modoPag);
 	}
 	
-	public Venda(Pedido pedido, int id)
+	public Venda(Pedido pedido)
 	{
 		this.pedido = pedido;
-		this.id = id;
 	}
 	
-	public void setId(int id)
-	{
-		this.id = id;
-	}
-	
-	public int getId()
-	{
-		return this.id;
-	}
-	
+		
 	public double getFrete() {
 		return frete;
 	}
@@ -51,11 +41,33 @@ public class Venda implements Serializable{
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
+	public String getModoPagamento() {
+		return modoPagamento;
+	}
+
+	public void setModoPagamento(String modoPagamento) {
+		if (modoPagamento != null) {
+			this.modoPagamento = modoPagamento;
+		}
+	}
 	
+	public LocalDate getDataVenda() {
+		return dataVenda;
+	}
+
+	public void setDataVenda(LocalDate dataVenda) {
+		this.dataVenda = dataVenda;
+	}
+
 	public String toString() {
-		String s = this.pedido.toString()+","+this.frete+","+this.valorTotalPedido;
+		String s = this.pedido.toString()+","+this.frete+","+this.valorTotalPedido+ ","
+				+this.modoPagamento+","+ this.dataVenda.toString() ;
 		return s;
 	}
+
+	
+	
+	
 	
 	
 }

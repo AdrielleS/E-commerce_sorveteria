@@ -7,126 +7,154 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import beans.Consumidor;
-import beans.Zona;
+import dados.IRepositorioConsumidores;
 import exceptions.ConsumidorException;
 
 
-public class RepositorioConsumidores implements Serializable {
+public class RepositorioConsumidores implements IRepositorioConsumidores,Serializable {
 
 	private static final long serialVersionUID = -1217645168917213127L;
-	File file;
-	ArrayList<Consumidor> consumidores;
+	private List<Consumidor> consumidores;
 	public static RepositorioConsumidores instance;
 	
-	public RepositorioConsumidores() {
+	private RepositorioConsumidores() {
 		consumidores =  new ArrayList<Consumidor>();
 	}
 	
 	
-	public void listar()
+	@Override
+	public List<Consumidor> listar()
 	{
-		if(!consumidores.isEmpty())
-		{
-			for (Consumidor consumidor : consumidores) {
-				System.out.println(consumidor.getNome());
-			}
-		}
+		return this.consumidores;
 	}
 	
-	
-	
-	  public static RepositorioConsumidores getInstance() throws ClassNotFoundException, IOException {
-		    if (instance == null) {
-		      instance = lerArquivo();
-		    }
-		    return instance;
-		  }
-	
-	
-	public static RepositorioConsumidores lerArquivo() throws ClassNotFoundException, IOException
-	{
-            RepositorioConsumidores instancialocal =  null;
-            File f = new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqConsumidores.dat");
+
+	public static RepositorioConsumidores getInstance() {
+		if (instance == null) {
+			instance = RepositorioConsumidores.lerArquivo();
+		}
+		return instance;
+	}
+	private static RepositorioConsumidores lerArquivo() {
+		RepositorioConsumidores instanciaLocal =  null;
+		File f = new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqConsumidores.dat");
 	    FileInputStream fis = null;
 	    ObjectInputStream ois = null;
-	    fis = new FileInputStream(f);
-	    ois = new ObjectInputStream(fis);
-	    Object o = ois.readObject();
-	    instancialocal = (RepositorioConsumidores) o;
-            
-	    ois.close();
+  
+	    try{
+	    	
+	    	fis = new FileInputStream(f);
+	 	    ois = new ObjectInputStream(fis);
+	 	    Object o = ois.readObject();
+	 	    instanciaLocal = (RepositorioConsumidores) o;
+	 	    
+	      }
+	      catch(Exception e){
+	    	  
+	        
+	    	  instanciaLocal = new RepositorioConsumidores();
+	        
+	      }
+	      finally{
+	        if(ois!=null){
+	            try{
+	              ois.close();
+	            }
+	            catch(IOException e){
+	              System.out.println("Não foi possível fechar o arquivo!");
+	              e.printStackTrace();
+	            }
+	        }
+	      }
 
 
-	    return instancialocal;
+	    return instanciaLocal;
 	}
 	
-	
-	
-	public void salvarArquivo() throws IOException
-	{
-			File f =  new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqConsumidores.dat");
-			FileOutputStream fos = null;
-		    ObjectOutputStream oos = null;
+	@Override
+	public void salvarArquivo(){
+		if(instance == null){
+			return;
+		}
+		     
+		File f = new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqConsumidores.dat");
+	    FileOutputStream fos = null;
+	    ObjectOutputStream oos = null;
+	    try{
+	    	 if(!f.exists()) {
+	    		 f.createNewFile();
+	    	 }
+	    	 fos = new FileOutputStream(f);
+			 oos = new ObjectOutputStream(fos);
+			 
+			 oos.writeObject(instance);   
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    }finally{
+	        if(oos!=null){
+	          
+	          try{
+	              oos.close();
+	          }catch(IOException e){
+	        	  System.out.println("Não foi possível fechar o arquivo.");
+	        	  e.printStackTrace();
+	          }
+	        }
+	    }
 
-		    fos = new FileOutputStream(f);
-		    oos = new ObjectOutputStream(fos);
-		    oos.writeObject(instance);
-		    oos.close(); 
-		
-		
 	}
 	
-	
-	
-	
+
+	@Override    
+
 	public boolean cadastrar(Consumidor consumidor) throws ConsumidorException {
 		boolean cadastrado =false;
-		
-
-		if(!consumidores.contains(consumidor))
-		{
-			consumidores.add(consumidor);
-			cadastrado = true;
-		}
-		else
-		{
-			ConsumidorException cadastrarConsumidor =  new ConsumidorException("Consumidor nÃ£o pode ser cadastrado no repositorio");
-			throw cadastrarConsumidor;
-		}
-
-        
+		boolean temEmail = false;
+        if(consumidores.isEmpty()){
+        	consumidores.add(consumidor);
+        	cadastrado = true;
+        }else {
+        	Consumidor tem = this.buscar(consumidor);
+        	for(Consumidor c: consumidores) {
+        		if(c.getEmail().equals(consumidor.getEmail())) {
+        			temEmail = true;
+        		}
+        		
+        	}
+            
+            if(tem == null && !temEmail){
+            	consumidores.add(consumidor);
+            	cadastrado = true;
+            }else{
+            	ConsumidorException cadastroconsumidor =  new ConsumidorException("CPF ou e-mail já cadastrado!");
+            	throw cadastroconsumidor;
+            }
+        }       
         
 		return cadastrado;
 	}
 	
 	
-	
+	@Override
 	public boolean remover(Consumidor consumidor) throws ConsumidorException {
 		boolean removido = false;
-		if(consumidores.contains(consumidor))
-		{
+		if(consumidor != null){
 			consumidores.remove(consumidor);
+			removido = true;
+		}else {
+			ConsumidorException removerconsumidor =  new ConsumidorException("Consumidor nÃ£o encontrado!");
+			throw removerconsumidor;
 		}
-		else
-		{
-			ConsumidorException removerConsumidor =  new ConsumidorException("Consumidor nao existe no repositorio");
-			throw removerConsumidor;
-		}
-
-
-
 		return removido;
 	}
 		
 	
-	
-	public boolean atualizar(String nome, String email, LocalDate dataNascimento, 
-			String senha, String cpf,String endereco, Zona zona) throws ConsumidorException {
-		Consumidor consumidor = new Consumidor(nome, email, dataNascimento, senha, cpf, endereco, zona);
+	@Override
+	public boolean atualizar(Consumidor consumidor) throws ConsumidorException {
 		boolean atualizado = false;
 		if(consumidor != null){
 			for (int i =0; i< consumidores.size(); i++) {
@@ -139,7 +167,8 @@ public class RepositorioConsumidores implements Serializable {
 				
 				}
 			}if(atualizado == false){
-				ConsumidorException atualizarconsumidor = new ConsumidorException("Consumidor nao existe no repositorio");
+				ConsumidorException atualizarconsumidor = new ConsumidorException("Consumidor nÃ£o encontrado!");
+
 				throw atualizarconsumidor;
 			}
 		}
@@ -149,7 +178,7 @@ public class RepositorioConsumidores implements Serializable {
 		
 	}
 	
-	
+	@Override
 	public Consumidor buscar(Consumidor consumidor) throws ConsumidorException {
 		Consumidor resul = null;
 		if(consumidor != null){
@@ -162,7 +191,7 @@ public class RepositorioConsumidores implements Serializable {
 			}
 			
 			if(resul == null){
-				ConsumidorException buscarconsumidor= new ConsumidorException("Consumidor nao existe no repositorio");
+				ConsumidorException buscarconsumidor= new ConsumidorException("Consumidor nÃ£o encontrado!");
 				throw buscarconsumidor;
 			}
 		}

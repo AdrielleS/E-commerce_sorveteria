@@ -90,7 +90,7 @@ public class Main {
 //		System.out.println(rpf.buscar(f1));
 		
 		//teste repositorio pedidos
-		RepositorioPedidos reppedidos =  new RepositorioPedidos();
+		/*RepositorioPedidos reppedidos =  new RepositorioPedidos();
 		
 		SaborSorvete[] saboressorevetes =  new SaborSorvete[3];
 		saboressorevetes[0] = SaborSorvete.BAUNILHA;
@@ -170,7 +170,7 @@ public class Main {
 		 System.out.println();
 		 System.out.println("Adicionando na instancia recuperada do arquivo");
 		 reppedidos2.cadastrar(pedido3);
-		 reppedidos2.listar();
+		 reppedidos2.listar();*/
 		
 //		
 //		

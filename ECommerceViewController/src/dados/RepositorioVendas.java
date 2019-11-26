@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,180 +17,150 @@ import beans.Pedido;
 import beans.Sorvete;
 import beans.Venda;
 import exceptions.PedidoException;
-import exceptions.VendaExeption;
+import exceptions.VendaException;
 
 
-public class RepositorioVendas implements Serializable{
+import beans.Venda;
+import dados.IRepositorioVendas;
+import exceptions.VendaException;
+
+public class RepositorioVendas implements IRepositorioVendas ,Serializable{
 
 	private static final long serialVersionUID = -441651136385215292L;
-	ArrayList<Venda> vendas;
-	File file;
+	private List<Venda> vendas;
 	public static RepositorioVendas instance;
 	
-	public RepositorioVendas()
-	{
-		vendas =  new ArrayList<Venda>();
+	private  RepositorioVendas() {
+		vendas = new ArrayList<Venda>();
 	}
 	
-	
-	public void listar()
-	{
-		for (Venda venda : vendas)
-		{
-			
-			System.out.println(venda.getPedido().getConsumidor().getNome()+"    "+venda.getPedido().getConsumidor().getCpf()+"    "+venda.getId());
+	public static RepositorioVendas getInstance() {
+		if (instance == null) {
+			instance = RepositorioVendas.lerArquivo();
 		}
+		return instance;
 	}
+
+	@Override
+	public void cadastrar(Venda v) {
+		vendas.add(v);
 	
-	
-	  public static RepositorioVendas getInstance() throws ClassNotFoundException, IOException {
-		    if (instance == null) {
-		      instance = lerArquivo();
-		    }
-		    return instance;
-		  }
-	  
-	  
-		public static RepositorioVendas lerArquivo() throws ClassNotFoundException, IOException
-		{
-			RepositorioVendas instancialocal =  null;
-			File f = new File("baseDados" + File.separatorChar+"vendas"+  File.separatorChar+"arqVendas.dat");
-		    FileInputStream fis = null;
-		    ObjectInputStream ois = null;
-		    fis = new FileInputStream(f);
-		    ois = new ObjectInputStream(fis);
-		    Object o = ois.readObject();
-		    instancialocal = (RepositorioVendas) o;
-		    ois.close();
+	}
 
-
-		    return instancialocal;
+	@Override
+	public boolean remover(Venda v) {
+		boolean removido = false;
+		if(v !=null) {
+			vendas.remove(v);
+			removido = true;
 		}
-		
-		public void salvarArquivo() throws IOException
-		{
+		return removido;
+	}
 
-				File f =  new File("baseDados" + File.separatorChar+"vendas"+  File.separatorChar+"arqVendas.dat");
-				FileOutputStream fos = null;
-			    ObjectOutputStream oos = null;
-
-			    fos = new FileOutputStream(f);
-			    oos = new ObjectOutputStream(fos);
-			    oos.writeObject(instance);
-			    oos.close(); 
-		
-		}
-		
-		
-		
-		public boolean cadastrar(Venda venda) throws IOException, VendaExeption {
-
-			boolean cadastrado =false;
-			if(venda != null)
-			{
-				if(!vendas.contains(venda)) 
-				{
-					vendas.add(venda);
-					cadastrado =  true;
-				}
-				else
-				{
-					VendaExeption cadastrarVenda =  new VendaExeption("Venda nao pode ser cadastrado");
-					throw cadastrarVenda;
-				}
+	@Override
+	public List<Venda> listarPorData(LocalDate d) {
+		List<Venda> lista = new ArrayList<Venda>();
+		for(Venda v: vendas) {
+			if(v.getDataVenda().equals(d)) {
+				lista.add(v);
 			}
+		}
+		
+		return lista;
+	}
 
-			
+	@Override
+	public List<Venda> listarTodasVendas() {
+		return this.vendas;
+	}
+	
+	@Override
+	public List<Venda> listarPorConsumidor (Consumidor c) {
+		List<Venda> lista = new ArrayList<Venda>();
+		for(Venda v: vendas) {
+			if(v.getPedido().getConsumidor().equals(c)) {
+				lista.add(v);
+			}
+		}
+		return lista;
+	}
+	
+	private static RepositorioVendas lerArquivo() {
+		RepositorioVendas instanciaLocal =  null;
+		File f = new File("baseDados" + File.separatorChar+"pedido"+  File.separatorChar+"arqVendas.dat");
+	    FileInputStream fis = null;
+	    ObjectInputStream ois = null;
+	   
+	    try{
+	    	
+	    	fis = new FileInputStream(f);
+	 	    ois = new ObjectInputStream(fis);
+	 	    Object o = ois.readObject();
+	 	    instanciaLocal = (RepositorioVendas) o;
+	 	    
+	      }
+	      catch(Exception e){
+	    	  
 	        
-			return cadastrado;
-		}
-		
-		public boolean remover(int id) throws VendaExeption {
-			boolean removido = false;
-			Venda resul = null;
-			for (Venda venda2 : vendas) {
-				if(venda2.getId() == id)
-				{
-					resul = venda2;
-					
-				}
-			}
+	    	  instanciaLocal = new RepositorioVendas();
+	        
+	      }
+	      finally{
+	        if(ois!=null){
+	            try{
+	              ois.close();
+	            }
+	            catch(IOException e){
+	              System.out.println("Não foi possível fechar o arquivo!");
+	              e.printStackTrace();
+	            }
+	        }
+	      }
 
-			if(resul == null)
-			{
-				VendaExeption removerVendaId =  new VendaExeption("Venda nao existe no repositorio");
-				throw removerVendaId;
-			}
-			else 
-			{
-				vendas.remove(resul);
-				removido = true;
-				
-			}
+	    return instanciaLocal;
+	}
+	
 
+	@Override
+	public void salvar() {
+		if(instance == null){
+			return;
+		}
+		     
+		File f = new File("baseDados" + File.separatorChar+"pedido"+  File.separatorChar+"arqVendas.dat");
+	    FileOutputStream fos = null;
+	    ObjectOutputStream oos = null;
+	    try{
+	    	 if(!f.exists()) {
+	    		 f.createNewFile();
+	    	 }
+	    	 fos = new FileOutputStream(f);
+			 oos = new ObjectOutputStream(fos);
+			 
+			 oos.writeObject(instance);   
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    }finally{
+	        if(oos!=null){
+	          
+	          try{
+	              oos.close();
+	          }catch(IOException e){
+	        	  System.out.println("Não foi possível fechar o arquivo.");
+	        	  e.printStackTrace();
+	          }
+	        }
+	    }
+	}
 
+	
+	
+	
+	
+	
 
-			return removido;
-		}
-		
-		
-		public boolean remover(Venda venda) throws VendaExeption
-		{
-			boolean removido =  false;
-			if(venda != null)
-			{
-				if(vendas.contains(venda))
-				{
-					vendas.remove(venda);
-					removido = true;
-				}
-				else
-				{
-					VendaExeption removerVendaObj = new VendaExeption("Venda nao existe no repositorio");
-					throw removerVendaObj;
-				}
-			}
-			
-			return removido;
-		}
-		
-		
-		public boolean atualizar(Pedido pedido) throws IOException, VendaExeption {
-			Venda venda =  new Venda(pedido);
-			boolean atualizado = false;
-			if(pedido != null){
-
-				int u = this.retornarIndice(venda.getId());
-				if(u!= -1)
-				{
-						
-					vendas.set(u, venda);
-					atualizado = true;
-				
-				}
-				if(atualizado == false){
-					VendaExeption atualizarVenda = new VendaExeption("Pedido nao existe no repositorio");
-					throw atualizarVenda;
-				}
-			}
-			
-			
-			return atualizado;
-			
-		}
-		
-		
-		private int retornarIndice(int id) {
-			int indice =-1;
-			for(int i =0; i< vendas.size(); i++) {
-				if(vendas.get(i).getId() == id) {
-					indice = i;
-				}
-			}
-		
-			return indice;
-			
-		}
+	
+	
 	
 
 }

@@ -40,6 +40,18 @@ public class Consumidor extends Pessoa implements Serializable{
 		return s;
 	}
 	
+	public boolean equals(Consumidor c) {
+		boolean igual = false;
+		if(c !=null) {
+			if(this.getCpf().equals(c.getCpf()) && this.getNome().equalsIgnoreCase(c.getNome())
+					&& this.getEmail().equals(c.getEmail())) {
+				igual =true;
+			}
+			
+		}
+		return igual;
+	}
+	
 	
 
 	

@@ -11,25 +11,14 @@ public class Pedido implements Serializable {
 	private Consumidor consumidor;
 	private double preco;
 	private int id;
-	private static int cont;
 
 	
 	
 	public Pedido(List<Sorvete> sorvete, String status, Consumidor consumidor) {
 		super();
-		cont+=1;
 		this.sorvetes = sorvete;
 		this.status = status;
 		this.consumidor = consumidor;
-		this.id = cont;
-	}
-	
-	public Pedido(List<Sorvete> sorvete, String status, Consumidor consumidor,int id) {
-		super();
-		this.sorvetes = sorvete;
-		this.status = status;
-		this.consumidor = consumidor;
-		this.id = id;
 	}
 
 
@@ -75,7 +64,7 @@ public class Pedido implements Serializable {
 		this.preco =0;
 		for (Sorvete s: sorvetes) {
 			for(int i = 0; i < s.getNumeroBolas(); i++) {
-				this.preco += s.getSabor()[i].getValor();
+				this.preco += s.getSabor().get(i).getValor();
 			}
 			this.preco += s.getAdicionais().getValor()+ s.getCalda().getValor();
 		}

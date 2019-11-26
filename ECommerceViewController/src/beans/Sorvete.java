@@ -1,28 +1,29 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Sorvete implements Serializable{
 
 	private static final long serialVersionUID = 1966429498693322976L;
-	private SaborSorvete[] sabor;
+	private ArrayList<SaborSorvete> sabor;
 	private Incremento adicionais;
 	private  Calda calda;
 	private int numeroBolas;
 	
-	public Sorvete(SaborSorvete[] sabor, Incremento adicionais, Calda calda, int numeroBolas) {
+	public Sorvete(ArrayList<SaborSorvete> sabor, Incremento adicionais, Calda calda, int numeroBolas) {
 		this.setSabor(sabor); 
 		this.adicionais = adicionais;
 		this.calda = calda;
 		this.numeroBolas = numeroBolas;
 	}
 
-	public SaborSorvete[] getSabor() {
+	public ArrayList<SaborSorvete> getSabor() {
 		return sabor;
 	}
 
-	public void setSabor(SaborSorvete[] sabor) {
-		if (sabor.length == this.numeroBolas) {
+	public void setSabor(ArrayList<SaborSorvete> sabor) {
+		if (sabor.size() < numeroBolas) {
 			this.sabor = sabor;
 		}
 	}
@@ -54,7 +55,7 @@ public class Sorvete implements Serializable{
 	public String toString() {
 		String s = "";
 		for(int i =0; i < this.numeroBolas; i++) {
-			s+= this.getSabor()[i].toString()+",";
+			s+= this.sabor.get(i).toString()+",";
 		}
 		s += this.adicionais.toString()+","+this.calda.toString();
 		return s;

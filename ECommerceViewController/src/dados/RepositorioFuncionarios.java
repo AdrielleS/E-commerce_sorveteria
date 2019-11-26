@@ -8,106 +8,150 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+
 
 import beans.Funcionario;
+import dados.IRepositorioFuncionarios;
 import exceptions.FuncionarioException;
-import java.time.LocalDate;
 
-public class RepositorioFuncionarios implements Serializable{
+public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serializable{
 
 	private static final long serialVersionUID = 1025911660485970999L;
-	ArrayList<Funcionario> funcionarios;
-	File file;
-	public static RepositorioFuncionarios instance;
+	private List<Funcionario> funcionarios;
+	private static RepositorioFuncionarios instance;
+
+	private RepositorioFuncionarios() {
+		funcionarios = new ArrayList<Funcionario>();		
+	}
 	
-	public RepositorioFuncionarios() {
-		funcionarios = new ArrayList<>();
-		
+
+	@Override
+	public List<Funcionario> listar(){
+		return funcionarios;
+         
 	}
 	
 	
-	public void listar()
-	{
-            
-		for (Funcionario funcionario : funcionarios) {
-			System.out.println(funcionario.getNome());
-		}
+	
+	public static RepositorioFuncionarios getInstance() {
+		if (instance == null) {
+			      instance = RepositorioFuncionarios.lerArquivo();
+		 }
+		 return instance;
 	}
 	
 	
-	  public static RepositorioFuncionarios getInstance() throws ClassNotFoundException, IOException {
-		    if (instance == null) {
-		      instance = lerArquivo();
-		    }
-		    return instance;
-		  }
-	
-	
-	public static RepositorioFuncionarios lerArquivo() throws ClassNotFoundException, IOException
-	{
-            RepositorioFuncionarios instancialocal =  null;
-            File f = new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
+	private static RepositorioFuncionarios lerArquivo() {
+		RepositorioFuncionarios instanciaLocal =  null;
+		File f = new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
 	    FileInputStream fis = null;
 	    ObjectInputStream ois = null;
-	    fis = new FileInputStream(f);
-	    ois = new ObjectInputStream(fis);
-	    Object o = ois.readObject();
-            
-	    instancialocal = (RepositorioFuncionarios) o;
-            
-	    ois.close();
+   
+	    try{
+	    	
+	    	fis = new FileInputStream(f);
+	 	    ois = new ObjectInputStream(fis);
+	 	    Object o = ois.readObject();
+	 	    instanciaLocal = (RepositorioFuncionarios) o;
+	 	    
+	      }
+	      catch(Exception e){
+	    	  
+	        
+	    	  instanciaLocal = new RepositorioFuncionarios();
+	        
+	      }
+	      finally{
+	        if(ois!=null){
+	            try{
+	              ois.close();
+	            }
+	            catch(IOException e){
+	              System.out.println("N„o foi possÌvel fechar o arquivo!");
+	              e.printStackTrace();
+	            }
+	        }
+	      }
 
-
-	    return instancialocal;
+	    return instanciaLocal;
 	}
 	
-	public void salvarArquivo() throws IOException
-	{
-
-			File f =  new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
-			FileOutputStream fos = null;
-		    ObjectOutputStream oos = null;
-
-		    fos = new FileOutputStream(f);
-		    oos = new ObjectOutputStream(fos);
-		    oos.writeObject(instance);
-		    oos.close(); 
-		
-		
+	@Override
+	public void salvarArquivo(){
+		if(instance == null){
+			return;
+		}
+		     
+		File f =  new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
+	    FileOutputStream fos = null;
+	    ObjectOutputStream oos = null;
+	    try{
+	    	 if(!f.exists()) {
+	    		 f.createNewFile();
+	    	 }
+	    	 fos = new FileOutputStream(f);
+			 oos = new ObjectOutputStream(fos);
+			 
+			 oos.writeObject(instance);   
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    }finally{
+	        if(oos!=null){
+	          
+	          try{
+	              oos.close();
+	          }catch(IOException e){
+	        	  System.out.println("N„o foi possÌvel fechar o arquivo.");
+	        	  e.printStackTrace();
+	          }
+	        }
+	    }
 	}
 	
 
-
+	@Override
 	public boolean cadastrar(Funcionario funcionario) throws FuncionarioException {
 		boolean cadastrado =false;
 
-		if(!funcionarios.contains(funcionario))
-		{
-			funcionarios.add(funcionario);
-			cadastrado = true;
-		}
-		else
-		{
-			FuncionarioException cadastrarfuncionario =  new FuncionarioException("Funcionario nao pode ser cadastrado no repositorio");
-			throw cadastrarfuncionario;
-		}
-
+		boolean temEmail = false;
+		
+        if(funcionarios.isEmpty()){
+        	funcionarios.add(funcionario);
+        	cadastrado = true;
+        }else{
+        	for(Funcionario f: funcionarios) {
+        		if(f.getEmail().equals(funcionario.getEmail())) {
+        			temEmail = true;
+        		}
+        		
+        	}
+            
+            if(!temEmail){
+            	funcionarios.add(funcionario);
+            	cadastrado = true;
+            }else{
+            	FuncionarioException cadastrofuncionario =  new FuncionarioException("CPF ou e-mail j· cadastrado!");
+            	throw cadastrofuncionario;
+            }
+        }
         
 		return cadastrado;
 	}
 	
 	
 
-
+	@Override
 	public boolean remover(Funcionario funcionario) throws FuncionarioException {
+		int i = this.retornarIndice(funcionario.getCpf());
 		boolean removido = false;
-		if(funcionarios.contains(funcionario))
-		{
+
+		if(i != -1) {
 			funcionarios.remove(funcionario);
-		}
-		else
-		{
-			FuncionarioException removerfuncionario =  new FuncionarioException("Funcionario nao existe no repositorio");
+
+			removido = true;
+		}else{
+			FuncionarioException removerfuncionario =  new FuncionarioException("Funcionario n√£o encontrado");
 			throw removerfuncionario;
 		}
 
@@ -116,11 +160,8 @@ public class RepositorioFuncionarios implements Serializable{
 		return removido;
 	}
 
-
-	public boolean atualizar(String nome, String email, LocalDate dataNascimento, String senha, String cpf,
-			LocalDate dataAdmissao, String tipoFuncionario) throws FuncionarioException {
-		
-		Funcionario funcionario =  new Funcionario(nome, email, dataNascimento, senha, cpf, dataAdmissao, tipoFuncionario);
+	@Override
+	public boolean atualizar(Funcionario funcionario) throws FuncionarioException {
 		boolean atualizado = false;
 		if(funcionario != null)
 		{
@@ -135,7 +176,7 @@ public class RepositorioFuncionarios implements Serializable{
 				}
 			}if(atualizado == false){
 				
-				FuncionarioException atualizarfuncionario = new FuncionarioException("Funcionario nao existe no repositorio");
+				FuncionarioException atualizarfuncionario = new FuncionarioException("Funcionario n√£o encontrado!");
 				throw atualizarfuncionario;
 			}
 		}
@@ -144,7 +185,8 @@ public class RepositorioFuncionarios implements Serializable{
 		return atualizado;
 		
 	}
-
+	
+	@Override
 	public Funcionario buscar(Funcionario funcionario) throws FuncionarioException {
 		
 		Funcionario resul = null;
@@ -159,7 +201,8 @@ public class RepositorioFuncionarios implements Serializable{
 					resul = f;
 				}
 			}if(resul == null){
-				FuncionarioException buscarfuncionario = new FuncionarioException("Funcionario nao existe no repositorio");
+
+				FuncionarioException buscarfuncionario = new FuncionarioException("Funcionario n√£o encotrado!");
 				throw buscarfuncionario;
 			}
 		}
