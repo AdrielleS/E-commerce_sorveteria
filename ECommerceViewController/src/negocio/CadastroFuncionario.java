@@ -16,7 +16,7 @@ public class CadastroFuncionario {
     }
     
     public void cadastrar(Funcionario funcionario) throws FuncionarioException{
-        if (funcionario != null) {
+        if (funcionario != null && this.eNumero(funcionario.getCpf())) {
 			this.repFuncionario.cadastrar(funcionario);
 			this.repFuncionario.salvarArquivo();
 		}
@@ -43,6 +43,17 @@ public class CadastroFuncionario {
 
 	public Funcionario buscar(Funcionario funcionario) throws FuncionarioException {
 		return repFuncionario.buscar(funcionario);
+	}
+	
+	private boolean eNumero(String s) {
+		boolean r;
+		if(s.contains("^[a-Z]")) {
+			r = false;
+		}else{
+			r =true;
+		}
+		return r;
+		
 	}
     
     

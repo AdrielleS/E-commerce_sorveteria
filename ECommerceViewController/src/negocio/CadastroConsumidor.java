@@ -15,8 +15,10 @@ public class CadastroConsumidor {
     }
     
     public void cadastrar(Consumidor consumidor) throws ConsumidorException, IOException{
-        this.repConsumidor.cadastrar(consumidor);
-        this.repConsumidor.salvarArquivo();
+        if (this.eNumero(consumidor.getCpf())) {
+			this.repConsumidor.cadastrar(consumidor);
+			this.repConsumidor.salvarArquivo();
+		}
     }
 
 	public List<Consumidor> listar() {
@@ -30,6 +32,18 @@ public class CadastroConsumidor {
 
 	public Consumidor buscar(Consumidor consumidor) throws ConsumidorException {
 		return repConsumidor.buscar(consumidor);
+	}
+	
+	private boolean eNumero(String s) {
+		boolean r;
+	
+		if(s.contains("^[a-Z]")) {
+			r = false;
+		}else{
+			r =true;
+		}
+		return r;
+		
 	}
     
 }
