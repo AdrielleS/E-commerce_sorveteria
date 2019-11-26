@@ -12,6 +12,8 @@ public interface IRepositorioVendas {
 	
 	boolean remover(Venda v);
 	
+	void cancelarVenda(Venda v);
+	
 	List<Venda> listarPorData(LocalDate d);
 	
 	List<Venda> listarTodasVendas();

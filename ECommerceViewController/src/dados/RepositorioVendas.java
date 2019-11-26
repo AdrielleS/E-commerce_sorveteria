@@ -14,7 +14,6 @@ import java.util.List;
 import beans.Consumidor;
 import beans.Venda;
 import dados.IRepositorioVendas;
-import exceptions.VendaException;
 
 public class RepositorioVendas implements IRepositorioVendas ,Serializable{
 
@@ -75,6 +74,16 @@ public class RepositorioVendas implements IRepositorioVendas ,Serializable{
 			}
 		}
 		return lista;
+	}
+	
+	@Override
+	public void cancelarVenda(Venda v) {
+		for(Venda ve: vendas) {
+			if(ve.getPedido().getId() == v.getPedido().getId()) {
+				ve.getPedido().setStatus("CANCELADO!");
+			}
+		}
+		
 	}
 	
 	private static RepositorioVendas lerArquivo() {
@@ -144,6 +153,8 @@ public class RepositorioVendas implements IRepositorioVendas ,Serializable{
 	        }
 	    }
 	}
+
+	
 
 	
 	
