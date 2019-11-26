@@ -13,7 +13,6 @@ import java.util.List;
 
 import beans.Pedido;
 import dados.IRepositorioPedidos;
-import exceptions.PedidoException;
 
 
 public class RepositorioPedidos implements IRepositorioPedidos,Serializable {

@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import negocio.CadastrarFuncionario;
+import negocio.CadastroFuncionario;
 import negocio.FachadaSorveteria;
 import negocio.ISorveteria;
 import telas.TelaCadastroFuncionario;

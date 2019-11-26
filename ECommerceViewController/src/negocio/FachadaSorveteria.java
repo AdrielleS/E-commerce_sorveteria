@@ -22,13 +22,13 @@ import javafx.scene.control.Alert;
  * @author Jamelly
  */
 public class FachadaSorveteria implements ISorveteria{
-    private final CadastrarFuncionario funcionario;
-    private final CadastrarConsumidor consumidor;
+    private final CadastroFuncionario funcionario;
+    private final CadastroConsumidor consumidor;
     private static ISorveteria instance;
     
     public FachadaSorveteria() throws ClassNotFoundException, IOException {
-        this.funcionario = new CadastrarFuncionario(RepositorioFuncionarios.getInstance());
-        this.consumidor = new CadastrarConsumidor(RepositorioConsumidores.getInstance());
+        this.funcionario = new CadastroFuncionario(RepositorioFuncionarios.getInstance());
+        this.consumidor = new CadastroConsumidor(RepositorioConsumidores.getInstance());
         
     }
     

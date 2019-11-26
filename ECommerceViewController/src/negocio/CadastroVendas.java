@@ -16,9 +16,6 @@ public class CadastroVendas {
 		this.repV = RepositorioVendas.getInstance();
 	}
 	
-	
-	
-
 	public void cadastrar(Pedido pedido, String modoPag) throws VendaException  {
 		
 		Venda v = new Venda(pedido, modoPag);
@@ -27,20 +24,11 @@ public class CadastroVendas {
 			this.repV.cadastrar(v);
 			this.repV.salvar();
 		}
-		else{
-			
-			VendaException venE = new VendaException("Não foi possível realizar a venda!");
-			throw venE; 
-		}
 		
 	}
 
 	public boolean remover(Venda v) {
 		return repV.remover(v);
-	}
-
-	public void salvar() {
-		repV.salvar();
 	}
 
 	public List<Venda> listarPorData(LocalDate d) {

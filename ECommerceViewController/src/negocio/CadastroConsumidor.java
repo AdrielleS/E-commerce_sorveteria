@@ -18,11 +18,11 @@ import javafx.scene.control.Alert;
  *
  * @author Jamelly
  */
-public class CadastrarConsumidor {
+public class CadastroConsumidor {
     private  RepositorioConsumidores RepConsumidor;
 
         
-    public CadastrarConsumidor(RepositorioConsumidores instancia){
+    public CadastroConsumidor(RepositorioConsumidores instancia){
         this.RepConsumidor = instancia;
     }
     

@@ -15,12 +15,12 @@ import java.util.ArrayList;
  *
  * @author Jamelly
  */
-public class CadastrarFuncionario {
+public class CadastroFuncionario {
     
     private RepositorioFuncionarios RepFuncionario;
 
         
-    public CadastrarFuncionario(RepositorioFuncionarios instancia) throws IOException{
+    public CadastroFuncionario(RepositorioFuncionarios instancia) throws IOException{
         this.RepFuncionario = instancia;
         this.RepFuncionario.salvarArquivo();
     }
