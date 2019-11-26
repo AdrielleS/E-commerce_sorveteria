@@ -12,6 +12,7 @@ import dados.RepositorioFuncionarios;
 import exceptions.ConsumidorException;
 import exceptions.FuncionarioException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Alert;
@@ -25,9 +26,10 @@ public class FachadaSorveteria implements ISorveteria{
     private final CadastrarConsumidor consumidor;
     private static ISorveteria instance;
     
-    private FachadaSorveteria() throws ClassNotFoundException, IOException{
+    public FachadaSorveteria() throws ClassNotFoundException, IOException {
         this.funcionario = new CadastrarFuncionario(RepositorioFuncionarios.getInstance());
         this.consumidor = new CadastrarConsumidor(RepositorioConsumidores.getInstance());
+        
     }
     
     public static ISorveteria getInstance() throws ClassNotFoundException, IOException {
@@ -40,7 +42,7 @@ public class FachadaSorveteria implements ISorveteria{
     @Override
     public void cadastrarConsumi(Consumidor c) {
         try {
-            consumidor.cadastrar(c);
+            this.consumidor.cadastrar(c);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 	    alert.setHeaderText("Sucesso");
             alert.setTitle("Cadastro realizado");
@@ -51,6 +53,8 @@ public class FachadaSorveteria implements ISorveteria{
             alert.setHeaderText("Cliente já cadastrado");
             alert.setContentText(ex.getMessage());
             alert.show();
+            Logger.getLogger(FachadaSorveteria.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(FachadaSorveteria.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -79,5 +83,7 @@ public class FachadaSorveteria implements ISorveteria{
 
     @Override
     public void removerFuncionario(String cpf) {
-    }    
+    }
+
+
 }

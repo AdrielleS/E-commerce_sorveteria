@@ -8,6 +8,8 @@ package negocio;
 import beans.Funcionario;
 import dados.RepositorioFuncionarios;
 import exceptions.FuncionarioException;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,12 +20,15 @@ public class CadastrarFuncionario {
     private RepositorioFuncionarios RepFuncionario;
 
         
-    public CadastrarFuncionario(RepositorioFuncionarios instancia){
+    public CadastrarFuncionario(RepositorioFuncionarios instancia) throws IOException{
         this.RepFuncionario = instancia;
+        this.RepFuncionario.salvarArquivo();
     }
     
     public void cadastrar(Funcionario funcionario) throws FuncionarioException{
         this.RepFuncionario.cadastrar(funcionario);
     
     }
+    
+
 }

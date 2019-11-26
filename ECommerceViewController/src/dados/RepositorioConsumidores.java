@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import beans.Consumidor;
 import beans.Zona;
 import exceptions.ConsumidorException;
-import exceptions.FuncionarioException;
 
 
 public class RepositorioConsumidores implements Serializable {
@@ -50,14 +49,15 @@ public class RepositorioConsumidores implements Serializable {
 	
 	public static RepositorioConsumidores lerArquivo() throws ClassNotFoundException, IOException
 	{
-		RepositorioConsumidores instancialocal =  null;
-		File f = new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqConsumidores.dat");
+            RepositorioConsumidores instancialocal =  null;
+            File f = new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqConsumidores.dat");
 	    FileInputStream fis = null;
 	    ObjectInputStream ois = null;
 	    fis = new FileInputStream(f);
 	    ois = new ObjectInputStream(fis);
 	    Object o = ois.readObject();
 	    instancialocal = (RepositorioConsumidores) o;
+            
 	    ois.close();
 
 
@@ -94,7 +94,7 @@ public class RepositorioConsumidores implements Serializable {
 		}
 		else
 		{
-			ConsumidorException cadastrarConsumidor =  new ConsumidorException("Consumidor n„o pode ser cadastrado no repositorio");
+			ConsumidorException cadastrarConsumidor =  new ConsumidorException("Consumidor n√£o pode ser cadastrado no repositorio");
 			throw cadastrarConsumidor;
 		}
 
@@ -113,7 +113,7 @@ public class RepositorioConsumidores implements Serializable {
 		}
 		else
 		{
-			ConsumidorException removerConsumidor =  new ConsumidorException("Consumidor n„o existe no repositorio");
+			ConsumidorException removerConsumidor =  new ConsumidorException("Consumidor nao existe no repositorio");
 			throw removerConsumidor;
 		}
 
@@ -139,7 +139,7 @@ public class RepositorioConsumidores implements Serializable {
 				
 				}
 			}if(atualizado == false){
-				ConsumidorException atualizarconsumidor = new ConsumidorException("Funcionario n„o existe no repositorio");
+				ConsumidorException atualizarconsumidor = new ConsumidorException("Consumidor nao existe no repositorio");
 				throw atualizarconsumidor;
 			}
 		}
@@ -162,7 +162,7 @@ public class RepositorioConsumidores implements Serializable {
 			}
 			
 			if(resul == null){
-				ConsumidorException buscarconsumidor= new ConsumidorException("Consumidor n„o existe no repositorio");
+				ConsumidorException buscarconsumidor= new ConsumidorException("Consumidor nao existe no repositorio");
 				throw buscarconsumidor;
 			}
 		}

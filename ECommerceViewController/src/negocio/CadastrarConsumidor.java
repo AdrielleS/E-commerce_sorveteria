@@ -9,6 +9,7 @@ import beans.Consumidor;
 import controller.CadastroController;
 import dados.RepositorioConsumidores;
 import exceptions.ConsumidorException;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Alert;
@@ -18,14 +19,15 @@ import javafx.scene.control.Alert;
  * @author Jamelly
  */
 public class CadastrarConsumidor {
-    private RepositorioConsumidores RepConsumidor;
+    private  RepositorioConsumidores RepConsumidor;
 
         
     public CadastrarConsumidor(RepositorioConsumidores instancia){
         this.RepConsumidor = instancia;
     }
     
-    public void cadastrar(Consumidor consumidor) throws ConsumidorException{
+    public void cadastrar(Consumidor consumidor) throws ConsumidorException, IOException{
         this.RepConsumidor.cadastrar(consumidor);
+        this.RepConsumidor.salvarArquivo();
     }
 }

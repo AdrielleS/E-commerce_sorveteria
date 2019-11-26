@@ -73,6 +73,8 @@ public class LoginController implements Initializable {
                 alert.setContentText("Usuário ou senha invalido, tente novamente");
                 alert.show();
             }
+        
+        
     }
     
 }

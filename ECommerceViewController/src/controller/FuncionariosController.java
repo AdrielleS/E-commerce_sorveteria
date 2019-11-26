@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import negocio.FachadaSorveteria;
 import telas.TelaAdmin;
 import telas.TelaCadastroFuncionario;
 import telas.TelaFuncionariosAdmin;
@@ -36,10 +37,11 @@ public class FuncionariosController extends Sair implements Initializable {
     private List<Funcionario> funcionarios = new ArrayList<>();
     private ObservableList<Funcionario> obsFuncionario;
     private RepositorioFuncionarios repFuncionario;
+    private FachadaSorveteria fachada;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        listarFuncionarios();
+        
         
         btnSair.setOnMouseClicked((MouseEvent e)->{
             sair();
@@ -54,6 +56,7 @@ public class FuncionariosController extends Sair implements Initializable {
                 Logger.getLogger(FuncionariosController.class.getName()).log(Level.SEVERE, null, ex);
             }
             fechar();
+            
         });
         
         btnCadastro.setOnMouseClicked((MouseEvent e)->{
@@ -73,8 +76,7 @@ public class FuncionariosController extends Sair implements Initializable {
     }   
     
     private void listarFuncionarios(){
-        repFuncionario = new RepositorioFuncionarios();
-        obsFuncionario = FXCollections.observableArrayList(repFuncionario.listar());
+        obsFuncionario = FXCollections.observableArrayList();
         lvFuncionarios.setItems(obsFuncionario);
     }
  }

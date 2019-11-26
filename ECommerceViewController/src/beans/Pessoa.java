@@ -9,7 +9,9 @@ public abstract class Pessoa {
 	private String senha;
 	private String cpf;
 	
-	
+	public Pessoa(){
+            
+        }
 	public Pessoa(String nome, String email, LocalDate dataNascimento, String senha, String cpf) {
 		this.nome = nome;
 		this.email = email;

@@ -94,7 +94,7 @@ public class RepositorioVendas implements Serializable{
 				}
 				else
 				{
-					VendaExeption cadastrarVenda =  new VendaExeption("Venda não pode ser cadastrado");
+					VendaExeption cadastrarVenda =  new VendaExeption("Venda nao pode ser cadastrado");
 					throw cadastrarVenda;
 				}
 			}
@@ -117,7 +117,7 @@ public class RepositorioVendas implements Serializable{
 
 			if(resul == null)
 			{
-				VendaExeption removerVendaId =  new VendaExeption("Venda não existe no repositorio");
+				VendaExeption removerVendaId =  new VendaExeption("Venda nao existe no repositorio");
 				throw removerVendaId;
 			}
 			else 
@@ -145,7 +145,7 @@ public class RepositorioVendas implements Serializable{
 				}
 				else
 				{
-					VendaExeption removerVendaObj = new VendaExeption("Venda não existe no repositorio");
+					VendaExeption removerVendaObj = new VendaExeption("Venda nao existe no repositorio");
 					throw removerVendaObj;
 				}
 			}
@@ -168,7 +168,7 @@ public class RepositorioVendas implements Serializable{
 				
 				}
 				if(atualizado == false){
-					VendaExeption atualizarVenda = new VendaExeption("Pedido não existe no repositorio");
+					VendaExeption atualizarVenda = new VendaExeption("Pedido nao existe no repositorio");
 					throw atualizarVenda;
 				}
 			}

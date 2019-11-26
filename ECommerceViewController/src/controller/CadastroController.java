@@ -39,6 +39,7 @@ public class CadastroController implements Initializable {
     @FXML private Button btnVoltar;
     @FXML private ComboBox<String> cbZona;
     ISorveteria fachada;
+    FachadaSorveteria fa;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -56,14 +57,16 @@ public class CadastroController implements Initializable {
         
         btnCadastro.setOnMouseClicked((MouseEvent e)->{
            try {
-               fachada = FachadaSorveteria.getInstance();
+               fa = new FachadaSorveteria();
+               fa.cadastrarConsumi(new Consumidor(txtNome.getText(), txtEmail.getText(), dateDataNascimento.getValue(), txtSenha.getText(), txtCpf.getText(), txtEndereco.getText(), Zona.valueOf(cbZona.getSelectionModel().getSelectedItem())));
+               System.out.println(fa + "oi");
            } catch (ClassNotFoundException ex) {
                Logger.getLogger(CadastroController.class.getName()).log(Level.SEVERE, null, ex);
            } catch (IOException ex) {
                Logger.getLogger(CadastroController.class.getName()).log(Level.SEVERE, null, ex);
            }
-           
-           fachada.cadastrarConsumi(new Consumidor(txtNome.getText(), txtEmail.getText(), dateDataNascimento.getValue(), txtSenha.getText(), txtCpf.getText(), txtEndereco.getText(), Zona.valueOf(cbZona.getSelectionModel().getSelectedItem())));
+            
+           // fa.cadastrarConsumi(new Consumidor(txtNome.getText(), txtEmail.getText(), dateDataNascimento.getValue(), txtSenha.getText(), txtCpf.getText(), txtEndereco.getText(), Zona.valueOf(cbZona.getSelectionModel().getSelectedItem())));
            
         });
     }  

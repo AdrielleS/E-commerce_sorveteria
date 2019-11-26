@@ -98,7 +98,7 @@ public class RepositorioPedidos implements Serializable {
 			}
 			else
 			{
-				PedidoException cadastrarPedido =  new PedidoException("Pedido não pode ser cadastrado");
+				PedidoException cadastrarPedido =  new PedidoException("Pedido nao pode ser cadastrado");
 				throw cadastrarPedido;
 			}
 		}
@@ -122,7 +122,7 @@ public class RepositorioPedidos implements Serializable {
 				
 			if(buscarpedidos.isEmpty())
 			{
-				PedidoException buscarpedido = new PedidoException("Pedido não existe no repositorio");
+				PedidoException buscarpedido = new PedidoException("Pedido nao existe no repositorio");
 				throw buscarpedido;
 			}
 
@@ -159,7 +159,7 @@ public class RepositorioPedidos implements Serializable {
 
 		if(resul == null)
 		{
-			PedidoException removerPedido =  new PedidoException("Pedido não existe no repositorio");
+			PedidoException removerPedido =  new PedidoException("Pedido nao existe no repositorio");
 			throw removerPedido;
 		}
 		else 
@@ -187,7 +187,7 @@ public class RepositorioPedidos implements Serializable {
 			}
 			else
 			{
-				PedidoException removerPedido = new PedidoException("Pedido não existe no repositorio");
+				PedidoException removerPedido = new PedidoException("Pedido nao existe no repositorio");
 				throw removerPedido;
 			}
 		}
@@ -210,7 +210,7 @@ public class RepositorioPedidos implements Serializable {
 			
 			}
 			if(atualizado == false){
-				PedidoException atualizarPedido = new PedidoException("Pedido não existe no repositorio");
+				PedidoException atualizarPedido = new PedidoException("Pedido nao existe no repositorio");
 				throw atualizarPedido;
 			}
 		}

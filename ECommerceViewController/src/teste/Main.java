@@ -41,7 +41,7 @@ public class Main {
 		repc.listar();
 
 
-		//Desse jeito não dá erro, o cpf é o mesmo do consumidor1
+		//Desse jeito nao da erro, o cpf e o mesmo do consumidor1
 //		System.out.println();
 //		System.out.println("atualizar "+consumidor3.getNome());
 //		System.out.println();
@@ -49,7 +49,7 @@ public class Main {
 //		repc.listar();
 		
 		
-		//error: se atualizar com o cpf do consumidor2 dá erro
+		//error: se atualizar com o cpf do consumidor2 da erro
 //		System.out.println();
 //		System.out.println("atualizar "+consumidor3.getNome());
 //		System.out.println();
@@ -75,12 +75,12 @@ public class Main {
 		RepositorioConsumidores.instance = repc;
 		repc.salvarArquivo();
 		
-		//Recuperando instâcia do arquivo
+		//Recuperando instï¿½cia do arquivo
 		RepositorioConsumidores repc2 =  RepositorioConsumidores.getInstance();
 		
 		//listando nomes da isntacia do arquivo
 		System.out.println();
-		System.out.println("instância do arquivo/nomes");
+		System.out.println("instï¿½ncia do arquivo/nomes");
 		repc2.listar();*/
 		
 //		Funcionario f1 = new Funcionario("Sonael", "Sonael@gmail.com", LocalDate.of(2000, 6, 1), "1234", "13123123123", LocalDate.of(2000, 6, 1), "entregador");

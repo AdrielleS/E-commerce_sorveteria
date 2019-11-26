@@ -46,7 +46,8 @@ public class CadastrofuncionarioController extends Sair implements Initializable
     @FXML private ToggleGroup cargos;
     @FXML private RadioButton rdEntregador;
     String cargo;
-    ISorveteria fachada;
+    
+    FachadaSorveteria fachada;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -58,7 +59,7 @@ public class CadastrofuncionarioController extends Sair implements Initializable
         
         btnVoltar.setOnMouseClicked((MouseEvent e)->{
             TelaFuncionariosAdmin fa = new TelaFuncionariosAdmin();
-            try {
+            try {                
                 fa.start(new Stage());
             } catch (Exception ex) {
                 Logger.getLogger(CadastrofuncionarioController.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,12 +68,7 @@ public class CadastrofuncionarioController extends Sair implements Initializable
         });
         
         btnCadastrar.setOnMouseClicked((MouseEvent e)->{
-                try {
-                    fachada = FachadaSorveteria.getInstance();
-                } catch (ClassNotFoundException | IOException ex) {
-                    Logger.getLogger(CadastrofuncionarioController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
+            try {
                 if (cargos.getSelectedToggle().equals(rdSorveteiro)) {
                     cargo = "sorveteiro";
                 }
@@ -80,8 +76,14 @@ public class CadastrofuncionarioController extends Sair implements Initializable
                 if(cargos.getSelectedToggle().equals(rdEntregador)){
                     cargo = "entregador";
                 }
-       
-            fachada.cadastrar(new Funcionario(txtNome.getText(),txtEmail.getText(),dateData.getValue(), txtSenha.getText(), txtCpf.getText(), dateDataAdmissao.getValue(),cargo));
+                    fachada = new FachadaSorveteria();
+                    fachada.cadastrar(new Funcionario(txtNome.getText(),txtEmail.getText(),dateData.getValue(), txtSenha.getText(), txtCpf.getText(), dateDataAdmissao.getValue(),cargo));
+
+                } catch (ClassNotFoundException | IOException ex) {
+                    Logger.getLogger(CadastrofuncionarioController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                
         });
     }    
     
