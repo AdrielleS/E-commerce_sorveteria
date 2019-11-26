@@ -17,6 +17,8 @@ import beans.Consumidor;
 import beans.Pedido;
 import beans.Sorvete;
 import exceptions.ConsumidorException;
+import exceptions.FuncionarioException;
+import exceptions.PedidoException;
 
 public class RepositorioPedidos implements Serializable {
 
@@ -24,7 +26,6 @@ public class RepositorioPedidos implements Serializable {
 	File file;
 	ArrayList<Pedido> pedidos;
 	public static RepositorioPedidos instance;
-	private static int cont;
 	
 	public RepositorioPedidos() {
 		pedidos =  new ArrayList<Pedido>();
@@ -85,34 +86,44 @@ public class RepositorioPedidos implements Serializable {
 		
 		
 	
-	public boolean cadastrar(List<Sorvete> sorvete, String status, Consumidor consumidor) throws IOException, ConsumidorException {
-		cont +=1;
-		Pedido pedido = new Pedido(sorvete, status, consumidor,cont);
+	public boolean cadastrar(Pedido pedido) throws IOException, PedidoException {
+
 		boolean cadastrado =false;
 		if(pedido != null)
 		{
-			pedidos.add(pedido);
-			cadastrado =  true;
+			if(!pedidos.contains(pedido)) 
+			{
+				pedidos.add(pedido);
+				cadastrado =  true;
+			}
+			else
+			{
+				PedidoException cadastrarPedido =  new PedidoException("Pedido n„o pode ser cadastrado");
+				throw cadastrarPedido;
+			}
 		}
+
 		
-
-
         
 		return cadastrado;
 	}
 	
 	
-	public ArrayList<Pedido> buscar(Pedido pedido) throws ConsumidorException {
+	public ArrayList<Pedido> buscar(String cpf) throws PedidoException {
 		ArrayList<Pedido> buscarpedidos =  new ArrayList<Pedido>();
-		if(pedido != null)
+		if(cpf != null)
 		{
-			buscarpedidos = this.retornarIndice(pedido.getConsumidor().getCpf());
-				
+			for (Pedido pedido : pedidos) {
+				if(pedido.getConsumidor().getCpf().equals(cpf))
+				{
+					buscarpedidos.add(pedido);
+				}
+			}
 				
 			if(buscarpedidos.isEmpty())
 			{
-				ConsumidorException buscarconsumidor= new ConsumidorException("Consumidor n√£o existe no repositorio");
-				throw buscarconsumidor;
+				PedidoException buscarpedido = new PedidoException("Pedido n„o existe no repositorio");
+				throw buscarpedido;
 			}
 
 			}
@@ -135,47 +146,57 @@ public class RepositorioPedidos implements Serializable {
 	}
 	
 	
-	private ArrayList<Pedido> retornarIndice(String cpf) {
-		ArrayList<Pedido> indicespedidos =  new ArrayList<Pedido>();
-		for(int i =0; i< pedidos.size(); i++) {
-			if(pedidos.get(i).getConsumidor().getCpf().equals(cpf)) {
-				indicespedidos.add(pedidos.get(i));
-			}
-		}
-		return indicespedidos;
-		
-	}
-	
-	
-	
-	
-	public boolean remover(Pedido pedido) throws ConsumidorException {
+	public boolean remover(int id) throws PedidoException {
 		boolean removido = false;
-		Pedido pedi = null;
-		for (Pedido p : pedidos) {
-			if(p.getId() == pedido.getId())
+		Pedido resul = null;
+		for (Pedido pedido2 : pedidos) {
+			if(pedido2.getId() == id)
 			{
-				pedi = p;
+				resul = pedido2;
+				
 			}
 		}
-		
-		if(pedi != null)
+
+		if(resul == null)
 		{
-			pedidos.remove(pedi);
+			PedidoException removerPedido =  new PedidoException("Pedido n„o existe no repositorio");
+			throw removerPedido;
+		}
+		else 
+		{
+			pedidos.remove(resul);
 			removido = true;
+			
 		}
-		else {
-			ConsumidorException removerconsumidor =  new ConsumidorException("Consumidor n√£o existe no repositorio");
-			throw removerconsumidor;
-		}
+
 
 
 		return removido;
 	}
 	
 	
+	public boolean remover(Pedido pedido) throws PedidoException
+	{
+		boolean removido =  false;
+		if(pedido != null)
+		{
+			if(pedidos.contains(pedido))
+			{
+				pedidos.remove(pedido);
+				removido = true;
+			}
+			else
+			{
+				PedidoException removerPedido = new PedidoException("Pedido n„o existe no repositorio");
+				throw removerPedido;
+			}
+		}
+		
+		return removido;
+	}
 	
-	public boolean atualizar(List<Sorvete> sorvete, String status, Consumidor consumidor, int id) throws IOException, ConsumidorException {
+	
+	public boolean atualizar(List<Sorvete> sorvete, String status, Consumidor consumidor, int id) throws IOException, PedidoException {
 		Pedido pedido = new Pedido(sorvete, status, consumidor, id);
 		boolean atualizado = false;
 		if(pedido != null){
@@ -189,8 +210,8 @@ public class RepositorioPedidos implements Serializable {
 			
 			}
 			if(atualizado == false){
-				ConsumidorException atualizarconsumidor = new ConsumidorException("Funcionario n√£o existe no repositorio");
-				throw atualizarconsumidor;
+				PedidoException atualizarPedido = new PedidoException("Pedido n„o existe no repositorio");
+				throw atualizarPedido;
 			}
 		}
 		

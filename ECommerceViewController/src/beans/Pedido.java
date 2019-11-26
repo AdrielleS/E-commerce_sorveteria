@@ -11,9 +11,20 @@ public class Pedido implements Serializable {
 	private Consumidor consumidor;
 	private double preco;
 	private int id;
+	private static int cont;
+
 	
 	
-	public Pedido(List<Sorvete> sorvete, String status, Consumidor consumidor, int id) {
+	public Pedido(List<Sorvete> sorvete, String status, Consumidor consumidor) {
+		super();
+		cont+=1;
+		this.sorvetes = sorvete;
+		this.status = status;
+		this.consumidor = consumidor;
+		this.id = cont;
+	}
+	
+	public Pedido(List<Sorvete> sorvete, String status, Consumidor consumidor,int id) {
 		super();
 		this.sorvetes = sorvete;
 		this.status = status;

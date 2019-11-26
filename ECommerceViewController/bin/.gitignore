@@ -3,7 +3,9 @@
 /controller/
 /dados/
 /exceptions/
+/negocio/
 /pedido/
 /telas/
 /teste/
 /view/
+/vendas/

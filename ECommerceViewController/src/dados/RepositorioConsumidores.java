@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import beans.Consumidor;
 import beans.Zona;
 import exceptions.ConsumidorException;
+import exceptions.FuncionarioException;
 
 
 public class RepositorioConsumidores implements Serializable {
@@ -67,7 +68,6 @@ public class RepositorioConsumidores implements Serializable {
 	
 	public void salvarArquivo() throws IOException
 	{
-
 			File f =  new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqConsumidores.dat");
 			FileOutputStream fos = null;
 		    ObjectOutputStream oos = null;
@@ -79,24 +79,26 @@ public class RepositorioConsumidores implements Serializable {
 		
 		
 	}
-        
+	
+	
+	
+	
 	public boolean cadastrar(Consumidor consumidor) throws ConsumidorException {
-		boolean cadastrado =false;		
-        if(consumidores.isEmpty()){
-        	consumidores.add(consumidor);
-        	cadastrado = true;
-        }else {
-        	Consumidor tem = this.buscar(consumidor);
-            
-            if(tem == null){
-            	consumidores.add(consumidor);
-            	cadastrado = true;
-            }else{
-            	ConsumidorException cadastroconsumidor =  new ConsumidorException("Consumidor n√£o pode ser cadastrado");
-            	throw cadastroconsumidor;
-            }
-        }
+		boolean cadastrado =false;
+		
 
+		if(!consumidores.contains(consumidor))
+		{
+			consumidores.add(consumidor);
+			cadastrado = true;
+		}
+		else
+		{
+			ConsumidorException cadastrarConsumidor =  new ConsumidorException("Consumidor n„o pode ser cadastrado no repositorio");
+			throw cadastrarConsumidor;
+		}
+
+        
         
 		return cadastrado;
 	}
@@ -104,15 +106,17 @@ public class RepositorioConsumidores implements Serializable {
 	
 	
 	public boolean remover(Consumidor consumidor) throws ConsumidorException {
-		Consumidor consu = this.buscar(consumidor);
 		boolean removido = false;
-		if(consu != null){
-			consumidores.remove(consu);
-			removido = true;
-		}else {
-			ConsumidorException removerconsumidor =  new ConsumidorException("Consumidor n√£o existe no repositorio");
-			throw removerconsumidor;
+		if(consumidores.contains(consumidor))
+		{
+			consumidores.remove(consumidor);
 		}
+		else
+		{
+			ConsumidorException removerConsumidor =  new ConsumidorException("Consumidor n„o existe no repositorio");
+			throw removerConsumidor;
+		}
+
 
 
 		return removido;
@@ -135,7 +139,7 @@ public class RepositorioConsumidores implements Serializable {
 				
 				}
 			}if(atualizado == false){
-				ConsumidorException atualizarconsumidor = new ConsumidorException("Funcionario n√£o existe no repositorio");
+				ConsumidorException atualizarconsumidor = new ConsumidorException("Funcionario n„o existe no repositorio");
 				throw atualizarconsumidor;
 			}
 		}
@@ -158,7 +162,7 @@ public class RepositorioConsumidores implements Serializable {
 			}
 			
 			if(resul == null){
-				ConsumidorException buscarconsumidor= new ConsumidorException("Consumidor n√£o existe no repositorio");
+				ConsumidorException buscarconsumidor= new ConsumidorException("Consumidor n„o existe no repositorio");
 				throw buscarconsumidor;
 			}
 		}

@@ -8,9 +8,29 @@ public class Venda implements Serializable{
 	private double frete;
 	private double valorTotalPedido;
 	private Pedido pedido;
+	private int id;
+	private static int cont;
 	
 	public Venda(Pedido pedido) {
+		cont+=1;
 		this.pedido = pedido;
+		this.id = cont;
+	}
+	
+	public Venda(Pedido pedido, int id)
+	{
+		this.pedido = pedido;
+		this.id = id;
+	}
+	
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+	
+	public int getId()
+	{
+		return this.id;
 	}
 	
 	public double getFrete() {

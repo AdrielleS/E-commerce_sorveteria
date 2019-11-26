@@ -26,16 +26,11 @@ public class RepositorioFuncionarios implements Serializable{
 	}
 	
 	
-	public ArrayList<Funcionario> listar()
+	public void listar()
 	{
-                
-                return funcionarios;
-               /* ArrayList<String> funcionarioString = new ArrayList<>();
 		for (Funcionario funcionario : funcionarios) {
-                        funcionarioString.add(funcionario.toString());
 			System.out.println(funcionario.getNome());
 		}
-                return funcionarioString */
 	}
 	
 	
@@ -49,8 +44,8 @@ public class RepositorioFuncionarios implements Serializable{
 	
 	public static RepositorioFuncionarios lerArquivo() throws ClassNotFoundException, IOException
 	{
-            RepositorioFuncionarios instancialocal =  null;
-            File f = new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
+		RepositorioFuncionarios instancialocal =  null;
+		File f = new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
 	    FileInputStream fis = null;
 	    ObjectInputStream ois = null;
 	    fis = new FileInputStream(f);
@@ -66,8 +61,8 @@ public class RepositorioFuncionarios implements Serializable{
 	public void salvarArquivo() throws IOException
 	{
 
-                    File f =  new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
-                    FileOutputStream fos = null;
+			File f =  new File("baseDados" + File.separatorChar+"arquivosPessoas"+  File.separatorChar+"arqFuncionarios.dat");
+			FileOutputStream fos = null;
 		    ObjectOutputStream oos = null;
 
 		    fos = new FileOutputStream(f);
@@ -80,21 +75,19 @@ public class RepositorioFuncionarios implements Serializable{
 	
 
 
-	public boolean cadastrar(Funcionario funcionario) throws FuncionarioException{
-	boolean cadastrado =false;	
-        if(funcionarios.isEmpty()){
-        	funcionarios.add(funcionario);
-        	cadastrado = true;
-        }else{
-        	Funcionario tem = this.buscar(funcionario);
-            if(tem == null){
-            	funcionarios.add(funcionario);
-            	cadastrado = true;
-            }else{
-            	FuncionarioException cadastrofuncionario =  new FuncionarioException("Funcionario n√£o pode ser cadastrado");
-            	throw cadastrofuncionario;
-            }
-        }
+	public boolean cadastrar(Funcionario funcionario) throws FuncionarioException {
+		boolean cadastrado =false;
+
+		if(!funcionarios.contains(funcionario))
+		{
+			funcionarios.add(funcionario);
+			cadastrado = true;
+		}
+		else
+		{
+			FuncionarioException cadastrarfuncionario =  new FuncionarioException("Funcionario n„o pode ser cadastrado no repositorio");
+			throw cadastrarfuncionario;
+		}
 
         
 		return cadastrado;
@@ -104,16 +97,17 @@ public class RepositorioFuncionarios implements Serializable{
 
 
 	public boolean remover(Funcionario funcionario) throws FuncionarioException {
-		Funcionario fun = this.buscar(funcionario);
 		boolean removido = false;
-		if(funcionario != null)
+		if(funcionarios.contains(funcionario))
 		{
-			funcionarios.remove(fun);
-			removido = true;
-		}else{
-			FuncionarioException removerfuncionario =  new FuncionarioException("Funcionario n√£o existe no repositorio");
+			funcionarios.remove(funcionario);
+		}
+		else
+		{
+			FuncionarioException removerfuncionario =  new FuncionarioException("Funcionario n„o existe no repositorio");
 			throw removerfuncionario;
 		}
+
 
 
 		return removido;
@@ -138,7 +132,7 @@ public class RepositorioFuncionarios implements Serializable{
 				}
 			}if(atualizado == false){
 				
-				FuncionarioException atualizarfuncionario = new FuncionarioException("Funcionario n√£o existe no repositorio");
+				FuncionarioException atualizarfuncionario = new FuncionarioException("Funcionario n„o existe no repositorio");
 				throw atualizarfuncionario;
 			}
 		}
@@ -162,7 +156,7 @@ public class RepositorioFuncionarios implements Serializable{
 					resul = f;
 				}
 			}if(resul == null){
-				FuncionarioException buscarfuncionario = new FuncionarioException("Funcionario n√£o existe no repositorio");
+				FuncionarioException buscarfuncionario = new FuncionarioException("Funcionario n„o existe no repositorio");
 				throw buscarfuncionario;
 			}
 		}
@@ -174,6 +168,7 @@ public class RepositorioFuncionarios implements Serializable{
 		int indice =-1;
 		for(int i =0; i< funcionarios.size(); i++) {
 			if(funcionarios.get(i).getCpf().equals(cpf)) {
+				System.out.println(funcionarios.get(i).getCpf()+"    "+cpf);
 				indice = i;
 			}
 		}
