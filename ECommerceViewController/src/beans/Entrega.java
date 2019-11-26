@@ -1,9 +1,11 @@
 package beans;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Entrega {
+public class Entrega implements Serializable {
+	private static final long serialVersionUID = 7936814384571784814L;
 	private List<Venda> vendas;
 	private LocalDate dataEntrega;
 	private Funcionario entregador;
