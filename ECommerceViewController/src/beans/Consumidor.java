@@ -10,7 +10,8 @@ public class Consumidor extends Pessoa implements Serializable{
 	private String endereco;
 	private Zona zona;
         
-	public Consumidor(String nome, String email, LocalDate dataNascimento, String senha, String cpf, String endereco, Zona zona) {
+	public Consumidor(String nome, String email, LocalDate dataNascimento, String senha, String cpf, 
+			String endereco, Zona zona) {
 		super(nome, email, dataNascimento, senha, cpf);
 		this.endereco = endereco;
 		this.zona = zona;
