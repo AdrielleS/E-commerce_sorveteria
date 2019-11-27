@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,6 +115,10 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
 	@Override
 	public void cadastrar(Funcionario funcionario) throws FuncionarioException {
 		boolean temEmail = false;
+		LocalDate hoje =  LocalDate.now();
+		Period periodo = Period.between(funcionario.getDataNascimento(), hoje);
+		boolean idade = (periodo.getYears() >= 18) ? true : false;
+		
 		
         if(funcionarios.isEmpty()){
         	funcionarios.add(funcionario);
@@ -124,10 +130,10 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
         		
         	}
             
-            if(!temEmail){
+            if(!temEmail && funcionario.getDataAdmissao().isBefore(hoje) && idade){
             	funcionarios.add(funcionario);
             }else{
-            	FuncionarioException cadastrofuncionario =  new FuncionarioException("CPF ou e-mail já cadastrado!");
+            	FuncionarioException cadastrofuncionario =  new FuncionarioException("O funcionario não pode ser cadastrado!");
             	throw cadastrofuncionario;
             }
         }

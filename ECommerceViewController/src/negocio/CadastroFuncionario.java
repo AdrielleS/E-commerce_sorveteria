@@ -4,6 +4,7 @@ import beans.Funcionario;
 import dados.RepositorioFuncionarios;
 import exceptions.FuncionarioException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class CadastroFuncionario {
@@ -16,6 +17,7 @@ public class CadastroFuncionario {
     }
     
     public void cadastrar(Funcionario funcionario) throws FuncionarioException{
+    	LocalDate hoje = LocalDate.now();
         if (funcionario != null && this.eNumero(funcionario.getCpf())) {
 			this.repFuncionario.cadastrar(funcionario);
 			this.repFuncionario.salvarArquivo();

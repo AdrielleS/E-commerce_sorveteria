@@ -2,6 +2,7 @@ package beans;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Venda implements Serializable{
 
@@ -10,7 +11,7 @@ public class Venda implements Serializable{
 	private double valorTotalPedido;
 	private Pedido pedido;
 	private String modoPagamento;
-	private LocalDate dataVenda;
+	private LocalDateTime dataVenda;
 	
 	private static final String DEBITO ="debito";
 	private static final String CREDITO ="credito";
@@ -58,11 +59,11 @@ public class Venda implements Serializable{
 		}
 	}
 	
-	public LocalDate getDataVenda() {
+	public LocalDateTime getDataVenda() {
 		return dataVenda;
 	}
 
-	public void setDataVenda(LocalDate dataVenda) {
+	public void setDataVenda(LocalDateTime dataVenda) {
 		this.dataVenda = dataVenda;
 	}
 
