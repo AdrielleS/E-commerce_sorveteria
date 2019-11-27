@@ -46,7 +46,7 @@ public class CadastrofuncionarioController extends Sair implements Initializable
     @FXML private ToggleGroup cargos;
     @FXML private RadioButton rdEntregador;
     String cargo;
-    
+    ISorveteria fa;
     FachadaSorveteria fachada;
 
     @Override
@@ -76,8 +76,8 @@ public class CadastrofuncionarioController extends Sair implements Initializable
                 if(cargos.getSelectedToggle().equals(rdEntregador)){
                     cargo = "entregador";
                 }
-                    fachada = new FachadaSorveteria();
-                    fachada.cadastrar(new Funcionario(txtNome.getText(),txtEmail.getText(),dateData.getValue(), txtSenha.getText(), txtCpf.getText(), dateDataAdmissao.getValue(),cargo));
+                    fa = FachadaSorveteria.getInstance();
+                    fa.cadastrar(new Funcionario(txtNome.getText(),txtEmail.getText(),dateData.getValue(), txtSenha.getText(), txtCpf.getText(), dateDataAdmissao.getValue(),cargo));
 
                 } catch (ClassNotFoundException | IOException ex) {
                     Logger.getLogger(CadastrofuncionarioController.class.getName()).log(Level.SEVERE, null, ex);

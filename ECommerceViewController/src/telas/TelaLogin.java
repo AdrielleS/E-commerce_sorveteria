@@ -1,6 +1,7 @@
 
 package telas;
 
+import beans.Consumidor;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,7 @@ import javafx.stage.Stage;
 
 public class TelaLogin extends Application{
     private static Stage stage;
+    private Consumidor cliente;
 
     public static void main(String[] args) {
         launch(args);
@@ -22,6 +24,7 @@ public class TelaLogin extends Application{
         stage.setTitle("E-Sorvetes");
         stage.setScene(scene); // coloca a cena em uma janela
         stage.show(); // abre a janela
+        setCliente(cliente);
         setStage(stage); // seta esse novo stage recebido na variavel stage, muito util para fechar uma jaenela enquanto abre outra
     }
 
@@ -31,5 +34,9 @@ public class TelaLogin extends Application{
 
     public static void setStage(Stage stage) {
         TelaLogin.stage = stage;
+    }
+    
+    public void setCliente(Consumidor cliente){
+        
     }
 }

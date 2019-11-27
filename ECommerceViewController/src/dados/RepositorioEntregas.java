@@ -94,7 +94,7 @@ public class RepositorioEntregas implements IRepositorioEntrega, Serializable {
 	              ois.close();
 	            }
 	            catch(IOException e){
-	              System.out.println("Não foi possível fechar o arquivo!");
+	              System.out.println("Nao foi possivel fechar o arquivo!");
 	              e.printStackTrace();
 	            }
 	        }
@@ -128,7 +128,7 @@ public class RepositorioEntregas implements IRepositorioEntrega, Serializable {
 	          try{
 	              oos.close();
 	          }catch(IOException e){
-	        	  System.out.println("Não foi possível fechar o arquivo.");
+	        	  System.out.println("Nao foi possivel fechar o arquivo.");
 	        	  e.printStackTrace();
 	          }
 	        }

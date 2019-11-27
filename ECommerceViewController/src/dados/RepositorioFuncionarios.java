@@ -70,7 +70,7 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
 	              ois.close();
 	            }
 	            catch(IOException e){
-	              System.out.println("Não foi possível fechar o arquivo!");
+	              System.out.println("Nao foi possivel fechar o arquivo!");
 	              e.printStackTrace();
 	            }
 	        }
@@ -104,7 +104,7 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
 	          try{
 	              oos.close();
 	          }catch(IOException e){
-	        	  System.out.println("Não foi possível fechar o arquivo.");
+	        	  System.out.println("Nao foi possivel fechar o arquivo.");
 	        	  e.printStackTrace();
 	          }
 	        }
@@ -133,7 +133,7 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
             if(!temEmail && !funcionario.getDataAdmissao().isAfter(hoje) && idade){
             	funcionarios.add(funcionario);
             }else{
-            	FuncionarioException cadastrofuncionario =  new FuncionarioException("O funcionario não pode ser cadastrado!");
+            	FuncionarioException cadastrofuncionario =  new FuncionarioException("O funcionario nao pode ser cadastrado!");
             	throw cadastrofuncionario;
             }
         }

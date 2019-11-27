@@ -15,11 +15,13 @@ import beans.Funcionario;
 public interface ISorveteria {
   void cadastrarConsumi(Consumidor c);
 
-  void efetuarLogin();
+  Consumidor efetuarLogin(String usuario, String senha);
 
   void cadastrar(Funcionario f);
 
   void removerFuncionario(String cpf);
+  
+  public Consumidor buscarConsumi(String cpf);
 
   
     

@@ -1,6 +1,8 @@
 
 package controller;
 
+import beans.Consumidor;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -16,8 +18,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import negocio.FachadaSorveteria;
+import negocio.ISorveteria;
 import telas.TelaAdmin;
 import telas.TelaCadastro;
+import telas.TelaCliente;
 import telas.TelaLogin;
 
 public class LoginController implements Initializable {
@@ -26,6 +31,8 @@ public class LoginController implements Initializable {
     @FXML private PasswordField txtSenha;
     @FXML private Button btnEntrar;
     @FXML private Button btnCadastrar;
+    Consumidor cliente;
+    ISorveteria fachada;
 
 
     @Override
@@ -57,7 +64,10 @@ public class LoginController implements Initializable {
     }
     
     private void logar(){
-        if (txtUsuario.getText().equals("admin") && txtSenha.getText().equals("admin")) {
+        try {
+            boolean entrou = false;
+             if (txtUsuario.getText().equals("admin") && txtSenha.getText().equals("admin")) {
+                 entrou = true;
                 TelaAdmin a = new TelaAdmin();
                 try {
                     a.start(new Stage());
@@ -65,6 +75,20 @@ public class LoginController implements Initializable {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 fecha();
+            }
+            fachada = FachadaSorveteria.getInstance();
+            if (entrou == false) {
+                if (fachada.efetuarLogin(txtUsuario.getText(), txtSenha.getText()) != null) {               
+                    TelaCliente tc = new TelaCliente();          
+                    cliente = fachada.efetuarLogin(txtUsuario.getText(), txtSenha.getText());
+                    try {
+                        
+                        tc.start(new Stage());
+                
+                    } catch (Exception ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    fecha();
                 
             }else{
                 Alert alert = new Alert(AlertType.ERROR);
@@ -72,9 +96,16 @@ public class LoginController implements Initializable {
                 alert.setTitle("Erro ao entrar");
                 alert.setContentText("Usuário ou senha invalido, tente novamente");
                 alert.show();
-            }
-        
-        
+            }   
+           }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+} 
+
     
-}
+
+

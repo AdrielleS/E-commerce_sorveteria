@@ -30,16 +30,17 @@ public class FachadaSorveteria implements ISorveteria{
     private final CadastroPedido pedido;
     private final CadastroVendas venda;
     private final CadastroEntregas entrega;
+    private final Logins logins;
     
     private static ISorveteria instance;
     
-    public FachadaSorveteria() throws ClassNotFoundException, IOException {
+    private FachadaSorveteria() throws ClassNotFoundException, IOException {
         this.funcionario = new CadastroFuncionario();
         this.consumidor = new CadastroConsumidor();
         this.pedido = new CadastroPedido();
         this.venda = new CadastroVendas();
         this.entrega = new CadastroEntregas();
-        
+        this.logins = new Logins();
     }
     
     public static ISorveteria getInstance() throws ClassNotFoundException, IOException {
@@ -68,15 +69,30 @@ public class FachadaSorveteria implements ISorveteria{
             Logger.getLogger(FachadaSorveteria.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public Consumidor buscarConsumi(String cpf){
+        Consumidor cliente = null;
+        try {
+            cliente = consumidor.buscar(cpf);
+        } catch (ConsumidorException ex) {
+            Logger.getLogger(FachadaSorveteria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cliente;
+    }
 
     @Override
-    public void efetuarLogin() {
+    public Consumidor efetuarLogin(String usuario, String senha) {
+        Consumidor cliente = null;
+        if (this.logins.login(usuario, senha) != null) {
+            cliente = this.logins.login(usuario, senha);
+        }
+        return cliente;
     }
 
     @Override
     public void cadastrar(Funcionario f) {
         try {
-            funcionario.cadastrar(f);
+            this.funcionario.cadastrar(f);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 	    alert.setHeaderText("Sucesso");
             alert.setTitle("Cadastro realizado");

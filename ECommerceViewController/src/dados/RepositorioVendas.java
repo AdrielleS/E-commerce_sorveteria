@@ -115,7 +115,7 @@ public class RepositorioVendas implements IRepositorioVendas ,Serializable{
 	              ois.close();
 	            }
 	            catch(IOException e){
-	              System.out.println("Não foi possível fechar o arquivo!");
+	              System.out.println("Nï¿½o foi possï¿½vel fechar o arquivo!");
 	              e.printStackTrace();
 	            }
 	        }
@@ -150,7 +150,7 @@ public class RepositorioVendas implements IRepositorioVendas ,Serializable{
 	          try{
 	              oos.close();
 	          }catch(IOException e){
-	        	  System.out.println("Não foi possível fechar o arquivo.");
+	        	  System.out.println("Nao foi possivel fechar o arquivo.");
 	        	  e.printStackTrace();
 	          }
 	        }

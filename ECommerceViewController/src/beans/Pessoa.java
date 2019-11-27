@@ -1,17 +1,17 @@
 package beans;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Pessoa {
+public class Pessoa implements Serializable {
+        private static final long serialVersionUID = 7874335581605575568L;
+        
 	private String nome;
 	private String email;
 	private LocalDate dataNascimento;
 	private String senha;
 	private String cpf;
 	
-	public Pessoa(){
-            
-        }
 	public Pessoa(String nome, String email, LocalDate dataNascimento, String senha, String cpf) {
 		this.nome = nome;
 		this.email = email;
@@ -19,8 +19,9 @@ public abstract class Pessoa {
 		this.senha = senha;
 		this.cpf = cpf;
 	}
-
-
+        
+    
+        
 	public String getNome() {
 		return nome;
 	}
@@ -70,6 +71,7 @@ public abstract class Pessoa {
 		this.cpf = cpf;
 	}
 	
+        @Override
 	public String toString() {
 		String s = this.cpf+","+this.nome+","+this.dataNascimento.toString()+
 				","+this.email+","+this.senha;

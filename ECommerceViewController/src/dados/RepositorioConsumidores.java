@@ -69,7 +69,7 @@ public class RepositorioConsumidores implements IRepositorioConsumidores,Seriali
 	              ois.close();
 	            }
 	            catch(IOException e){
-	              System.out.println("Não foi possível fechar o arquivo!");
+	              System.out.println("Nï¿½o foi possï¿½vel fechar o arquivo!");
 	              e.printStackTrace();
 	            }
 	        }
@@ -104,7 +104,7 @@ public class RepositorioConsumidores implements IRepositorioConsumidores,Seriali
 	          try{
 	              oos.close();
 	          }catch(IOException e){
-	        	  System.out.println("Não foi possível fechar o arquivo.");
+	        	  System.out.println("Nï¿½o foi possï¿½vel fechar o arquivo.");
 	        	  e.printStackTrace();
 	          }
 	        }
@@ -129,6 +129,9 @@ public class RepositorioConsumidores implements IRepositorioConsumidores,Seriali
         	consumidores.add(consumidor);
         }else{
         	for(Consumidor c: consumidores) {
+                    System.out.println(c.getCpf());
+                    System.out.println(c.getEmail());
+                    System.out.println(consumidor.getCpf());
         		if(c.getEmail().equals(consumidor.getEmail()) || c.getCpf().equals(consumidor.getCpf())) {
         			temEmail = true;
         		}
@@ -138,7 +141,7 @@ public class RepositorioConsumidores implements IRepositorioConsumidores,Seriali
             if(!temEmail  && idade){
             	consumidores.add(consumidor);
             }else{
-				ConsumidorException cadastrarconsumidor = new ConsumidorException("Consumidor não encontrado!");
+				ConsumidorException cadastrarconsumidor = new ConsumidorException("Consumidor nao encontrado!");
 
 				throw cadastrarconsumidor;
             }
@@ -197,7 +200,7 @@ public class RepositorioConsumidores implements IRepositorioConsumidores,Seriali
 				}
 			}if(resul == null){
 
-				ConsumidorException buscarconsumidor = new ConsumidorException("Consumidor não encotrado!");
+				ConsumidorException buscarconsumidor = new ConsumidorException("Consumidor nao encotrado!");
 				throw buscarconsumidor;
 			}
 		}

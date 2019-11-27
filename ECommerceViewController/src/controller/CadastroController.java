@@ -56,18 +56,17 @@ public class CadastroController implements Initializable {
         });
         
         btnCadastro.setOnMouseClicked((MouseEvent e)->{
+            
            try {
-               fa = new FachadaSorveteria();
-               fa.cadastrarConsumi(new Consumidor(txtNome.getText(), txtEmail.getText(), dateDataNascimento.getValue(), txtSenha.getText(), txtCpf.getText(), txtEndereco.getText(), Zona.valueOf(cbZona.getSelectionModel().getSelectedItem())));
-               System.out.println(fa + "oi");
+               fachada = FachadaSorveteria.getInstance();
+               Consumidor c = new Consumidor(txtNome.getText(), txtEmail.getText(), dateDataNascimento.getValue(), txtSenha.getText(), txtCpf.getText(), txtEndereco.getText(), Zona.valueOf(cbZona.getSelectionModel().getSelectedItem())); 
+               fachada.cadastrarConsumi(c);
            } catch (ClassNotFoundException ex) {
                Logger.getLogger(CadastroController.class.getName()).log(Level.SEVERE, null, ex);
            } catch (IOException ex) {
                Logger.getLogger(CadastroController.class.getName()).log(Level.SEVERE, null, ex);
            }
-            
-           // fa.cadastrarConsumi(new Consumidor(txtNome.getText(), txtEmail.getText(), dateDataNascimento.getValue(), txtSenha.getText(), txtCpf.getText(), txtEndereco.getText(), Zona.valueOf(cbZona.getSelectionModel().getSelectedItem())));
-           
+                     
         });
     }  
     
