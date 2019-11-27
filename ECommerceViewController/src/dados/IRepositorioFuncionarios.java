@@ -18,7 +18,7 @@ public interface IRepositorioFuncionarios {
 	
 	void atualizar(Funcionario funcionario) throws FuncionarioException;
 	
-	Funcionario buscar(Funcionario funcionario) throws FuncionarioException ;
+	Funcionario buscar(String cpf) throws FuncionarioException ;
 	
 
 }

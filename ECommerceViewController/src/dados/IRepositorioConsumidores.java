@@ -16,7 +16,8 @@ public interface IRepositorioConsumidores {
 	
 	void atualizar( Consumidor consumidor) throws ConsumidorException;
 	
-	 Consumidor buscar(Consumidor consumidor) throws ConsumidorException;
+	 Consumidor buscar(String cpf) throws ConsumidorException;
 	
 
 }
+

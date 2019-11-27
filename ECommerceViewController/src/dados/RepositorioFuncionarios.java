@@ -124,13 +124,13 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
         	funcionarios.add(funcionario);
         }else{
         	for(Funcionario f: funcionarios) {
-        		if(f.getEmail().equals(funcionario.getEmail())) {
+        		if(f.getEmail().equals(funcionario.getEmail()) || f.getCpf().equals(funcionario.getCpf())) {
         			temEmail = true;
         		}
         		
         	}
             
-            if(!temEmail && funcionario.getDataAdmissao().isBefore(hoje) && idade){
+            if(!temEmail && !funcionario.getDataAdmissao().isAfter(hoje) && idade){
             	funcionarios.add(funcionario);
             }else{
             	FuncionarioException cadastrofuncionario =  new FuncionarioException("O funcionario não pode ser cadastrado!");
@@ -180,16 +180,15 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
 	}
 	
 	@Override
-	public Funcionario buscar(Funcionario funcionario) throws FuncionarioException {
+	public Funcionario buscar(String cpf) throws FuncionarioException {
 		
 		Funcionario resul = null;
 		
-		if(funcionario != null)
+		if(cpf != null)
 		{
 			for (Funcionario f : funcionarios)
 			{
-				int i = this.retornarIndice(f.getCpf());
-				if(i!=-1)
+				if(f.getCpf().equals(cpf))
 				{
 					resul = f;
 				}
@@ -207,7 +206,6 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
 		int indice =-1;
 		for(int i =0; i< funcionarios.size(); i++) {
 			if(funcionarios.get(i).getCpf().equals(cpf)) {
-				System.out.println(funcionarios.get(i).getCpf()+"    "+cpf);
 				indice = i;
 			}
 		}

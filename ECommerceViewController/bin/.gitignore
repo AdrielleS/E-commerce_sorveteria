@@ -1,11 +1,2 @@
-/arquivosPessoas/
-/beans/
-/controller/
 /dados/
-/exceptions/
-/negocio/
-/pedido/
-/telas/
-/teste/
-/vendas/
-/view/
+/beans/

@@ -7,12 +7,16 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
 import beans.Consumidor;
+import beans.Funcionario;
 import dados.IRepositorioConsumidores;
 import exceptions.ConsumidorException;
+import exceptions.FuncionarioException;
 
 
 public class RepositorioConsumidores implements IRepositorioConsumidores,Serializable {
@@ -112,25 +116,33 @@ public class RepositorioConsumidores implements IRepositorioConsumidores,Seriali
 	@Override    
 
 	public void cadastrar(Consumidor consumidor) throws ConsumidorException {
+		
+		LocalDate hoje = LocalDate.now();
+		
+		Period periodo = Period.between(consumidor.getDataNascimento(), hoje);
+		boolean idade = (periodo.getYears() >= 18) ? true : false;
+		
 		boolean temEmail = false;
+		
+		
         if(consumidores.isEmpty()){
         	consumidores.add(consumidor);
-        }else {
-        	Consumidor tem = this.buscar(consumidor);
+        }else{
         	for(Consumidor c: consumidores) {
-        		if(c.getEmail().equals(consumidor.getEmail())) {
+        		if(c.getEmail().equals(consumidor.getEmail()) || c.getCpf().equals(consumidor.getCpf())) {
         			temEmail = true;
         		}
         		
         	}
             
-            if(tem == null && !temEmail){
+            if(!temEmail  && idade){
             	consumidores.add(consumidor);
             }else{
-            	ConsumidorException cadastroconsumidor =  new ConsumidorException("CPF ou e-mail já cadastrado!");
-            	throw cadastroconsumidor;
+				ConsumidorException cadastrarconsumidor = new ConsumidorException("Consumidor não encontrado!");
+
+				throw cadastrarconsumidor;
             }
-        }       
+        }
  
 	}
 	
@@ -150,9 +162,10 @@ public class RepositorioConsumidores implements IRepositorioConsumidores,Seriali
 	@Override
 	public void atualizar(Consumidor consumidor) throws ConsumidorException {
 		boolean atualizado = false;
-		if(consumidor != null){
+		if(consumidor != null)
+		{
 			for (int i =0; i< consumidores.size(); i++) {
-				int u = this.retornarIndice(consumidores.get(i).getCpf());
+				int u = this.retornarIndice(consumidor.getCpf());
 				if(u!= -1)
 				{
 					
@@ -161,34 +174,37 @@ public class RepositorioConsumidores implements IRepositorioConsumidores,Seriali
 				
 				}
 			}if(atualizado == false){
-				ConsumidorException atualizarconsumidor = new ConsumidorException("Consumidor nÃ£o encontrado!");
-
+				
+				ConsumidorException atualizarconsumidor= new ConsumidorException("Consumidor nÃ£o encontrado!");
 				throw atualizarconsumidor;
 			}
 		}
 		
+		
 	}
 	
 	@Override
-	public Consumidor buscar(Consumidor consumidor) throws ConsumidorException {
+	public Consumidor buscar(String cpf) throws ConsumidorException {
 		Consumidor resul = null;
-		if(consumidor != null){
+		
+		if(cpf != null)
+		{
 			for (Consumidor c : consumidores)
 			{
-				int i = this.retornarIndice(c.getCpf());
-				if(i!=-1){
+				if(c.getCpf().equals(cpf))
+				{
 					resul = c;
 				}
-			}
-			
-			if(resul == null){
-				ConsumidorException buscarconsumidor= new ConsumidorException("Consumidor nÃ£o encontrado!");
+			}if(resul == null){
+
+				ConsumidorException buscarconsumidor = new ConsumidorException("Consumidor não encotrado!");
 				throw buscarconsumidor;
 			}
 		}
 		
 		return resul;
 	}
+	
 	private int retornarIndice(String cpf) {
 		int indice =-1;
 		for(int i =0; i< consumidores.size(); i++) {

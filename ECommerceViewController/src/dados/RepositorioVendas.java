@@ -35,7 +35,9 @@ public class RepositorioVendas implements IRepositorioVendas ,Serializable{
 
 	@Override
 	public void cadastrar(Venda v) {
+		v.setDataVenda(LocalDate.now());
 		vendas.add(v);
+		
 		
 	}
 

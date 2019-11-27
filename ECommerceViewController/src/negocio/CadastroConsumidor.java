@@ -30,8 +30,8 @@ public class CadastroConsumidor {
 		this.repConsumidor.salvarArquivo();
 	}
 
-	public Consumidor buscar(Consumidor consumidor) throws ConsumidorException {
-		return repConsumidor.buscar(consumidor);
+	public Consumidor buscar(String cpf) throws ConsumidorException {
+		return repConsumidor.buscar(cpf);
 	}
 	
 	private boolean eNumero(String s) {

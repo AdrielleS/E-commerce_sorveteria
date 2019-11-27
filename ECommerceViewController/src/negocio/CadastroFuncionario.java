@@ -43,8 +43,8 @@ public class CadastroFuncionario {
 		}
 	}
 
-	public Funcionario buscar(Funcionario funcionario) throws FuncionarioException {
-		return repFuncionario.buscar(funcionario);
+	public Funcionario buscar(String cpf) throws FuncionarioException {
+		return repFuncionario.buscar(cpf);
 	}
 	
 	private boolean eNumero(String s) {

@@ -11,7 +11,7 @@ public class Venda implements Serializable{
 	private double valorTotalPedido;
 	private Pedido pedido;
 	private String modoPagamento;
-	private LocalDateTime dataVenda;
+	private LocalDate dataVenda;
 	
 	private static final String DEBITO ="debito";
 	private static final String CREDITO ="credito";
@@ -59,11 +59,11 @@ public class Venda implements Serializable{
 		}
 	}
 	
-	public LocalDateTime getDataVenda() {
+	public LocalDate getDataVenda() {
 		return dataVenda;
 	}
 
-	public void setDataVenda(LocalDateTime dataVenda) {
+	public void setDataVenda(LocalDate dataVenda) {
 		this.dataVenda = dataVenda;
 	}
 
