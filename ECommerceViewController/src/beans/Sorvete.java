@@ -12,7 +12,7 @@ public class Sorvete implements Serializable{
 	private int numeroBolas;
 	
 	public Sorvete(ArrayList<SaborSorvete> sabor, Incremento adicionais, Calda calda, int numeroBolas) {
-		this.setSabor(sabor); 
+		this.sabor = sabor;
 		this.adicionais = adicionais;
 		this.calda = calda;
 		this.numeroBolas = numeroBolas;
@@ -23,9 +23,7 @@ public class Sorvete implements Serializable{
 	}
 
 	public void setSabor(ArrayList<SaborSorvete> sabor) {
-		if (sabor.size() < numeroBolas) {
-			this.sabor = sabor;
-		}
+	
 	}
 
 	public Incremento getAdicionais() {
@@ -51,15 +49,10 @@ public class Sorvete implements Serializable{
 	public void setNumeroBolas(int numeroBolas) {
 		this.numeroBolas = numeroBolas;
 	}
+        
+
+
 	
-	public String toString() {
-		String s = "";
-		for(int i =0; i < this.numeroBolas; i++) {
-			s+= this.sabor.get(i).toString()+",";
-		}
-		s += this.adicionais.toString()+","+this.calda.toString();
-		return s;
-	}
 	
 	
 	

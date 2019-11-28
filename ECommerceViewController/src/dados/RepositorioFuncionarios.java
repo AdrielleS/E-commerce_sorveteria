@@ -22,6 +22,7 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
 	private static final long serialVersionUID = 1025911660485970999L;
 	private List<Funcionario> funcionarios;
 	private static RepositorioFuncionarios instance;
+        private List<String> funcionarioString;
 
 	private RepositorioFuncionarios() {
 		funcionarios = new ArrayList<Funcionario>();		
@@ -29,8 +30,13 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
 	
 
 	@Override
-	public List<Funcionario> listar(){
-		return funcionarios;
+	public List<String> listar(){
+            funcionarioString = new ArrayList<>();
+            funcionarioString.add("NOME /  CPF/  DATA DE NASCIMENTO /  CARGO/   DATA DE ADMISSÃO");
+            for (Funcionario funcionario : funcionarios) {
+                funcionarioString.add(funcionario.toString());
+            }
+		return funcionarioString;
          
 	}
 	
@@ -124,6 +130,8 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
         	funcionarios.add(funcionario);
         }else{
         	for(Funcionario f: funcionarios) {
+                    System.out.println(funcionario.getEmail());
+                    System.out.println(f.getEmail());
         		if(f.getEmail().equals(funcionario.getEmail()) || f.getCpf().equals(funcionario.getCpf())) {
         			temEmail = true;
         		}

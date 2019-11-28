@@ -7,6 +7,8 @@ package negocio;
 
 import beans.Consumidor;
 import beans.Funcionario;
+import beans.Pedido;
+import beans.Venda;
 import dados.RepositorioConsumidores;
 import dados.RepositorioFuncionarios;
 import exceptions.ConsumidorException;
@@ -17,6 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.sun.javafx.scene.control.ControlAcceleratorSupport;
+import exceptions.VendaException;
+import java.util.List;
 
 import javafx.scene.control.Alert;
 
@@ -110,6 +114,32 @@ public class FachadaSorveteria implements ISorveteria{
     @Override
     public void removerFuncionario(String cpf) {
     }
+
+    @Override
+    public void cadastrarPedido(Pedido pedido) {
+        this.pedido.cadastrar(pedido);
+        }
+
+    @Override
+    public void cadastrarVenda(Venda venda) {
+        try {
+            this.venda.cadastrar(venda);
+        } catch (VendaException ex) {
+            Logger.getLogger(FachadaSorveteria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+
+    @Override
+    public List<String> listarPedidos() {
+       return pedido.listarTodosPedidos();
+    }
+
+    @Override
+    public List<String> listarFuncionarios() {
+        return funcionario.listar();
+        }
+    
+    
 
 
 }

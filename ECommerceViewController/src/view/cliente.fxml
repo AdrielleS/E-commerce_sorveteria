@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #FF69B4;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.ClienteController">
+<AnchorPane id="AnchorPane" fx:id="tela" prefHeight="418.0" prefWidth="700.0" style="-fx-background-color: #FF69B4;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClienteController">
    <children>
-      <Label layoutX="243.0" layoutY="15.0" text="Bem vindo - ">
+      <Label layoutX="263.0" layoutY="17.0" text="Bem vindo - ">
          <font>
-            <Font name="Arial" size="27.0" />
-         </font>
-      </Label>
-      <Label layoutX="287.0" layoutY="55.0" text="Faça seu pedido">
-         <font>
-            <Font name="Arial" size="17.0" />
+            <Font name="Arial" size="23.0" />
          </font>
       </Label>
       <Button fx:id="btnSair" layoutX="652.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: #FFC0CB;" text="Sair" textFill="#683939">
@@ -23,10 +19,64 @@
             <Font name="Arial" size="13.0" />
          </font>
       </Button>
-      <Label fx:id="lbPessoa" layoutX="400.0" layoutY="20.0" text="Label">
+      <Label fx:id="lbPessoa" layoutX="393.0" layoutY="17.0" text="Label">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
       </Label>
+      <ComboBox fx:id="cbBolas" layoutX="205.0" layoutY="85.0" prefHeight="25.0" prefWidth="26.0" promptText="Numero de bolas" />
+      <Label layoutX="61.0" layoutY="88.0" text="Numero de bolas:">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="ckCHoco" layoutX="28.0" layoutY="125.0" mnemonicParsing="false" text="CHOCOLATE - R$2,00" />
+      <CheckBox fx:id="ckMor" layoutX="169.0" layoutY="125.0" mnemonicParsing="false" text="MORANGO - R$2,00" />
+      <CheckBox fx:id="ckBau" layoutX="303.0" layoutY="124.0" mnemonicParsing="false" text="BAUNILHA - R$2,00" />
+      <CheckBox fx:id="ckLim" layoutX="434.0" layoutY="125.0" mnemonicParsing="false" text="LIMAO - R$2,50" />
+      <CheckBox fx:id="ckFlocos" layoutX="549.0" layoutY="125.0" mnemonicParsing="false" text="FLOCOS - R$3,00" />
+      <Label layoutX="273.0" layoutY="52.0" text="Sabores de sorvete">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="ckPacoca" layoutX="167.0" layoutY="207.0" mnemonicParsing="false" text="PAÇOCA - R$1,50" />
+      <Label layoutX="289.0" layoutY="161.0" text="Incrementos">
+         <font>
+            <Font name="Arial Bold" size="21.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="ckGranulado" layoutX="299.0" layoutY="207.0" mnemonicParsing="false" text="GRANULADO - R$1,00" />
+      <CheckBox fx:id="ckAmedoim" layoutX="449.0" layoutY="207.0" mnemonicParsing="false" text="AMEDOIM - R$2,00" />
+      <CheckBox fx:id="ckCaldaChoco" layoutX="25.0" layoutY="235.0" mnemonicParsing="false" text="CALDA DE CHOCOLATE - R$1,00" />
+      <CheckBox fx:id="ckCaldaMor" layoutX="234.0" layoutY="235.0" mnemonicParsing="false" text="CALDA DE MORANGO - R$1,00" />
+      <CheckBox fx:id="ckCaldaLeite" layoutX="435.0" layoutY="235.0" mnemonicParsing="false" text="CALDA DE LEITE CONDENSADO - R$2,00" />
+      <Button fx:id="btnFazerPedido" layoutX="292.0" layoutY="364.0" mnemonicParsing="false" style="-fx-background-color: #FFC0CB;" text="Fazer pedido" textFill="#683939">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="cbFormaPagamento" layoutX="277.0" layoutY="289.0" prefWidth="150.0" />
+      <Label layoutX="272.0" layoutY="262.0" text="Forma de pagamento">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="562.0" layoutY="22.0" text="PREÇO">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="475.0" layoutY="44.0" text="Preço do pedido:" />
+      <Label layoutX="491.0" layoutY="60.0" text="Valor do frete:" />
+      <Label layoutX="505.0" layoutY="75.0" text="Valor total:" />
+      <Button fx:id="btnCalcular" layoutX="301.0" layoutY="328.0" mnemonicParsing="false" style="-fx-background-color: #FFC0CB;" text="Calcular preço" textFill="#683939">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Button>
+      <Label fx:id="precoPedido" layoutX="571.0" layoutY="44.0" text="R$0,00" />
+      <Label fx:id="precoFrete" layoutX="569.0" layoutY="60.0" text="R$0,00" />
+      <Label fx:id="precoTotal" layoutX="571.0" layoutY="75.0" text="R$0,00" />
    </children>
 </AnchorPane>

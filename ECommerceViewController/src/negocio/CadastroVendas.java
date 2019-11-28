@@ -16,25 +16,12 @@ public class CadastroVendas {
 		this.repV = RepositorioVendas.getInstance();
 	}
 	
-	public void cadastrar(Pedido pedido, String modoPag) throws VendaException  {
-		
-		Venda v = new Venda(pedido, modoPag);
-		if (v  != null) {
-			
-			this.repV.cadastrar(v);
-			this.repV.salvar();
-		}
-		
-	}
 	
 	public void cadastrar(Venda v) throws VendaException  {
-		
-		if (v  != null) {
-			
+		if (v  != null) {	
 			this.repV.cadastrar(v);
 			this.repV.salvar();
 		}
-		
 	}
 	
 	

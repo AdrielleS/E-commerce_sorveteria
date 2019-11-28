@@ -8,7 +8,10 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -31,6 +34,7 @@ public class LoginController implements Initializable {
     @FXML private PasswordField txtSenha;
     @FXML private Button btnEntrar;
     @FXML private Button btnCadastrar;
+    ClienteController cc = new ClienteController();
     Consumidor cliente;
     ISorveteria fachada;
 
@@ -38,6 +42,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnEntrar.setOnMouseClicked((MouseEvent e)->{
+            
             logar();
     });
         
@@ -78,19 +83,13 @@ public class LoginController implements Initializable {
             }
             fachada = FachadaSorveteria.getInstance();
             if (entrou == false) {
+                
                 if (fachada.efetuarLogin(txtUsuario.getText(), txtSenha.getText()) != null) {               
                     TelaCliente tc = new TelaCliente();          
                     cliente = fachada.efetuarLogin(txtUsuario.getText(), txtSenha.getText());
-                    try {
-                        
-                        tc.start(new Stage());
-                
-                    } catch (Exception ex) {
-                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    fecha();
-                
-            }else{
+                    mudarTela();
+            }
+                else{
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setHeaderText("ERRO");
                 alert.setTitle("Erro ao entrar");
@@ -104,6 +103,24 @@ public class LoginController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public Consumidor getCliente(){
+        return cliente;
+    }
+    
+    	@FXML public void mudarTela() throws IOException
+	{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/view/cliente.fxml"));
+		Parent root = loader.load();
+		ClienteController controller = loader.getController();
+		controller.setCliente(cliente);
+		
+		Stage stage = new Stage();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
 } 
 
     

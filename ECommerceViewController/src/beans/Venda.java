@@ -20,6 +20,8 @@ public class Venda implements Serializable{
 	public Venda(Pedido pedido, String modoPag) {
 		this.pedido = pedido;
 		this.setModoPagamento(modoPag);
+                setFrete();
+                setValorTotalPedido();
 	}
 	
 	public Venda(Pedido pedido)

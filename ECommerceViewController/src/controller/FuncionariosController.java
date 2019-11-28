@@ -2,6 +2,7 @@ package controller;
 
 import beans.Funcionario;
 import dados.RepositorioFuncionarios;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import negocio.FachadaSorveteria;
+import negocio.ISorveteria;
 import telas.TelaAdmin;
 import telas.TelaCadastroFuncionario;
 import telas.TelaFuncionariosAdmin;
@@ -33,15 +35,13 @@ public class FuncionariosController extends Sair implements Initializable {
     @FXML private Button btnAtualizar;
     @FXML private Button btnRemover;
     @FXML private Button btnCadastro;
-    @FXML private ListView<Funcionario> lvFuncionarios;
-    private List<Funcionario> funcionarios = new ArrayList<>();
-    private ObservableList<Funcionario> obsFuncionario;
-    private RepositorioFuncionarios repFuncionario;
-    private FachadaSorveteria fachada;
+    @FXML private ListView<String> lvFuncionarios;
+    private ObservableList<String> obsFuncionario;
+    private ISorveteria fachada;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        listarFuncionarios();
         
         btnSair.setOnMouseClicked((MouseEvent e)->{
             sair();
@@ -76,7 +76,16 @@ public class FuncionariosController extends Sair implements Initializable {
     }   
     
     private void listarFuncionarios(){
-        obsFuncionario = FXCollections.observableArrayList();
+        try {
+            fachada = FachadaSorveteria.getInstance();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FuncionariosController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FuncionariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        obsFuncionario = FXCollections.observableArrayList(fachada.listarFuncionarios());
         lvFuncionarios.setItems(obsFuncionario);
     }
  }

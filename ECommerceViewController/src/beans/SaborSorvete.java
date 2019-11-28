@@ -7,6 +7,7 @@ public enum SaborSorvete {
 	LIMAO(2.5),
 	COCO(2.5),
 	FLOCOS(3.0);
+        
 	public double valorCalda;
 	SaborSorvete(double valor) {
 		this.valorCalda = valor;

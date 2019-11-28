@@ -7,6 +7,10 @@ package negocio;
 
 import beans.Consumidor;
 import beans.Funcionario;
+import beans.Pedido;
+import beans.Venda;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,6 +26,14 @@ public interface ISorveteria {
   void removerFuncionario(String cpf);
   
   public Consumidor buscarConsumi(String cpf);
+  
+  void cadastrarPedido(Pedido pedido);
+  
+  void cadastrarVenda(Venda venda);
+  
+  List<String> listarFuncionarios();
+  
+  List<String> listarPedidos();
 
   
     

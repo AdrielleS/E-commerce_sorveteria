@@ -21,15 +21,23 @@ public class RepositorioPedidos implements IRepositorioPedidos,Serializable {
 	private List<Pedido> pedidos;
 	private static RepositorioPedidos instance;
 	private static int cont;
+        List<String> lista;
 	
 	private RepositorioPedidos() {
 		pedidos =  new ArrayList<Pedido>();
 	}
 	
 	
-	public List<Pedido> listarTodosPedidos(){
-		return this.pedidos;
+	public List<String> listarTodosPedidos(){
+            lista = new ArrayList<>();
+            lista.add("CPF do cliente   Sabores   Qtd de bolas   Calda    Incrementos    Status do pedido    Endereço");
+            for (Pedido pedido : pedidos) {
+                lista.add(pedido.toString());
+            }
+		return lista;
 	}
+        
+        
 	
 	
 	public static RepositorioPedidos getInstance() {

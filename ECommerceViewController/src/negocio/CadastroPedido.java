@@ -4,26 +4,27 @@ import java.util.List;
 
 import beans.Pedido;
 import dados.RepositorioPedidos;
+import java.util.ArrayList;
 
 public class CadastroPedido {
 	private RepositorioPedidos repPedido;
 
 	public CadastroPedido() {
-		repPedido =  RepositorioPedidos.getInstance();
+		this.repPedido =  RepositorioPedidos.getInstance();
 	}
 
-	public List<Pedido> listarTodosPedidos() {
-		return repPedido.listarTodosPedidos();
+	public List<String> listarTodosPedidos() {
+		return this.repPedido.listarTodosPedidos();
 	}
 
 	public void cadastrar(Pedido pedido) {
-		 repPedido.cadastrar(pedido);
-		 repPedido.salvarArquivo();
+		 this.repPedido.cadastrar(pedido);
+		 this.repPedido.salvarArquivo();
 	}
 
 	public void remover(Pedido pedido) {
-		repPedido.remover(pedido);
-		repPedido.salvarArquivo();
+		this.repPedido.remover(pedido);
+		this.repPedido.salvarArquivo();
 	}
 	
 	

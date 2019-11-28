@@ -3,11 +3,8 @@ package controller;
 
 import beans.Consumidor;
 import beans.Zona;
-import dados.RepositorioConsumidores;
-import exceptions.ConsumidorException;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -78,7 +75,7 @@ public class CadastroController implements Initializable {
         ObservableList<String> zonas = FXCollections.observableArrayList("NORTE","SUL","LESTE","OESTE");
         cbZona.setValue("Zonas");
         cbZona.setItems(zonas);
-        cbZona.getSelectionModel().getSelectedItem();// select item escolhido no comboBox
+                        // select item escolhido no comboBox
     }
     
 }

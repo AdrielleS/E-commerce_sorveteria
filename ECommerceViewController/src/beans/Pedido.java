@@ -15,10 +15,10 @@ public class Pedido implements Serializable {
 	
 	
 	public Pedido(List<Sorvete> sorvete, String status, Consumidor consumidor) {
-		super();
 		this.sorvetes = sorvete;
 		this.status = status;
 		this.consumidor = consumidor;
+                this.calcularPreco();
 	}
 
 
@@ -60,23 +60,23 @@ public class Pedido implements Serializable {
 		return preco;
 	}
 
-	public void setPreco() {
+	private void calcularPreco() {
 		this.preco =0;
 		for (Sorvete s: sorvetes) {
-			for(int i = 0; i < s.getNumeroBolas(); i++) {
-				this.preco += s.getSabor().get(i).getValor();
-			}
-			this.preco += s.getAdicionais().getValor()+ s.getCalda().getValor();
+                    for (SaborSorvete sabor : s.getSabor()) {
+                        preco+=sabor.getValor();
+                    }
+                    this.preco += s.getAdicionais().getValor()+ s.getCalda().getValor();			
 		}
 	}
+        
+        public void mudarStatus(){
+            
+        }
 
 	public String toString() {
 		String s = "";
-		s+=this.consumidor.getCpf()+",";
-		for(Sorvete so: sorvetes) {
-			s+=so.toString()+",";
-		}
-		s+= this.status+"," +this.getPreco();
+		s = this.consumidor.getCpf()+"\t"+this.sorvetes.get(0).getSabor()+"    "+ this.sorvetes.get(0).getNumeroBolas()+"\t"+ this.sorvetes.get(0).getCalda()+"\t"+ this.sorvetes.get(0).getAdicionais() +"\t"+this.status+"\t"+this.consumidor.getEndereco();
 		return s;
 	}
 

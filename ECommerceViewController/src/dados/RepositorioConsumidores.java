@@ -129,9 +129,6 @@ public class RepositorioConsumidores implements IRepositorioConsumidores,Seriali
         	consumidores.add(consumidor);
         }else{
         	for(Consumidor c: consumidores) {
-                    System.out.println(c.getCpf());
-                    System.out.println(c.getEmail());
-                    System.out.println(consumidor.getCpf());
         		if(c.getEmail().equals(consumidor.getEmail()) || c.getCpf().equals(consumidor.getCpf())) {
         			temEmail = true;
         		}

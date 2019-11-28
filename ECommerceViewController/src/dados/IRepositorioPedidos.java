@@ -7,7 +7,7 @@ import beans.Pedido;
 
 public interface IRepositorioPedidos {
 	
-	List<Pedido> listarTodosPedidos();
+	List<String> listarTodosPedidos();
 	
 	void cadastrar(Pedido pedido);
 	

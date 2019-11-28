@@ -6,6 +6,9 @@
 package telas;
 
 import beans.Consumidor;
+import controller.ClienteController;
+import controller.LoginController;
+import java.util.ArrayList;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -24,15 +27,20 @@ public class TelaCliente extends Application{
     public static void main(String[] args) {
         launch(args);
     }
-
+    
     @Override
     public void start(Stage stage) throws Exception {
-        Parent rood = FXMLLoader.load(getClass().getResource("/view/cliente.fxml"));
-        Scene scene = new Scene(rood);
-        stage.setTitle("Bem Vindo");
-        stage.setScene(scene);
-        stage.show();
-        setStage(stage);
+	
+	
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/view/cliente.fxml"));
+		Parent root = loader.load();
+		ClienteController controller = loader.getController();
+		controller.setCliente(cliente);
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	
     }
 
     public static Stage getStage() {
@@ -43,11 +51,4 @@ public class TelaCliente extends Application{
         TelaCliente.stage = stage;
     }
     
-    public void setCliente(Consumidor cliente){
-        this.cliente = cliente;
-    }
-    
-    public Consumidor getCliente(){
-        return this.cliente;
-    }
 }
