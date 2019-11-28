@@ -27,6 +27,7 @@ import telas.TelaAdmin;
 import telas.TelaCadastro;
 import telas.TelaCliente;
 import telas.TelaLogin;
+import telas.TelaPedidos;
 
 public class LoginController implements Initializable {
     
@@ -87,15 +88,31 @@ public class LoginController implements Initializable {
                 if (fachada.efetuarLogin(txtUsuario.getText(), txtSenha.getText()) != null) {               
                     TelaCliente tc = new TelaCliente();          
                     cliente = fachada.efetuarLogin(txtUsuario.getText(), txtSenha.getText());
+                    entrou = true;
                     mudarTela();
+                    fecha();
             }
-                else{
+                
+                if (entrou == false) {
+                    if (fachada.efetuarLoginFunci(txtUsuario.getText(), txtSenha.getText()) != null) {
+                    TelaPedidos tp = new TelaPedidos();
+                    try {
+                        tp.start(new Stage());
+                    } catch (Exception ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    entrou = true;
+                    fecha();
+                    
+                }
+                    else{
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setHeaderText("ERRO");
                 alert.setTitle("Erro ao entrar");
                 alert.setContentText("Usuário ou senha invalido, tente novamente");
                 alert.show();
-            }   
+            }  
+              }
            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);

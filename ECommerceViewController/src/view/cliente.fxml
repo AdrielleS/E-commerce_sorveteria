@@ -62,21 +62,21 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="562.0" layoutY="22.0" text="PREÇO">
+      <Label layoutX="560.0" layoutY="302.0" text="PREÇO">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="475.0" layoutY="44.0" text="Preço do pedido:" />
-      <Label layoutX="491.0" layoutY="60.0" text="Valor do frete:" />
-      <Label layoutX="505.0" layoutY="75.0" text="Valor total:" />
+      <Label layoutX="473.0" layoutY="324.0" text="Preço do pedido:" />
+      <Label layoutX="489.0" layoutY="340.0" text="Valor do frete:" />
+      <Label layoutX="503.0" layoutY="355.0" text="Valor total:" />
       <Button fx:id="btnCalcular" layoutX="301.0" layoutY="328.0" mnemonicParsing="false" style="-fx-background-color: #FFC0CB;" text="Calcular preço" textFill="#683939">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </Button>
-      <Label fx:id="precoPedido" layoutX="571.0" layoutY="44.0" text="R$0,00" />
-      <Label fx:id="precoFrete" layoutX="569.0" layoutY="60.0" text="R$0,00" />
-      <Label fx:id="precoTotal" layoutX="571.0" layoutY="75.0" text="R$0,00" />
+      <Label fx:id="precoPedido" layoutX="569.0" layoutY="324.0" text="R$0,00" />
+      <Label fx:id="precoFrete" layoutX="567.0" layoutY="340.0" text="R$0,00" />
+      <Label fx:id="precoTotal" layoutX="569.0" layoutY="355.0" text="R$0,00" />
    </children>
 </AnchorPane>

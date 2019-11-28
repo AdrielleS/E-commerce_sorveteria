@@ -39,6 +39,10 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios, Serial
 		return funcionarioString;
          
 	}
+        
+        public List<Funcionario> listarFuncionarios(){
+            return funcionarios;
+        }
 	
 	
 	

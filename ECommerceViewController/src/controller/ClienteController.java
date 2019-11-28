@@ -32,13 +32,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import negocio.FachadaSorveteria;
 import negocio.ISorveteria;
+import telas.TelaCliente;
 
 /**
  * FXML Controller class
  *
  * @author Jamelly
  */
-public class ClienteController implements Initializable {
+public class ClienteController extends Sair implements Initializable {
     @FXML private Button btnSair;
     @FXML private Label lbPessoa;
     @FXML private AnchorPane tela;
@@ -79,9 +80,8 @@ public class ClienteController implements Initializable {
         });
         
         btnSair.setOnMouseClicked((MouseEvent e)->{
-            lbPessoa.setText(cliente.getNome());
-            System.out.println(cliente.getNome());
-        
+            sair();
+            fecha();
         });
         
         btnFazerPedido.setOnMouseClicked((MouseEvent e)->{
@@ -188,6 +188,10 @@ public class ClienteController implements Initializable {
             calda = Calda.LEITE_CONDENSADO;
         }
            
+    }
+    
+    private void fecha(){
+        TelaCliente.getStage().close();
     }
     
 }

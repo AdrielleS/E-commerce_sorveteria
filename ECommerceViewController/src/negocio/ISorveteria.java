@@ -34,6 +34,8 @@ public interface ISorveteria {
   List<String> listarFuncionarios();
   
   List<String> listarPedidos();
+  
+  Funcionario efetuarLoginFunci(String usuario, String senha);
 
   
     

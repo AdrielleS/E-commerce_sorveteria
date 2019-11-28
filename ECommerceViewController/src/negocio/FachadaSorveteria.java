@@ -92,6 +92,15 @@ public class FachadaSorveteria implements ISorveteria{
         }
         return cliente;
     }
+    
+    @Override
+    public Funcionario efetuarLoginFunci(String usuario, String senha) {
+        Funcionario funcionarios = null;
+        if (this.logins.loginFunci(usuario, senha) != null) {
+            funcionarios = this.logins.loginFunci(usuario, senha);
+        }
+        return funcionarios;
+    }
 
     @Override
     public void cadastrar(Funcionario f) {
