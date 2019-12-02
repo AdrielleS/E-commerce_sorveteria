@@ -2,6 +2,7 @@
 package controller;
 
 import beans.Consumidor;
+import beans.Funcionario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,6 +27,7 @@ import negocio.ISorveteria;
 import telas.TelaAdmin;
 import telas.TelaCadastro;
 import telas.TelaCliente;
+import telas.TelaEntregador;
 import telas.TelaLogin;
 import telas.TelaPedidos;
 
@@ -94,16 +96,27 @@ public class LoginController implements Initializable {
             }
                 
                 if (entrou == false) {
-                    if (fachada.efetuarLoginFunci(txtUsuario.getText(), txtSenha.getText()) != null) {
-                    TelaPedidos tp = new TelaPedidos();
-                    try {
-                        tp.start(new Stage());
-                    } catch (Exception ex) {
-                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    entrou = true;
-                    fecha();
-                    
+                    Funcionario funci = fachada.efetuarLoginFunci(txtUsuario.getText(), txtSenha.getText());
+                    if (funci != null) {
+                        if (funci.getTipoFuncionario().equals("SORVETEIRO")) {
+                            TelaPedidos tp = new TelaPedidos();
+                            try {
+                                tp.start(new Stage());
+                            } catch (Exception ex) {
+                                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            entrou = true;
+                            fecha();
+                        }else{
+                            TelaEntregador te = new TelaEntregador();
+                            try {
+                                te.start(new Stage());
+                            } catch (Exception ex) {
+                                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                            } 
+                            entrou = true;
+                            fecha();
+                        }
                 }
                     else{
                 Alert alert = new Alert(AlertType.ERROR);

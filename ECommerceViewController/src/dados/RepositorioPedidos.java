@@ -13,47 +13,62 @@ import java.util.List;
 
 import beans.Pedido;
 import dados.IRepositorioPedidos;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class RepositorioPedidos implements IRepositorioPedidos,Serializable {
 
 	private static final long serialVersionUID = -8268941967102544914L;
 	private List<Pedido> pedidos;
-	private static RepositorioPedidos instance;
+	public static RepositorioPedidos instance;
 	private static int cont;
         List<String> lista;
 	
-	private RepositorioPedidos() {
+	public RepositorioPedidos() {
 		pedidos =  new ArrayList<Pedido>();
 	}
 	
 	
-	public List<String> listarTodosPedidos(){
+	public List<Pedido> listarTodosPedidos(){
             lista = new ArrayList<>();
-            lista.add("CPF do cliente   Sabores   Qtd de bolas   Calda    Incrementos    Status do pedido    Endereço");
-            for (Pedido pedido : pedidos) {
-                lista.add(pedido.toString());
-            }
-		return lista;
+		return pedidos;
 	}
         
-        
-	
-	
 	public static RepositorioPedidos getInstance() {
 		if (instance == null) {
 			instance = RepositorioPedidos.lerArquivo();
 		}
 		return instance;
 	}
+        
+        public void mudarStatus(String cpf){
+            for (Pedido p : pedidos) {
+                if (p.getConsumidor().getCpf().equals(cpf)) {
+                    p.setStatus("Pedido pronto: " + getDateTime());
+                }
+            }
+        }
+        
+        public void statusEntrega(String cpf){
+            for (Pedido p : pedidos) {
+                if(p.getConsumidor().getCpf().equals(cpf))
+                    p.setStatus("Saiu para entrega: " + getDateTime());
+            }
+        }
+        
+        public void statusEntregue(String cpf){
+            for (Pedido p : pedidos) {
+                if (p.getConsumidor().getCpf().equals(cpf)) {
+                    p.setStatus("ENTREGUE: " + getDateTime());
+                }
+            }
+        }
 
 
 	public void cadastrar(Pedido pedido) {
-		cont  = this.proximoId();
-		if (cont >0) {
-			pedido.setId(cont);
-			pedidos.add(pedido);
-		}
+                pedidos.add(pedido);
 	}
 	
 	public void remover(Pedido pedido) {
@@ -146,6 +161,12 @@ public class RepositorioPedidos implements IRepositorioPedidos,Serializable {
 	        }
 	    }
 	}
+        
+        private String getDateTime() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");    
+        Date date = new Date();
+        return dateFormat.format(date);
+}
 		
 	
 	

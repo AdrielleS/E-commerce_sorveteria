@@ -28,6 +28,10 @@ public class CadastroFuncionario {
 	public List<String> listar() {
 		return repFuncionario.listar();
 	}
+        
+        public List<Funcionario> listarFuncionario(){
+            return repFuncionario.listarFuncionarios();
+        }
 
 	public void remover(Funcionario funcionario) throws FuncionarioException {
 		if (funcionario != null) {

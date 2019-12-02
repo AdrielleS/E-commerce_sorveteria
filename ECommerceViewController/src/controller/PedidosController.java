@@ -2,9 +2,11 @@
 package controller;
 
 import beans.Pedido;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
@@ -40,7 +43,17 @@ public class PedidosController extends Sair implements Initializable {
             fechar();
         });
         
-        btnRealizar.setOnMouseClicked((MouseEvent e)->{
+       btnRealizar.setOnMouseClicked((MouseEvent e)->{
+           ArrayList<Pedido> mudarStatus = new ArrayList<>(fachada.listarPedidos());
+           int index = lvPedidos.getSelectionModel().getSelectedIndex();
+            if (index == -1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Selecione um pedido");
+                alert.setContentText("Selecione um pedido");
+                alert.show();
+            }
+           fachada.mudarStatus(mudarStatus.get(index-1).getConsumidor().getCpf());
+           listar();
         });
         
         
@@ -51,6 +64,7 @@ public class PedidosController extends Sair implements Initializable {
     }
     
     private void listar() {
+        ArrayList<String> listaPedidos = new ArrayList<>();
         try {
             fachada = FachadaSorveteria.getInstance();
         } catch (IOException ex) {
@@ -58,8 +72,12 @@ public class PedidosController extends Sair implements Initializable {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(PedidosController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        listaPedidos.add("CPF do cliente   Sabores   Qtd de bolas   Calda    Incrementos    Status do pedido    Endereço");
+        for (Pedido p : fachada.listarPedidos()) {
+            listaPedidos.add(p.toString());
+        }
         
-        ObservableList<String> obsFuncionario = FXCollections.observableArrayList(fachada.listarPedidos());
+        ObservableList<String> obsFuncionario = FXCollections.observableArrayList(listaPedidos);
         lvPedidos.setItems(obsFuncionario);
     }
     

@@ -81,7 +81,7 @@ public class ClienteController extends Sair implements Initializable {
         
         btnSair.setOnMouseClicked((MouseEvent e)->{
             sair();
-            fecha();
+            
         });
         
         btnFazerPedido.setOnMouseClicked((MouseEvent e)->{
@@ -188,10 +188,5 @@ public class ClienteController extends Sair implements Initializable {
             calda = Calda.LEITE_CONDENSADO;
         }
            
-    }
-    
-    private void fecha(){
-        TelaCliente.getStage().close();
-    }
-    
+    }    
 }

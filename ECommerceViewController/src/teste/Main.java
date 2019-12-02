@@ -90,22 +90,21 @@ public class Main {
 //		System.out.println(rpf.buscar(f1));
 		
 		//teste repositorio pedidos
-		/*RepositorioPedidos reppedidos =  new RepositorioPedidos();
+		RepositorioPedidos reppedidos =  new RepositorioPedidos();
 		
-		SaborSorvete[] saboressorevetes =  new SaborSorvete[3];
-		saboressorevetes[0] = SaborSorvete.BAUNILHA;
-		saboressorevetes[1] = SaborSorvete.CHOCOLATE;
-		saboressorevetes[2] = SaborSorvete.COCO;
+		ArrayList<SaborSorvete> saboressorvetes =  new ArrayList<>();
+		saboressorvetes.add(SaborSorvete.BAUNILHA);
 		
-		Sorvete sorvete1 =  new Sorvete(saboressorevetes, Incremento.AMEDOIM, Calda.CHOCOLATE, 3);
-		Sorvete sorvete2 =  new Sorvete(saboressorevetes, Incremento.AMEDOIM, Calda.CHOCOLATE, 3);
-		Sorvete sorvete3 =  new Sorvete(saboressorevetes, Incremento.AMEDOIM, Calda.CHOCOLATE, 3);
+		
+		Sorvete sorvete1 =  new Sorvete(saboressorvetes, Incremento.AMEDOIM, Calda.CHOCOLATE, 3);
+		//Sorvete sorvete2 =  new Sorvete(saboressorevetes, Incremento.AMEDOIM, Calda.CHOCOLATE, 3);
+		//Sorvete sorvete3 =  new Sorvete(saboressorevetes, Incremento.AMEDOIM, Calda.CHOCOLATE, 3);
 		
 		ArrayList<Sorvete> sorvetes =  new ArrayList<Sorvete>();
 		
 		sorvetes.add(sorvete1);
-		sorvetes.add(sorvete2);
-		sorvetes.add(sorvete3);
+		//sorvetes.add(sorvete2);
+		//sorvetes.add(sorvete3);
 		
 		Consumidor consumidor1 =  new Consumidor("Sonael", "Sonael@gmail.com", LocalDate.of(2000, 6, 1), "1234", "13123123123", "xama no xesquedele", Zona.OESTE);
 		Consumidor consumidor2 =  new Consumidor("Maria", "Maria@gmail.com", LocalDate.of(2000, 6, 1), "1234", "81982918921289", "xama no xesquedele", Zona.SUL);
@@ -124,35 +123,35 @@ public class Main {
 		reppedidos.cadastrar(pedido2);
 		
 		System.out.println("Listando cadastros");
-		reppedidos.listar();
+		//reppedidos.listar();
 		
 
 		
 		//atualizar pedidos
-		reppedidos.atualizar(sorvetes, "imcompleto", consumidor2, 2);
-		System.out.println();
-		System.out.println("Atualizando cadastros");
-		reppedidos.listar();
+		//reppedidos.atualizar(sorvetes, "imcompleto", consumidor2, 2);
+		//System.out.println();
+		//System.out.println("Atualizando cadastros");
+		//reppedidos.listar();
 		
-		System.out.println();
+		//System.out.println();
 		//remover pedidos
-		System.out.println("Remover");
+		//System.out.println("Remover");
 		//remover por id
 //		reppedidos.remover(4);	
 		//remover por objeto
 		reppedidos.remover(pedido);
-		reppedidos.listar();
+		//reppedidos.listar();
 		
 		
 		
 		System.out.println();
 		System.out.println("Buscando cadastro");
 		//buscar
-		 ArrayList<Pedido> array = reppedidos.buscar("13123123123");
+		// ArrayList<Pedido> array = reppedidos.buscar("13123123123");
 		 
-		 for (Pedido p : array) {
-			System.out.println(p.getConsumidor().getNome()+"      "+p.getConsumidor().getCpf()+"    "+p.getId());
-		}
+		// for (Pedido p : array) {
+		//	System.out.println(p.getConsumidor().getNome()+"      "+p.getConsumidor().getCpf()+"    "+p.getId());
+		//}
 		 
 		 
 		 //salvando instancia, Salvando instancia no arquivo e lendo instancia do arquivo
@@ -165,12 +164,12 @@ public class Main {
 		 System.out.println();
 		 System.out.println("Recuperando instacia do arquivo");
 
-		 reppedidos2.listar();
+		// reppedidos2.listar();
 		 
 		 System.out.println();
 		 System.out.println("Adicionando na instancia recuperada do arquivo");
 		 reppedidos2.cadastrar(pedido3);
-		 reppedidos2.listar();*/
+		// reppedidos2.listar();*/
 		
 //		
 //		

@@ -27,7 +27,7 @@ public class TelaEntregador extends Application{
     public void start(Stage stage) throws Exception {
         Parent rood = FXMLLoader.load(getClass().getResource("/view/entregador.fxml")); // carrega o fxml
         Scene scene = new Scene(rood); // coloca o fxml em uma cena
-        stage.setTitle("E-Sorvetes");
+        stage.setTitle("Entregador");
         stage.setScene(scene); // coloca a cena em uma janela
         stage.show(); // abre a janela
         setStage(stage); // seta esse novo stage recebido na variavel stage, muito util para fechar uma jaenela enquanto abre outra

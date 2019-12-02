@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
@@ -69,6 +70,19 @@ public class FuncionariosController extends Sair implements Initializable {
             fechar();
             
         });
+        
+        btnRemover.setOnMouseClicked((MouseEvent e)->{
+            int index = lvFuncionarios.getSelectionModel().getSelectedIndex();
+            if (index == -1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Selecione um funcionario");
+                alert.setContentText("Selecione um funcionario");
+                alert.show();
+            }
+            List<Funcionario> funcionarios = new ArrayList<>(fachada.listarFuncionarios());
+            fachada.removerFuncionario(funcionarios.get(index - 1));
+            listarFuncionarios();
+        });
     }
 
     private void fechar(){
@@ -85,7 +99,7 @@ public class FuncionariosController extends Sair implements Initializable {
         }
         
         
-        obsFuncionario = FXCollections.observableArrayList(fachada.listarFuncionarios());
+        obsFuncionario = FXCollections.observableArrayList(fachada.listarFuncionariosString());
         lvFuncionarios.setItems(obsFuncionario);
     }
  }

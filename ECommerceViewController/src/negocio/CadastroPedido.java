@@ -13,7 +13,7 @@ public class CadastroPedido {
 		this.repPedido =  RepositorioPedidos.getInstance();
 	}
 
-	public List<String> listarTodosPedidos() {
+	public List<Pedido> listarTodosPedidos() {
 		return this.repPedido.listarTodosPedidos();
 	}
 
@@ -26,6 +26,21 @@ public class CadastroPedido {
 		this.repPedido.remover(pedido);
 		this.repPedido.salvarArquivo();
 	}
+        
+        public void mudarStatus(String cpf){
+            this.repPedido.mudarStatus(cpf);
+            this.repPedido.salvarArquivo();
+        }
+
+        void entregaStatus(String cpf) {
+            this.repPedido.statusEntrega(cpf);
+            this.repPedido.salvarArquivo();
+        }
+        
+        void entregueStatus(String cpf){
+            this.repPedido.statusEntregue(cpf);
+            this.repPedido.salvarArquivo();
+        }
 	
 	
 

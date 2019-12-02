@@ -92,7 +92,7 @@ public class Funcionario implements Serializable{
 	}
 	
 	public String toString() {
-		String s = this.nome+"\t"+this.cpf+"\t"+this.dataNascimento.toString()+"\t"+this.tipoFuncionario+"\t"+this.dataAdmissao.toString();
+		String s = this.nome+"\t"+this.cpf+"   "+this.dataNascimento.toString()+"\t"+this.tipoFuncionario+"\t"+this.dataAdmissao.toString();
 		return s;
 	}
 	

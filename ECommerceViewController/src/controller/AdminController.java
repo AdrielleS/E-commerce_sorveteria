@@ -63,7 +63,8 @@ public class AdminController extends Sair implements Initializable {
             } catch (Exception ex) {
                 Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            fecha();  
+            fecha();
+            
             
         });
     }

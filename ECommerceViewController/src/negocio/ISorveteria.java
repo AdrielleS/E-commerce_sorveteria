@@ -6,6 +6,7 @@
 package negocio;
 
 import beans.Consumidor;
+import beans.Entrega;
 import beans.Funcionario;
 import beans.Pedido;
 import beans.Venda;
@@ -23,7 +24,7 @@ public interface ISorveteria {
 
   void cadastrar(Funcionario f);
 
-  void removerFuncionario(String cpf);
+  void removerFuncionario(Funcionario funci);
   
   public Consumidor buscarConsumi(String cpf);
   
@@ -31,12 +32,18 @@ public interface ISorveteria {
   
   void cadastrarVenda(Venda venda);
   
-  List<String> listarFuncionarios();
+  List<String> listarFuncionariosString();
   
-  List<String> listarPedidos();
+  List<Funcionario> listarFuncionarios();
+  
+  List<Pedido> listarPedidos();
   
   Funcionario efetuarLoginFunci(String usuario, String senha);
 
+  void mudarStatus(String cpf);
   
-    
+  void entregaStatus(String cpf);
+  
+  void entregueStatus(String cpf);
+  
 }

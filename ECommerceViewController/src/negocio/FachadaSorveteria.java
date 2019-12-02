@@ -6,19 +6,15 @@
 package negocio;
 
 import beans.Consumidor;
+import beans.Entrega;
 import beans.Funcionario;
 import beans.Pedido;
 import beans.Venda;
-import dados.RepositorioConsumidores;
-import dados.RepositorioFuncionarios;
 import exceptions.ConsumidorException;
 import exceptions.FuncionarioException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.sun.javafx.scene.control.ControlAcceleratorSupport;
 import exceptions.VendaException;
 import java.util.List;
 
@@ -121,7 +117,12 @@ public class FachadaSorveteria implements ISorveteria{
     }
 
     @Override
-    public void removerFuncionario(String cpf) {
+    public void removerFuncionario(Funcionario funci) {
+        try {
+            funcionario.remover(funci);
+        } catch (FuncionarioException ex) {
+            Logger.getLogger(FachadaSorveteria.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -139,14 +140,39 @@ public class FachadaSorveteria implements ISorveteria{
         }
 
     @Override
-    public List<String> listarPedidos() {
+    public List<Pedido> listarPedidos() {
        return pedido.listarTodosPedidos();
     }
 
     @Override
-    public List<String> listarFuncionarios() {
+    public List<String> listarFuncionariosString() {
         return funcionario.listar();
         }
+    
+    @Override
+    public void mudarStatus(String cpf){
+        pedido.mudarStatus(cpf);
+    }
+
+    @Override
+    public void entregaStatus(String cpf) {
+        pedido.entregaStatus(cpf);
+    }
+
+    @Override
+    public void entregueStatus(String cpf) {
+        pedido.entregueStatus(cpf);
+        }
+
+    @Override
+    public List<Funcionario> listarFuncionarios() {
+        return funcionario.listarFuncionario();
+        }
+
+    
+
+    
+    
     
     
 
