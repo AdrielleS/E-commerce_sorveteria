@@ -169,6 +169,22 @@ public class FachadaSorveteria implements ISorveteria{
         return funcionario.listarFuncionario();
         }
 
+    @Override
+    public void removerPedido(Pedido pedidos) {
+        pedido.remover(pedidos);
+    }
+    
+
+    @Override
+    public void cadastrarEntrega(Pedido pedidos) {
+        pedido.cadastrarEntrega(pedidos);
+    }
+
+    @Override
+    public List<Pedido> listaEntregas() {
+        return pedido.listaEntregador();
+    }
+
     
 
     

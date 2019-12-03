@@ -41,6 +41,15 @@ public class CadastroPedido {
             this.repPedido.statusEntregue(cpf);
             this.repPedido.salvarArquivo();
         }
+        
+        public void cadastrarEntrega(Pedido pedido){
+            this.repPedido.cadastrarEntrega(pedido);
+            this.repPedido.salvarArquivo();
+        }
+        
+        public List<Pedido> listaEntregador(){
+            return this.repPedido.listarEntregas();
+        }
 	
 	
 

@@ -16,18 +16,21 @@ import dados.IRepositorioPedidos;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javafx.scene.control.Alert;
 
 
 public class RepositorioPedidos implements IRepositorioPedidos,Serializable {
 
 	private static final long serialVersionUID = -8268941967102544914L;
 	private List<Pedido> pedidos;
+        private List<Pedido> listaEntregador;
 	public static RepositorioPedidos instance;
 	private static int cont;
         List<String> lista;
 	
 	public RepositorioPedidos() {
 		pedidos =  new ArrayList<Pedido>();
+                listaEntregador = new ArrayList<Pedido>();
 	}
 	
 	
@@ -43,6 +46,14 @@ public class RepositorioPedidos implements IRepositorioPedidos,Serializable {
 		return instance;
 	}
         
+        public void cadastrarEntrega(Pedido pedido){
+            listaEntregador.add(pedido);
+        }
+        
+        public List<Pedido> listarEntregas(){
+            return listaEntregador;
+        };
+        
         public void mudarStatus(String cpf){
             for (Pedido p : pedidos) {
                 if (p.getConsumidor().getCpf().equals(cpf)) {
@@ -52,14 +63,22 @@ public class RepositorioPedidos implements IRepositorioPedidos,Serializable {
         }
         
         public void statusEntrega(String cpf){
-            for (Pedido p : pedidos) {
+            for (Pedido p : listaEntregador) {
                 if(p.getConsumidor().getCpf().equals(cpf))
-                    p.setStatus("Saiu para entrega: " + getDateTime());
+                    if (p.getStatus().contains("ENTREGUE")) {
+                         Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText("Pedido já entregue");
+                        alert.setContentText("Pedido ja foi entregue");
+                        alert.show();
+                        
+                    }else{
+                        p.setStatus("Saiu para entrega: " + getDateTime());
+                    }
             }
         }
         
         public void statusEntregue(String cpf){
-            for (Pedido p : pedidos) {
+            for (Pedido p : listaEntregador) {
                 if (p.getConsumidor().getCpf().equals(cpf)) {
                     p.setStatus("ENTREGUE: " + getDateTime());
                 }

@@ -38,6 +38,8 @@ public interface ISorveteria {
   
   List<Pedido> listarPedidos();
   
+  List<Pedido> listaEntregas();
+  
   Funcionario efetuarLoginFunci(String usuario, String senha);
 
   void mudarStatus(String cpf);
@@ -45,5 +47,11 @@ public interface ISorveteria {
   void entregaStatus(String cpf);
   
   void entregueStatus(String cpf);
+
+    public void removerPedido(Pedido pedido);
+
+    public void cadastrarEntrega(Pedido pedido);
+    
+    
   
 }

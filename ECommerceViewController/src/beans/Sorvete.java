@@ -13,8 +13,16 @@ public class Sorvete implements Serializable{
 	
 	public Sorvete(ArrayList<SaborSorvete> sabor, Incremento adicionais, Calda calda, int numeroBolas) {
 		this.sabor = sabor;
-		this.adicionais = adicionais;
-		this.calda = calda;
+                if (adicionais == null) {
+                this.adicionais = Incremento.SEMINCREMENTO;
+            }else{
+                  this.adicionais = adicionais;
+                }
+                if (calda == null) {
+                this.calda = Calda.SEMCALDA;
+            }else{
+                  this.calda = calda;
+                }
 		this.numeroBolas = numeroBolas;
 	}
 

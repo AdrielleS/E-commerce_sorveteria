@@ -16,7 +16,7 @@
    <children>
       <AnchorPane layoutX="350.0" layoutY="39.0" prefHeight="323.0" prefWidth="278.0" style="-fx-background-color: #FFC0CB;">
          <children>
-            <TextField fx:id="txtUsuario" alignment="CENTER" layoutX="27.0" layoutY="99.0" prefHeight="25.0" prefWidth="224.0" promptText="Usuario">
+            <TextField fx:id="txtUsuario" alignment="CENTER" layoutX="27.0" layoutY="99.0" prefHeight="25.0" prefWidth="224.0" promptText="Email">
                <opaqueInsets>
                   
                </opaqueInsets>

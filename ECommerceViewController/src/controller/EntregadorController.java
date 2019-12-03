@@ -46,7 +46,7 @@ public class EntregadorController extends Sair implements Initializable {
         });
         
         btnEntrega.setOnMouseClicked((MouseEvent e)->{
-           ArrayList<Pedido> mudarStatus = new ArrayList<>(fachada.listarPedidos());
+           ArrayList<Pedido> mudarStatus = new ArrayList<>(fachada.listaEntregas());
            int index = lvEntregas.getSelectionModel().getSelectedIndex();
             if (index == -1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -60,7 +60,7 @@ public class EntregadorController extends Sair implements Initializable {
         });
         
         btnEntregue.setOnMouseClicked((MouseEvent e)->{
-           ArrayList<Pedido> mudarStatus = new ArrayList<>(fachada.listarPedidos());
+           ArrayList<Pedido> mudarStatus = new ArrayList<>(fachada.listaEntregas());
            int index = lvEntregas.getSelectionModel().getSelectedIndex();
             if (index == -1) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -88,7 +88,7 @@ public class EntregadorController extends Sair implements Initializable {
             Logger.getLogger(PedidosController.class.getName()).log(Level.SEVERE, null, ex);
         }
         listaPedidos.add("CPF do cliente   Sabores   Qtd de bolas   Calda    Incrementos    Status do pedido    Endereço");
-        for (Pedido p : fachada.listarPedidos()) {
+        for (Pedido p : fachada.listaEntregas()) {
             listaPedidos.add(p.toString());
         }
         

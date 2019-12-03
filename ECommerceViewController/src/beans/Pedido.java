@@ -75,9 +75,9 @@ public class Pedido implements Serializable {
         }
 
 	public String toString() {
-		String s = "";
-		s = this.consumidor.getCpf()+"\t"+this.sorvetes.get(0).getSabor()+"    "+ this.sorvetes.get(0).getNumeroBolas()+"  "+ this.sorvetes.get(0).getCalda()+"\t"+ this.sorvetes.get(0).getAdicionais() +"\t"+this.status+"\t"+this.consumidor.getEndereco();
-		return s;
+		
+		return this.consumidor.getCpf()+"\t"+this.sorvetes.get(0).getSabor()+"    "+ this.sorvetes.get(0).getNumeroBolas()+"  "+ this.sorvetes.get(0).getCalda()+"\t"+ this.sorvetes.get(0).getAdicionais() +"\t"+this.status+"\t"+this.consumidor.getEndereco();
+		
 	}
 
 }

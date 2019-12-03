@@ -7,30 +7,38 @@
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/beans/Incremento.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/controller/ClienteController.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/beans/Consumidor.java</file>
+            <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/dados/RepositorioEntregas.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/beans/Venda.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/beans/Sorvete.java</file>
-            <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/negocio/CadastroVendas.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/beans/Pedido.java</file>
+            <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/telas/TelaAdmin.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/beans/SaborSorvete.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/dados/RepositorioFuncionarios.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/negocio/CadastroFuncionario.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/negocio/FachadaSorveteria.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/telas/TelaLogin.java</file>
+            <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/telas/TelaPedidos.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/controller/LoginController.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/controller/CadastrofuncionarioController.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/controller/FuncionariosController.java</file>
+            <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/telas/TelaEntregador.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/negocio/Logins.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/beans/Calda.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/negocio/CadastroConsumidor.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/controller/CadastroController.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/controller/PedidosController.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/dados/RepositorioConsumidores.java</file>
+            <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/beans/Entrega.java</file>
+            <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/controller/AdminController.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/beans/Zona.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/negocio/CadastroPedido.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/dados/IRepositorioFuncionarios.java</file>
+            <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/teste/Main.java</file>
+            <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/dados/RepositorioVendas.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/negocio/ISorveteria.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/beans/Funcionario.java</file>
             <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/dados/IRepositorioPedidos.java</file>
+            <file>file:/C:/Users/Jamelly/Documents/NetBeansProjects/ECommerceViewController/ECommerceViewController/src/controller/EntregadorController.java</file>
         </group>
     </open-files>
 </project-private>

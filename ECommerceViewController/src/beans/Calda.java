@@ -5,7 +5,8 @@ public enum Calda {
 	DOCE_DE_lEITE(2.5),
 	MORANGO(1),
 	LIMAO(2),
-	LEITE_CONDENSADO(2.5);
+	LEITE_CONDENSADO(2.5),
+        SEMCALDA(0);
 	
 	public double valorCalda;
 	Calda(double valor) {

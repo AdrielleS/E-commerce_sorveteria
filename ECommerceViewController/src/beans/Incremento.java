@@ -4,7 +4,8 @@ public enum Incremento {
 	PACOCA(1.5),
 	GRANULADO(1),
 	AMEDOIM(2),
-	MeM(2.5);
+	MeM(2.5),
+        SEMINCREMENTO(0);
 	
 	public double valorCalda;
 	Incremento(double valor) {

@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import negocio.FachadaSorveteria;
 import negocio.ISorveteria;
 import telas.TelaPedidos;
@@ -32,12 +33,15 @@ public class PedidosController extends Sair implements Initializable {
     @FXML Button btnSair;
     @FXML private ListView<String> lvPedidos;
     @FXML private Button btnRealizar;
+    @FXML private AnchorPane tela;
     
     ISorveteria fachada;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        listar();
+            listar();
+        
+        
         btnSair.setOnMouseClicked((MouseEvent e)->{
             sair();
             fechar();
@@ -53,6 +57,9 @@ public class PedidosController extends Sair implements Initializable {
                 alert.show();
             }
            fachada.mudarStatus(mudarStatus.get(index-1).getConsumidor().getCpf());
+           fachada.cadastrarEntrega(fachada.listarPedidos().get(index-1));
+           fachada.removerPedido(fachada.listarPedidos().get(index-1));
+           
            listar();
         });
         
@@ -74,7 +81,8 @@ public class PedidosController extends Sair implements Initializable {
         }
         listaPedidos.add("CPF do cliente   Sabores   Qtd de bolas   Calda    Incrementos    Status do pedido    Endereço");
         for (Pedido p : fachada.listarPedidos()) {
-            listaPedidos.add(p.toString());
+            
+             listaPedidos.add(p.toString());   
         }
         
         ObservableList<String> obsFuncionario = FXCollections.observableArrayList(listaPedidos);
